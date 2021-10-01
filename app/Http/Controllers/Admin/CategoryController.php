@@ -101,7 +101,7 @@ class CategoryController extends Controller
         $data['name'] = $data['category_name'];
 
         $category->update($data);
-        return redirect()->route('categories.index')->with('info','Category updated success');
+        return redirect()->route('admin.categories.index')->with('info','Category updated success');
     }
 
     /**

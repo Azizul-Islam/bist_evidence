@@ -8,7 +8,7 @@
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('admin') }}">
+                <a href="{{ route('admin.home') }}">
                     <i class="bi bi-globe2 small me-2"></i> Dashboard
                 </a>
             </li>
@@ -28,7 +28,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form action="@if(!blank($update_category)) {{ route('categories.update',$update_category) }} @else{{ route('categories.store') }} @endif" method="POST">
+                <form action="@if(!blank($update_category)) {{ route('admin.categories.update',$update_category) }} @else{{ route('admin.categories.store') }} @endif" method="POST">
                 @csrf
                 @if(!blank($update_category)) @method('PUT') @endif
                 <div class="mb-3">
@@ -66,7 +66,7 @@
                     <button class="btn btn-primary">Submit</button>
                     @else
                     <button class="btn btn-primary">Update</button>
-                    <a href="{{ route('categories.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('admin.categories.index') }}" class="btn btn-danger">Cancel</a>
                     @endif
                 </div>
             </form>
@@ -108,7 +108,7 @@
                             
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('categories.index',['category_id'=>$item->id]) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
+                                    <a href="{{ route('admin.categories.index',['category_id'=>$item->id]) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
                                     {{-- <form action="{{ route('categories.destroy',$item->id) }}" onsubmit="return confirm('Are you sure?')" method="POST">
                                     @csrf
                                     @method('DELETE')

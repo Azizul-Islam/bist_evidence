@@ -55,4 +55,10 @@ class FrontendController extends Controller
         FrontendProperty::create($data);
         return redirect()->back()->with('success','Your response submited');
     }
+
+    public function propertyDetails($slug)
+    {
+        $property = Property::where('slug',$slug)->first();
+        return view('frontend.property-details',compact('property'));
+    }
 }

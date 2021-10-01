@@ -33,7 +33,7 @@
                     <span class="address">Head Office: Wirless Gate,T&T Road Gazipur</span>
                 </div>
                 <div class="col-md-2 col-12 col-sm-12">
-                    <span><a href="">Sign up or login</a></span>
+                    <span><a href="{{ route('login') }}">Sign up or login</a></span>
                 </div>
             </div>
         </div>
@@ -50,7 +50,7 @@
                             <div class="collapse navbar-collapse flex-1">
                                 <ul class="nav navbar-nav w-100">
                                     <li class="nav-item active custom-nav-item">
-                                        <a class="nav-link" href="{{ route('home') }}">Home</a>
+                                        <a class="nav-link" href="{{ url('/') }}">Home</a>
                                     </li>
                                     <li class="nav-item custom-nav-item">
                                         <a class="nav-link" href="#">About Us</a>

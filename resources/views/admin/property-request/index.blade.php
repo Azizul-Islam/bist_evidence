@@ -62,15 +62,11 @@
                    <td>{{ $item->status }}</td>
                    <td>{{ $item->created_at->diffForHumans() }}</td>
                     <td class="text-end">
-                        --
-                        {{-- <div class="btn-group">
-                            <a href="{{ route('properties.edit',$item->id) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
-                            <form action="{{ route('properties.destroy',$item->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
-                            @csrf
-                            @method('DELETE')
-                                <button  data-id="{{ $item->id }}" class="delBtn btn btn-sm btn-primary rounded"><i class="bi bi-trash"></i></button>
-                            </form>
-                        </div> --}}
+                        
+                        <div class="btn-group">
+                            <a href="{{ route('consumer-request.show',$item) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-eye"></i></a>
+                            
+                        </div>
                     </td>
                 </tr>
                 @empty

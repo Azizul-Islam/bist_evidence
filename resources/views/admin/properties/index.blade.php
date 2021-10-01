@@ -25,7 +25,7 @@
                     <div class="d-none d-md-flex"><h4>Total Properties</h4></div>
                     
                     <div class="dropdown ms-auto">
-                        <a href="{{ route('properties.create') }}" class="btn btn-primary btn-icon"><i class="bi bi-plus-circle"></i> Create</a>
+                        <a href="{{ route('admin.properties.create') }}" class="btn btn-primary btn-icon"><i class="bi bi-plus-circle"></i> Create</a>
                     </div>
                 </div>
             </div>
@@ -70,11 +70,11 @@
                    
                     <td class="text-end">
                         <div class="btn-group">
-                            <a href="{{ route('properties.edit',$item->id) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
-                            <form action="{{ route('properties.destroy',$item->id) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            <a href="{{ route('properties.edit',$item) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
+                            <form action="{{ route('properties.destroy',$item) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')
-                                <button  data-id="{{ $item->id }}" class="delBtn btn btn-sm btn-primary rounded"><i class="bi bi-trash"></i></button>
+                                <button class="delBtn btn btn-sm btn-primary rounded"><i class="bi bi-trash"></i></button>
                             </form>
                         </div>
                     </td>
@@ -104,7 +104,7 @@
             var mode = $(this).prop('checked');
             var id = $(this).val();
             $.ajax({
-                url: "{{ route('property.status') }}",
+                url: "{{ route('admin.property.status') }}",
                 method: "POST",
                 data: {
                     _token: '{{ csrf_token() }}',

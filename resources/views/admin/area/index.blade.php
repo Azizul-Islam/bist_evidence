@@ -8,7 +8,7 @@
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item">
-                <a href="{{ route('admin') }}">
+                <a href="{{ route('admin.home') }}">
                     <i class="bi bi-globe2 small me-2"></i> Dashboard
                 </a>
             </li>
@@ -28,7 +28,7 @@
         </div>
         <div class="card">
             <div class="card-body">
-                <form action="@if(!blank($update_area)) {{ route('areas.update',$update_area) }} @else{{ route('areas.store') }} @endif" method="POST">
+                <form action="@if(!blank($update_area)) {{ route('admin.areas.update',$update_area) }} @else{{ route('admin.areas.store') }} @endif" method="POST">
                 @csrf
                 @if(!blank($update_area)) @method('PUT') @endif
                 <div class="mb-3">
@@ -55,7 +55,7 @@
                     <button class="btn btn-primary">Submit</button>
                     @else
                     <button class="btn btn-primary">Update</button>
-                    <a href="{{ route('areas.index') }}" class="btn btn-danger">Cancel</a>
+                    <a href="{{ route('admin.areas.index') }}" class="btn btn-danger">Cancel</a>
                     @endif
                 </div>
             </form>
@@ -97,7 +97,7 @@
                             
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a href="{{ route('areas.index',['area_id'=>$item->id]) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
+                                    <a href="{{ route('admin.areas.index',['area_id'=>$item->id]) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
                                     
                                   </div>
                             </td>

@@ -1,9 +1,9 @@
 <div class="menu">
     <div class="menu-header">
-        <a href="{{ route('admin') }}" class="menu-header-logo">
+        <a href="{{ route('admin.home') }}" class="menu-header-logo">
             <img src="{{ asset('logo.png') }}" alt="logo">
         </a>
-        <a href="{{ route('admin') }}" class="btn btn-sm menu-close-btn">
+        <a href="{{ route('admin.home') }}" class="btn btn-sm menu-close-btn">
             <i class="bi bi-x"></i>
         </a>
     </div>
@@ -40,10 +40,10 @@
             </div>
         </div>
         <ul>
-            <li class="menu-divider">Real State</li>
+            <li class="menu-divider">Real Estate</li>
             <li>
                 <a  class="{{ \Request::is('admin') ? 'active' : '' }}"
-                    href="{{ route('admin') }}">
+                    href="{{ route('admin.home') }}">
                     <span class="nav-link-icon">
                         <i class="bi bi-bar-chart"></i>
                     </span>
@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li>
-                <a class="{{ \Request::is('admin/categories') ? 'active' : '' }}" href="{{ route('categories.index') }}">
+                <a class="{{ \Request::is('admin/categories') ? 'active' : '' }}" href="{{ route('admin.categories.index') }}">
                     <span class="nav-link-icon">
                         <i class="bi bi-view-stacked"></i>
                     </span>
@@ -59,9 +59,9 @@
                 </a>
             </li>
             <li>
-                <a class="{{ \Request::is('admin/areas') ? 'active' : '' }}" href="{{ route('areas.index') }}">
+                <a class="{{ \Request::is('admin/areas') ? 'active' : '' }}" href="{{ route('admin.areas.index') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-view-stacked"></i>
+                        <i class="bi bi-geo"></i>
                     </span>
                     <span>Area</span>
                 </a>
@@ -69,27 +69,27 @@
             <li>
                 <a href="#">
                     <span class="nav-link-icon">
-                        <i class="bi bi-wallet2"></i>
+                        <i class="bi bi-house"></i>
                     </span>
                     <span>Properties</span>
                 </a>
                 <ul>
                    
                     <li>
-                        <a {{ \Request::is('admin/properties') ? 'active' : '' }} href="{{ route('properties.index') }}">Property List</a>
+                        <a {{ \Request::is('admin/properties') ? 'active' : '' }} href="{{ route('admin.properties.index') }}">Property List</a>
                     </li>
                     <li>
-                        <a {{ \Request::is('admin/properties/create') ? 'active' : '' }} href="{{ route('properties.create') }}">Add Property</a>
+                        <a {{ \Request::is('admin/properties/create') ? 'active' : '' }} href="{{ route('admin.properties.create') }}">Add Property</a>
                     </li>
                     
                 </ul>
             </li>
             <li>
-                <a class="{{ \Request::is('admin/consumer-request') ? 'active' : '' }}" href="{{ route('consumer-request.index') }}">
+                <a class="{{ \Request::is('admin/consumer-request') ? 'active' : '' }}" href="{{ route('admin.consumer-request.index') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-view-stacked"></i>
+                        <i class="bi bi-cpu"></i>
                     </span>
-                    <span>Consumer Request</span>
+                    <span>Request Property</span>
                 </a>
             </li>
             

@@ -5,7 +5,7 @@
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="{{ route('admin') }}">
+                    <a href="{{ route('admin.home') }}">
                         <i class="bi bi-globe2 small me-2"></i> Dashboard
                     </a>
                 </li>
@@ -28,7 +28,7 @@
             </div>
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('properties.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.properties.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title <small class="text-primary">*</small></label>

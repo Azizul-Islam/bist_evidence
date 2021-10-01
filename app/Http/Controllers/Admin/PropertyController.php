@@ -99,7 +99,11 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        //
+        $result = Category::getCategories(true);
+        $categories = Category::generateCategories($result);
+        $areas = Area::whereNull('parent_id')->latest()->get();
+        $sub_areas = Area::WhereNotNull('parent_id')->get();
+        return view('admin.properties.edit',compact('property','categories','areas','sub_areas'));
     }
 
     /**
@@ -111,7 +115,32 @@ class PropertyController extends Controller
      */
     public function update(Request $request, Property $property)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string',
+            'price' => 'required|numeric',
+            'address' => 'required|string',
+            'size' => 'required',
+            'purpose' => 'nullable',
+            'description' => 'nullable|string',
+            'category_id' => 'required',
+            'sub_category_id' => 'nullable',
+            'area_id' => 'required',
+            'sub_area_id' => 'nullable',
+            'consumer' => 'nullable',
+            'status' => 'nullable',
+            'photo' => 'nullable'
+        ]);
+
+        //request has photo
+        if($request->has('photo')){
+            $file = $request->file('photo');
+            $name_gen = $file->getClientOriginalName();
+            $file->move(public_path('backend/assets/images/properties'),$name_gen);
+            $data['photo'] = $name_gen;
+        }
+
+        $property->update($data);
+        return redirect()->route('properties.index')->with('info','Property has been updated');
     }
 
     /**
@@ -122,7 +151,8 @@ class PropertyController extends Controller
      */
     public function destroy(Property $property)
     {
-        //
+        $property->delete();
+        return redirect()->back()->with('info','Property deleted successfully');
     }
 
     //update property status

@@ -102,7 +102,7 @@ class AreaController extends Controller
         $data['name'] = $data['area_name'];
 
         $area->update($data);
-        return redirect()->route('areas.index')->with('info','Location updated success');
+        return redirect()->route('admin.areas.index')->with('info','Location updated success');
     }
 
     /**
