@@ -24,13 +24,17 @@
     <link rel="stylesheet" href="{{ asset('backend/libs/slick/slick.css') }}" type="text/css">
 
     <link rel="stylesheet" href="{{ asset('backend/libs/dataTable/datatables.min.css') }}" type="text/css">
-    <!-- Main style file -->
-    <link rel="stylesheet" href="{{ asset('backend/dist/css/app.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('backend/libs/animate/animate.min.css') }}" type="text/css">
-    <link rel="stylesheet" href="{{ asset('backend/libs/select2/css/select2.min.css') }}" type="text/css">
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
-    
+     <!-- Data Table CSS -->
+     {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.css"/> --}}
+     <link rel="stylesheet" href="{{ asset('backend/libs/animate/animate.min.css') }}" type="text/css">
+     <link rel="stylesheet" href="{{ asset('backend/libs/select2/css/select2.min.css') }}" type="text/css">
+     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+     
+      
+
+     <!-- Main style file -->
+     <link rel="stylesheet" href="{{ asset('backend/dist/css/app.min.css') }}" type="text/css">
 
     @yield('styles')
 
@@ -91,18 +95,27 @@
 
 <!-- Examples -->
 <script src="{{ asset('backend/dist/js/examples/dashboard.js') }}"></script>
-
-<!-- Main Javascript file -->
-<script src="{{ asset('backend/dist/js/app.min.js') }}"></script>
 <script src="{{ asset('backend/libs/dataTable/datatables.min.js') }}"></script>
+<!-- Data Table Js -->
+{{-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js"></script> --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('backend/libs/ckeditor5/ckeditor.js') }}"></script>
 <script src="{{ asset('backend/dist/js/examples/ckeditor.js') }}"></script>
 <script src="{{ asset('backend/libs/select2/js/select2.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script src="{{ asset('frontend/js/libs/material-components-web.min.js') }}"></script> 
+{{-- <script src="{{ asset('frontend/js/libs/swiper.min.js') }}"></script>   --}}
+<script src="{{ asset('frontend/js/libs/dropzone.js') }}"></script>  
+<script src="{{ asset('frontend/js/scripts.js') }}"></script>  
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s&amp;callback=initMap" async defer></script>  
+
+
+<!-- Main Javascript file -->
+<script src="{{ asset('backend/dist/js/app.min.js') }}"></script>
 <script>
-    $('#datatable-example').DataTable({
+    $('#dataTable').DataTable({
         responsive: true
     });
 </script>

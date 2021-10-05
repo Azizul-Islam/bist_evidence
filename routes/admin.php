@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //area route
         Route::resource('areas','App\Http\Controllers\Admin\AreaController');
         Route::get('area/{area_id}/sub',[App\Http\Controllers\Admin\AreaController::class,'getChildAreaByParent']);
+
+        //amenities route
+        Route::resource('amenities', AmenityController::class);
 
         //properties route
         Route::resource('properties','App\Http\Controllers\Admin\PropertyController');
