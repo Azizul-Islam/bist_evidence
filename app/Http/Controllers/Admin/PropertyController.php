@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Amenity;
 use App\Models\Area;
 use App\Models\Category;
 use App\Models\Property;
@@ -33,6 +34,7 @@ class PropertyController extends Controller
         $result = Category::getCategories(true);
         $data['categories'] = Category::generateCategories($result);
         $data['areas'] = Area::whereNull('parent_id')->latest()->get();
+        $data['amenities'] = Amenity::latest()->get();
         return view('admin.properties.create',$data);
     }
 
@@ -44,7 +46,7 @@ class PropertyController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->all());
         $data = $request->validate([
             'title' => 'required|string',
             'price' => 'required|numeric',

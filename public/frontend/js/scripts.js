@@ -585,7 +585,7 @@ jQuery(document).ready(function($){
     }; 
   
     $(".add-step").on("click", function(event) { 
-        var template = $(this).attr('data-template-name'); 
+        var template = $(this).attr('data-template-name');
         var dynamic_steps = $(this).closest(".dynamic-steps");
         var steps = dynamic_steps.find('.steps')[0]; 
         $($("#"+template).html()).appendTo($(steps)).show("slow");

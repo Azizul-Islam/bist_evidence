@@ -18,6 +18,7 @@ class CreatePropertiesTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->mediumText('description')->nullable();
+            $table->float('previous_price',16)->nullable();
             $table->float('price',16);
             // $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('category_id');
@@ -32,7 +33,7 @@ class CreatePropertiesTable extends Migration
             $table->string('bathroom')->nullable();
             $table->string('garage')->nullable();
             $table->string('size')->nullable();
-            $table->string('year_built')->nullable();
+            $table->date('year_built')->nullable();
             $table->string('video_link')->nullable();
             $table->boolean('is_featured')->default(0);
             $table->enum('consumer',['owner','manager','guard','representative','admin'])->default('admin');
