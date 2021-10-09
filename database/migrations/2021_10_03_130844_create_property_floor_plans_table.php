@@ -16,12 +16,12 @@ class CreatePropertyFloorPlansTable extends Migration
         Schema::create('property_floor_plans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('property_id')->constrained();
-            $table->string('name');
-            $table->mediumText('description')->nullable();
-            $table->string('size');
-            $table->integer('room');
-            $table->integer('bath');
-            $table->string('photo')->nullable();
+            $table->string('floor_name');
+            $table->mediumText('floor_description')->nullable();
+            $table->string('floor_size');
+            $table->integer('floor_room');
+            $table->integer('floor_bath');
+            $table->string('floor_photo')->nullable();
             $table->timestamps();
         });
     }

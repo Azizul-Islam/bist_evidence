@@ -35,7 +35,8 @@ class CreatePropertiesTable extends Migration
             $table->string('size')->nullable();
             $table->date('year_built')->nullable();
             $table->string('video_link')->nullable();
-            $table->boolean('is_featured')->default(0);
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->boolean('is_featured')->nullable()->default(0);
             $table->enum('consumer',['owner','manager','guard','representative','admin'])->default('admin');
             $table->enum('status',['pending','active','inactive'])->default('active');
             $table->timestamps();

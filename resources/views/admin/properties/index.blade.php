@@ -70,8 +70,8 @@
                    
                     <td class="text-end">
                         <div class="btn-group">
-                            <a href="{{ route('properties.edit',$item) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
-                            <form action="{{ route('properties.destroy',$item) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                            <a href="{{ route('admin.properties.edit',$item) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
+                            <form action="{{ route('admin.properties.destroy',$item) }}" method="POST" onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')
                                 <button class="delBtn btn btn-sm btn-primary rounded"><i class="bi bi-trash"></i></button>

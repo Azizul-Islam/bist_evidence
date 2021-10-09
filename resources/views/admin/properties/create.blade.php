@@ -176,9 +176,7 @@
                                 </div>  
                                 <div class="col-xs-12 mt-2">  
                                     <input class="form-control" type="file" multiple name="photos[]" >
-                                    {{-- <div class="mdc-text-field mdc-text-field--outlined">
-                                        
-                                    </div>  --}}
+                                    
                                 </div>  
                                 <div class="col-xs-12 p-2 mt-3 end-xs"> 
                                     <button class="mdc-button mdc-button--raised next-tab" type="button">
@@ -226,7 +224,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="text" value="{{ old('street') }}" name="zip_code">
+                                        <input class="mdc-text-field__input" type="text" value="{{ old('street') }}" name="street">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -372,31 +370,19 @@
                                 <div class="col-xs-12 p-0 dynamic-steps">
                                     <div class="row middle-xs my-3 px-2">
                                         <p class="mb-0"><span class="uppercase fw-500">Videos</span><span class="text-muted mx-3">(video link to .mp4)</span></p>                            
-                                        <button class="mdc-icon-button material-icons primary-color add-step" type="button" data-template-name="videos">add_circle</button>  
+                                        
                                     </div>
                                     <div class="steps">
                                         <div class="step-section">
                                             <div class="row middle-xs">
                                                 <div class="col-xs-1 text-center fw-500">
-                                                    <span class="num">1</span>
+                                                    <span class="num"></span>
                                                 </div>
                                                 <div class="col-xs-10">
                                                     <div class="row"> 
-                                                        <div class="col-xs-12 col-sm-5 p-2">  
+                                                        <div class="col-xs-12 col-sm-12 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input">
-                                                                <div class="mdc-notched-outline">
-                                                                    <div class="mdc-notched-outline__leading"></div>
-                                                                    <div class="mdc-notched-outline__notch">
-                                                                        <label class="mdc-floating-label">Name</label>
-                                                                    </div>
-                                                                    <div class="mdc-notched-outline__trailing"></div>
-                                                                </div>
-                                                            </div> 
-                                                        </div> 
-                                                        <div class="col-xs-12 col-sm-7 p-2">  
-                                                            <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input">
+                                                                <input class="mdc-text-field__input" name="video_link" type="text" value="{{ old('video_link') }}">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -408,51 +394,11 @@
                                                         </div>  
                                                     </div> 
                                                 </div>
-                                                <div class="col-xs-1 text-center">
-                                                    <button class="mdc-icon-button material-icons warn-color remove-step" type="button">cancel</button> 
-                                                </div>
                                             </div> 
                                         </div> 
                                     </div>  
                                 </div> 
-                                <script id="videos" type="text/template">
-                                    <div class="step-section">
-                                        <div class="row middle-xs">
-                                            <div class="col-xs-1 text-center fw-500 number"></div>
-                                            <div class="col-xs-10">
-                                                <div class="row"> 
-                                                    <div class="col-xs-12 col-sm-5 p-2">  
-                                                        <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
-                                                            <div class="mdc-notched-outline">
-                                                                <div class="mdc-notched-outline__leading"></div>
-                                                                <div class="mdc-notched-outline__notch">
-                                                                    <label class="mdc-floating-label">Name</label>
-                                                                </div>
-                                                                <div class="mdc-notched-outline__trailing"></div>
-                                                            </div>
-                                                        </div> 
-                                                    </div> 
-                                                    <div class="col-xs-12 col-sm-7 p-2">  
-                                                        <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
-                                                            <div class="mdc-notched-outline">
-                                                                <div class="mdc-notched-outline__leading"></div>
-                                                                <div class="mdc-notched-outline__notch">
-                                                                    <label class="mdc-floating-label">Link</label>
-                                                                </div>
-                                                                <div class="mdc-notched-outline__trailing"></div>
-                                                            </div>
-                                                        </div> 
-                                                    </div>  
-                                                </div> 
-                                            </div>
-                                            <div class="col-xs-1 text-center">
-                                                <button class="mdc-icon-button material-icons warn-color remove-step" type="button">cancel</button> 
-                                            </div>
-                                        </div> 
-                                    </div>
-                                </script> 
+                                
                                 <div class="col-xs-12 p-0 dynamic-steps">
                                     <div class="row middle-xs my-3 px-2">
                                         <p class="mb-0"><span class="uppercase fw-500">Plans</span></p>                            
@@ -468,7 +414,7 @@
                                                     <div class="row"> 
                                                         <div class="col-xs-12 col-sm-5 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input">
+                                                                <input class="mdc-text-field__input" type="text" name="floor_name[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -480,7 +426,7 @@
                                                         </div> 
                                                         <div class="col-xs-12 col-sm-7 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input">
+                                                                <input class="mdc-text-field__input" type="text" name="floor_description[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -492,7 +438,7 @@
                                                         </div> 
                                                         <div class="col-xs-12 col-sm-4 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input">
+                                                                <input class="mdc-text-field__input" name="floor_size[]" type="number">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -504,7 +450,7 @@
                                                         </div>  
                                                         <div class="col-xs-12 col-sm-4 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input">
+                                                                <input class="mdc-text-field__input" type="number" name="floor_room[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -516,7 +462,7 @@
                                                         </div>  
                                                         <div class="col-xs-12 col-sm-4 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input">
+                                                                <input class="mdc-text-field__input" type="number" name="floor_bath[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -527,12 +473,7 @@
                                                             </div> 
                                                         </div>  
                                                         <div class="col-xs-12 mt-2">  
-                                                            <label class="text-muted">Image</label> 
-                                                            <div id="plan-image-1" class="dropzone needsclick">
-                                                                <div class="dz-message needsclick text-muted">    
-                                                                    Drop file here or click to upload.
-                                                                </div>
-                                                            </div>  
+                                                           <input type="file" name="floor_photo[]" class="form-control">
                                                         </div>  
                                                     </div> 
                                                 </div>
@@ -546,12 +487,14 @@
                                 <script id="plans" type="text/template">
                                     <div class="step-section">
                                         <div class="row middle-xs">
-                                            <div class="col-xs-1 text-center fw-500 number"></div>
+                                            <div class="col-xs-1 text-center fw-500">
+                                                <span class="num">1</span>
+                                            </div>
                                             <div class="col-xs-10">
                                                 <div class="row"> 
                                                     <div class="col-xs-12 col-sm-5 p-2">  
                                                         <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
+                                                            <input class="mdc-text-field__input" type="text" name="floor_name[]">
                                                             <div class="mdc-notched-outline">
                                                                 <div class="mdc-notched-outline__leading"></div>
                                                                 <div class="mdc-notched-outline__notch">
@@ -563,7 +506,7 @@
                                                     </div> 
                                                     <div class="col-xs-12 col-sm-7 p-2">  
                                                         <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
+                                                            <input class="mdc-text-field__input" type="text" name="floor_description[]">
                                                             <div class="mdc-notched-outline">
                                                                 <div class="mdc-notched-outline__leading"></div>
                                                                 <div class="mdc-notched-outline__notch">
@@ -575,7 +518,7 @@
                                                     </div> 
                                                     <div class="col-xs-12 col-sm-4 p-2">  
                                                         <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
+                                                            <input class="mdc-text-field__input" name="floor_size[]" type="number">
                                                             <div class="mdc-notched-outline">
                                                                 <div class="mdc-notched-outline__leading"></div>
                                                                 <div class="mdc-notched-outline__notch">
@@ -587,7 +530,7 @@
                                                     </div>  
                                                     <div class="col-xs-12 col-sm-4 p-2">  
                                                         <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
+                                                            <input class="mdc-text-field__input" type="number" name="floor_room[]">
                                                             <div class="mdc-notched-outline">
                                                                 <div class="mdc-notched-outline__leading"></div>
                                                                 <div class="mdc-notched-outline__notch">
@@ -599,7 +542,7 @@
                                                     </div>  
                                                     <div class="col-xs-12 col-sm-4 p-2">  
                                                         <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
+                                                            <input class="mdc-text-field__input" type="number" name="floor_bath[]">
                                                             <div class="mdc-notched-outline">
                                                                 <div class="mdc-notched-outline__leading"></div>
                                                                 <div class="mdc-notched-outline__notch">
@@ -608,14 +551,9 @@
                                                                 <div class="mdc-notched-outline__trailing"></div>
                                                             </div>
                                                         </div> 
-                                                    </div> 
+                                                    </div>  
                                                     <div class="col-xs-12 mt-2">  
-                                                        <label class="text-muted">Image</label> 
-                                                        <div id="plan-image" class="dropzone needsclick">
-                                                            <div class="dz-message needsclick text-muted">    
-                                                                Drop file here or click to upload.
-                                                            </div>
-                                                        </div>  
+                                                       <input type="file" name="floor_photo[]" class="form-control">
                                                     </div>  
                                                 </div> 
                                             </div>
@@ -640,7 +578,7 @@
                                                     <div class="row"> 
                                                         <div class="col-xs-12 col-sm-5 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="text" name="name[]">
+                                                                <input class="mdc-text-field__input" type="text" name="feature_name[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -652,7 +590,7 @@
                                                         </div> 
                                                         <div class="col-xs-12 col-sm-7 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="text" name="value[]">
+                                                                <input class="mdc-text-field__input" type="text" name="feature_value[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -674,12 +612,14 @@
                                 <script id="features" type="text/template">
                                     <div class="step-section">
                                         <div class="row middle-xs">
-                                            <div class="col-xs-1 text-center fw-500 number"></div>
+                                            <div class="col-xs-1 text-center fw-500">
+                                                <span class="num">1</span>
+                                            </div>
                                             <div class="col-xs-10">
                                                 <div class="row"> 
                                                     <div class="col-xs-12 col-sm-5 p-2">  
                                                         <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
+                                                            <input class="mdc-text-field__input" type="text" name="feature_name[]">
                                                             <div class="mdc-notched-outline">
                                                                 <div class="mdc-notched-outline__leading"></div>
                                                                 <div class="mdc-notched-outline__notch">
@@ -691,7 +631,7 @@
                                                     </div> 
                                                     <div class="col-xs-12 col-sm-7 p-2">  
                                                         <div class="mdc-text-field mdc-text-field--outlined">
-                                                            <input class="mdc-text-field__input">
+                                                            <input class="mdc-text-field__input" type="text" name="feature_value[]">
                                                             <div class="mdc-notched-outline">
                                                                 <div class="mdc-notched-outline__leading"></div>
                                                                 <div class="mdc-notched-outline__notch">
@@ -706,7 +646,7 @@
                                             <div class="col-xs-1 text-center">
                                                 <button class="mdc-icon-button material-icons warn-color remove-step" type="button">cancel</button> 
                                             </div>
-                                        </div> 
+                                        </div>  
                                     </div>
                                 </script>  
                                 <div class="col-xs-12 py-3 row middle-xs">
@@ -714,7 +654,7 @@
                                         <div class="mdc-switch__track"></div>
                                         <div class="mdc-switch__thumb-underlay">
                                             <div class="mdc-switch__thumb">
-                                                <input type="checkbox" id="featured" class="mdc-switch__native-control">
+                                                <input type="checkbox" id="featured" name="is_featured" class="mdc-switch__native-control">
                                             </div>
                                         </div>
                                     </div>

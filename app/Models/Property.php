@@ -9,7 +9,30 @@ class Property extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','slug','description','price','photo','size','category_id','sub_category_id','area_id','sub_area_id','status','consumer','address','purpose'];
+    protected $fillable = [
+        'title',
+        'slug',
+        'description',
+        'previous_price',
+        'price',
+        'category_id',
+        'sub_category_id',
+        'purpose',
+        'area_id',
+        'sub_area_id',
+        'address',
+        'street',
+        'bedroom',
+        'bathroom',
+        'garage',
+        'size',
+        'year_built',
+        'video_link',
+        'user_id',
+        'is_featured',
+        'status',
+        'consumer',
+    ];
 
     public function area()
     {
@@ -27,5 +50,10 @@ class Property extends Model
     public function sub_category()
     {
         return $this->belongsTo(Category::class,'sub_category_id');
+    }
+
+    public function images()
+    {
+        return $this->morphMany(Image::class,'imageable');
     }
 }
