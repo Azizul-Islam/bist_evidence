@@ -160,7 +160,7 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-6 p-2">
                                     <select name="category_id" class="form-control" id="">
-                                        <option value="">Select One</option>
+                                        <option value="">Select Category</option>
                                         @foreach ($categories as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
@@ -168,7 +168,7 @@
                                 </div>   
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <select name="purpose" class="form-control" id="">
-                                        <option value="">Select One</option>
+                                        <option value="">Select Purpose</option>
                                         <option value="sell">Sell</option>
                                         <option value="rent">Rent</option>
                                     </select>

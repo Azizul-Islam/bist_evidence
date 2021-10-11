@@ -56,7 +56,7 @@ class PropertyController extends Controller
         $slug = Str::slug($data['title']);
         $slug_count = Property::where('slug',$slug)->count();
         if($slug_count > 0){
-            $slug = time()."_".$slug;
+            $slug = rand()."_".$slug;
         }
         $data['slug'] = $slug;
         if($request->is_featured == 'on'){
@@ -71,7 +71,7 @@ class PropertyController extends Controller
          // request has photo
          if($request->has('photos') && !blank($request->photos)){
             foreach($request->photos as $photo) {
-                $name_gen = date('YmdHis').".".$photo->getClientOriginalExtension();
+                $name_gen = rand().".".$photo->getClientOriginalExtension();
                 $photo->move(public_path('backend/properties'),$name_gen);
                 $property->images()->create([
                     'path' => $name_gen,
@@ -104,7 +104,7 @@ class PropertyController extends Controller
                 $floor->floor_bath = $request->floor_bath[$i];
                 if(!blank($request->floor_photo[$i])){
                     $file = $request->floor_photo[$i];
-                    $name_gen = date('YmdHis').".".$file->getClientOriginalExtension();
+                    $name_gen = rand().".".$file->getClientOriginalExtension();
                     $file->move(public_path('backend/properties/floor'),$name_gen);
                     $floor->floor_photo = $name_gen;
                 }

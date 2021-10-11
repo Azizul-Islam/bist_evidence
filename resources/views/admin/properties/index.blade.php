@@ -55,7 +55,7 @@
                     </td>
                     <td>
                         <a href="#">
-                            <img src="{{ asset('backend/assets/images/properties/'.$item->photo) }}" class="rounded" width="40"
+                            <img src="{{ asset('backend/properties/'.$item->images[0]->path) }}" class="rounded" width="80"
                                  alt="Property">
                         </a>
                     </td>
