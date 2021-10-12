@@ -47,7 +47,7 @@
 
 <!-- preloader -->
 <div class="preloader">
-    <img src="https://vetra.laborasyon.com/assets/images/logo.svg" alt="logo">
+    <img src="{{ asset('frontend/assets/Logo.png') }}" alt="logo">
     <div class="preloader-icon"></div>
 </div>
 <!-- ./ preloader -->

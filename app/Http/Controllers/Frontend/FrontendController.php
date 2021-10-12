@@ -61,4 +61,9 @@ class FrontendController extends Controller
         $property = Property::where('slug',$slug)->first();
         return view('frontend.property-details',compact('property'));
     }
+
+    public function property()
+    {
+        return view('frontend.pages.property-details');
+    }
 }

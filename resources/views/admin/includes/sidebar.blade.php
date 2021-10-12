@@ -69,7 +69,7 @@
             <li>
                 <a class="{{ \Request::is('admin/amenities') || \Request::is('admin/amenities/create') ? 'active' : '' }}" href="{{ route('admin.amenities.index') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-geo"></i>
+                        <i class="bi bi-bar-chart-steps"></i>
                     </span>
                     <span>Amenity</span>
                 </a>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,12 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/',[App\Http\Controllers\Frontend\FrontendController::class,'index']);
-Route::get('/add-property',[App\Http\Controllers\Frontend\FrontendController::class,'addPropertyIndex'])->name('frontend.add-property');
-Route::post('getarea/{area_id}/sub',[App\Http\Controllers\Frontend\FrontendController::class,'getChildAreaByParent']);
-Route::post('add/property',[App\Http\Controllers\Frontend\FrontendController::class,'addPropertyStore'])->name('add-property');
-Route::get('property/details/{slug}',[App\Http\Controllers\Frontend\FrontendController::class,'propertyDetails'])->name('property.details');
-
+Route::get('/',[FrontendController::class,'index']);
+Route::get('/add-property',[FrontendController::class,'addPropertyIndex'])->name('frontend.add-property');
+Route::post('getarea/{area_id}/sub',[FrontendController::class,'getChildAreaByParent']);
+Route::post('add/property',[FrontendController::class,'addPropertyStore'])->name('add-property');
+Route::get('property/details/{slug}',[FrontendController::class,'propertyDetails'])->name('property.details');
+Route::get('property',[FrontendController::class,'property'])->name('property');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

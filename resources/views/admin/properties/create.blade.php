@@ -134,7 +134,7 @@
                                         </div>
                                     </div> 
                                 </div>
-                                <div class="col-xs-12 col-sm-6 p-2">  
+                                {{-- <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
                                         <input class="mdc-text-field__input" name="previous_price" type="text" value="{{ old('previous_price') }}">
                                         <div class="mdc-notched-outline">
@@ -145,7 +145,7 @@
                                             <div class="mdc-notched-outline__trailing"></div>
                                         </div>
                                     </div> 
-                                </div>
+                                </div> --}}
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
                                         <input class="mdc-text-field__input" type="text" name="price" value="{{ old('price') }}">
