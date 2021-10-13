@@ -55,7 +55,7 @@
                     </td>
                     <td>
                         <a href="#">
-                            <img src="{{ asset('backend/properties/'.$item->images[0]->path) }}" class="rounded" width="80"
+                            <img src="{{ isset($item->images[0]->path) ? asset('backend/properties/'.$item->images[0]->path)  : '' }}" class="rounded" width="80"
                                  alt="Property">
                         </a>
                     </td>
@@ -63,7 +63,7 @@
                     <td>{{ number_format($item->price,2) }}</td>
                     <td>{{ $item->size }}</td>
                     <td>{{ Str::limit($item->address, 20, '...') }}</td>
-                    <td><span class="badge {{ $item->purpose == 'sell' ? 'bg-primary' : 'bg-info' }}">{{ ucfirst($item->purpose) }}</span></td>
+                    <td><span class="badge {{ $item->purpose == 'for sale' ? 'bg-primary' : 'bg-info' }}">{{ ucfirst($item->purpose) }}</span></td>
                     <td>
                         <input type="checkbox" name="status"  data-toggle="toggle" {{ $item->status == 'active' ? 'checked' : '' }} value="{{ $item->id }}" data-size="sm" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="danger">
                     </td>

@@ -45,7 +45,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'category_name' => 'required|string|unique:categories,name',
+            'category_name' => 'required|string',
             'parent_id' => 'nullable',
             'status' => 'nullable'
         ]);
@@ -94,7 +94,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $data = $request->validate([
-            'category_name' => 'required|string|unique:categories,name,'.$category->id,
+            'category_name' => 'required|string',
             'parent_id' => 'nullable',
             'status' => 'nullable'
         ]);
@@ -113,5 +113,20 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         //
+    }
+
+
+    public function getChildCategoryByParent($id)
+    {
+       $category = Category::findOrFail($id);
+       if($category){
+        $category_id = Category::getChildCategoryByParentId($id);
+        if(count($category_id)<=0){
+            return response()->json(['status'=>false,'date'=>null,'msg'=>'']);
+        }
+        return response()->json(['status'=>true,'data'=>$category_id,'msg'=>'']);
+    }else{
+        return response()->json(['status'=>false,'data'=>null,'msg'=>'']);
+    }
     }
 }

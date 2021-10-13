@@ -113,7 +113,7 @@
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
-                                                <label class="mdc-floating-label">Title</label>
+                                                <label class="mdc-floating-label">Title *</label>
                                             </div>
                                             <div class="mdc-notched-outline__trailing"></div>
                                         </div>
@@ -134,46 +134,47 @@
                                         </div>
                                     </div> 
                                 </div>
-                                {{-- <div class="col-xs-12 col-sm-6 p-2">  
-                                    <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" name="previous_price" type="text" value="{{ old('previous_price') }}">
-                                        <div class="mdc-notched-outline">
-                                            <div class="mdc-notched-outline__leading"></div>
-                                            <div class="mdc-notched-outline__notch">
-                                                <label class="mdc-floating-label">Price ($)</label>
-                                            </div>
-                                            <div class="mdc-notched-outline__trailing"></div>
-                                        </div>
-                                    </div> 
-                                </div> --}}
-                                <div class="col-xs-12 col-sm-6 p-2">  
+                                
+                                <div class="col-xs-12 col-sm-12 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
                                         <input class="mdc-text-field__input" type="text" name="price" value="{{ old('price') }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
-                                                <label class="mdc-floating-label">Price (€)</label>
+                                                <label class="mdc-floating-label">Price *</label>
                                             </div>
                                             <div class="mdc-notched-outline__trailing"></div>
                                         </div>
                                     </div> 
                                 </div>
+                                
+                                <div class="col-xs-12 col-sm-6 p-2">  
+                                    <select name="purpose" required class="form-control" id="">
+                                        <option value="">Select Purpose *</option>
+                                        <option value="for sale">For Sale</option>
+                                        <option value="to rent">To Rent</option>
+                                    </select>
+                                </div> 
+                                <div class="col-xs-12 col-sm-6 p-2">  
+                                    <select name="completion_status" class="form-control" id="">
+                                        <option value="">Select Completion Status</option>
+                                        <option value="ready">Ready</option>
+                                        <option value="under constraction">Under Constraction</option>
+                                    </select>
+                                </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">
-                                    <select name="category_id" class="form-control" id="">
-                                        <option value="">Select Category</option>
+                                    <select name="category_id" required class="form-control" id="category_id">
+                                        <option value="">Select Category *</option>
                                         @foreach ($categories as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
                                     </select>
-                                </div>   
-                                <div class="col-xs-12 col-sm-6 p-2">  
-                                    <select name="purpose" class="form-control" id="">
-                                        <option value="">Select Purpose</option>
-                                        <option value="sell">Sell</option>
-                                        <option value="rent">Rent</option>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 p-2 d-none" id="sub_category_div">
+                                    <select name="sub_category_id" class="form-control" id="sub_category_id">
+                                       
                                     </select>
-    
-                                </div>  
+                                </div>     
                                 <div class="col-xs-12 mt-2">  
                                     <input class="form-control" type="file" multiple name="photos[]" >
                                     
@@ -191,12 +192,12 @@
                         <div class="tab-content"> 
                                 <div id="sp-address-form" class="row">
                                 <div class="col-xs-12 p-3">
-                                    <h1 class="fw-500 text-center">Address</h1>
+                                    <h1 class="fw-500 text-center">Address *</h1>
                                 </div> 
                                 <div class="col-xs-12 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
                                         <i class="material-icons mdc-text-field__icon text-muted">location_on</i>
-                                        <input class="mdc-text-field__input" type="text" name="address" value="{{ old('address') }}">
+                                        <input class="mdc-text-field__input" required type="text" name="address" value="{{ old('address') }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -210,8 +211,8 @@
                                     <div id="contact-map"></div>
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">
-                                    <select name="area_id" class="form-control" id="area_id">
-                                        <option value="">Select Area</option>
+                                    <select name="area_id" required class="form-control" id="area_id">
+                                        <option value="">Select Area *</option>
                                         @foreach ($areas as $item)
                                             <option value="{{ $item->id }}">{{ $item->name }}</option>
                                         @endforeach
@@ -691,6 +692,32 @@
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>  
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s&amp;callback=initMap" async defer></script>  
     <script>
+        $('#category_id').change(function() {
+            var category_id = $(this).val();
+            if (category_id != null) {
+                $.ajax({
+                    url: "/admin/category/" + category_id + "/sub",
+                    method: 'GET',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        category_id: category_id
+                    },
+                    success: function(response) {
+                        var html_option = "<option value=''>--Sub Category--</option>";
+                        if (response.status) {
+                            $("#sub_category_div").removeClass('d-none');
+                            $.each(response.data, function(id, name) {
+                                html_option += "<option value='" + id + "'>" + name +
+                                    "</option>";
+                            });
+                        } else {
+                            $("#sub_category_div").addClass('d-none');
+                        }
+                        $("#sub_category_id").html(html_option);
+                    }
+                });
+            }
+        });
         $('#area_id').change(function() {
             var area_id = $(this).val();
             if (area_id != null) {

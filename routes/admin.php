@@ -16,6 +16,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/',[AdminController::class,'index'])->name('home');
        //category route
         Route::resource('categories',CategoryController::class);
+        Route::get('category/{area_id}/sub',[CategoryController::class,'getChildCategoryByParent']);
 
         //area route
         Route::resource('areas','App\Http\Controllers\Admin\AreaController');

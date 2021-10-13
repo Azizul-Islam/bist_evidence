@@ -18,6 +18,7 @@ class Property extends Model
         'category_id',
         'sub_category_id',
         'purpose',
+        'completion_status',
         'area_id',
         'sub_area_id',
         'address',

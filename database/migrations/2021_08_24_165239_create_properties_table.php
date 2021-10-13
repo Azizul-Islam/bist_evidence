@@ -18,12 +18,12 @@ class CreatePropertiesTable extends Migration
             $table->string('title');
             $table->string('slug')->unique();
             $table->mediumText('description')->nullable();
-            $table->float('previous_price',16)->nullable();
             $table->float('price',16);
             // $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('sub_category_id')->nullable();
-            $table->enum('purpose',['sell','rent'])->default('sell');
+            $table->enum('purpose',['for sale','to rent']);
+            $table->enum('completion_status',['ready','under constraction'])->default('ready');
             $table->string('address')->nullable();
             $table->unsignedBigInteger('area_id');
             $table->unsignedBigInteger('sub_area_id')->nullable();

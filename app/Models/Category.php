@@ -46,4 +46,9 @@ class Category extends Model
         }
         return $outputs;
     }
+
+    public static function getChildCategoryByParentId($id)
+    {
+        return Category::where('parent_id',$id)->pluck('name','id');
+    }
 }

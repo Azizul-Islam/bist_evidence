@@ -36,7 +36,7 @@ class PropertyController extends Controller
     public function create()
     {
         $result = Category::getCategories(true);
-        $data['categories'] = Category::generateCategories($result);
+        $data['categories'] = Category::whereNull('parent_id')->latest()->get();
         $data['areas'] = Area::whereNull('parent_id')->latest()->get();
         $data['amenities'] = Amenity::latest()->get();
         return view('admin.properties.create',$data);
@@ -50,13 +50,13 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
-        // dd($request->all());
+
         $data = $request->all();
         //make slug form title
         $slug = Str::slug($data['title']);
         $slug_count = Property::where('slug',$slug)->count();
         if($slug_count > 0){
-            $slug = rand()."_".$slug;
+            $slug = rand()."-".$slug;
         }
         $data['slug'] = $slug;
         if($request->is_featured == 'on'){
@@ -80,9 +80,9 @@ class PropertyController extends Controller
             }
         }
 
+        $amenities = $request->amenity_id;
         //property amenity part herer
-        if($request->amenity_id != null){
-            $amenities = $request->amenity_id;
+        if(!empty(array_filter($amenities))){
             foreach($amenities as $i=>$item) {
                 $amenity = new PropertyAmenity();
                 $amenity->property_id = $property->id;
@@ -91,9 +91,9 @@ class PropertyController extends Controller
             }
         }
 
-        //property floor plan here
-        if($request->floor_name != null){
-            $floors = $request->floor_name;
+        $floors = $request->floor_name;
+         //property floor plan here
+         if(!empty(array_filter($floors))){
             foreach($floors as $i=>$item) {
                 $floor = new PropertyFloorPlan();
                 $floor->property_id = $property->id;
@@ -102,7 +102,7 @@ class PropertyController extends Controller
                 $floor->floor_size = $request->floor_size[$i];
                 $floor->floor_room = $request->floor_room[$i];
                 $floor->floor_bath = $request->floor_bath[$i];
-                if(!blank($request->floor_photo[$i])){
+                if(!empty($request->floor_photo)){
                     $file = $request->floor_photo[$i];
                     $name_gen = rand().".".$file->getClientOriginalExtension();
                     $file->move(public_path('backend/properties/floor'),$name_gen);
@@ -111,9 +111,10 @@ class PropertyController extends Controller
                 $floor->save();
             }
         }
+
+        $features = $request->feature_name;
         //property feature part here
-        if($request->feature_name != null) {
-            $features = $request->feature_name;
+        if(!empty(array_filter($features))) {
             foreach ($features as $i=>$item) {
                 $feature = new PropertyFeature();
                 $feature->property_id = $property->id;
@@ -144,11 +145,13 @@ class PropertyController extends Controller
      */
     public function edit(Property $property)
     {
-        $result = Category::getCategories(true);
-        $categories = Category::generateCategories($result);
+        $amenities = Amenity::latest()->get();
+        // $result = Category::getCategories(true);
+        $categories = Category::whereNull('parent_id')->latest()->get();
+        $subCategories = Category::whereNotNull('parent_id')->latest()->get();
         $areas = Area::whereNull('parent_id')->latest()->get();
         $sub_areas = Area::WhereNotNull('parent_id')->get();
-        return view('admin.properties.edit',compact('property','categories','areas','sub_areas'));
+        return view('admin.properties.edit',compact('property','categories','areas','sub_areas','amenities','subCategories'));
     }
 
     /**
@@ -158,32 +161,9 @@ class PropertyController extends Controller
      * @param  \App\Models\Property  $property
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Property $property)
+    public function update(PropertyRequest $request, Property $property)
     {
-        $data = $request->validate([
-            'title' => 'required|string',
-            'price' => 'required|numeric',
-            'address' => 'required|string',
-            'size' => 'required',
-            'purpose' => 'nullable',
-            'description' => 'nullable|string',
-            'category_id' => 'required',
-            'sub_category_id' => 'nullable',
-            'area_id' => 'required',
-            'sub_area_id' => 'nullable',
-            'consumer' => 'nullable',
-            'status' => 'nullable',
-            'photo' => 'nullable'
-        ]);
-
-        //request has photo
-        if($request->has('photo')){
-            $file = $request->file('photo');
-            $name_gen = $file->getClientOriginalName();
-            $file->move(public_path('backend/assets/images/properties'),$name_gen);
-            $data['photo'] = $name_gen;
-        }
-
+        $data = $request->all();
         $property->update($data);
         return redirect()->route('properties.index')->with('info','Property has been updated');
     }
