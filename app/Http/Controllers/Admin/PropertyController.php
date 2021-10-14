@@ -146,12 +146,12 @@ class PropertyController extends Controller
     public function edit(Property $property)
     {
         $amenities = Amenity::latest()->get();
-        // $result = Category::getCategories(true);
         $categories = Category::whereNull('parent_id')->latest()->get();
         $subCategories = Category::whereNotNull('parent_id')->latest()->get();
         $areas = Area::whereNull('parent_id')->latest()->get();
         $sub_areas = Area::WhereNotNull('parent_id')->get();
-        return view('admin.properties.edit',compact('property','categories','areas','sub_areas','amenities','subCategories'));
+        $propertyAmenities = $property->amenities->pluck('id')->toArray();
+        return view('admin.properties.edit',compact('property','categories','areas','sub_areas','amenities','subCategories','propertyAmenities'));
     }
 
     /**

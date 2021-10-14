@@ -213,7 +213,7 @@
                                 <div class="col-xs-12 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon">
                                         <i class="material-icons mdc-text-field__icon text-muted">location_on</i>
-                                        <input class="mdc-text-field__input" required type="text" name="address" value="{{ old('address') }}">
+                                        <input class="mdc-text-field__input" required type="text" name="address" value="{{ old('address',$property->address) }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -230,18 +230,29 @@
                                     <select name="area_id" required class="form-control" id="area_id">
                                         <option value="">Select Area *</option>
                                         @foreach ($areas as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            <option value="{{ $item->id }}" {{ $property->area_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
+                                @if(isset($property->sub_area_id))
+                                <div class="col-xs-12 col-sm-6 p-2">
+                                    <select name="sub_area_id" class="form-control" id="sub_area_id">
+                                        <option value="">Select One</option>
+                                        @foreach ($sub_areas as $item)
+                                            <option value="{{ $item->id }}" {{ $property->sub_area_id == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @else 
                                 <div class="col-xs-12 col-sm-6 p-2 d-none" id="sub_area_div">
                                     <select name="sub_area_id" class="form-control" id="sub_area_id">
 
                                     </select>
                                 </div>
+                                @endif
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="text" value="{{ old('street') }}" name="street">
+                                        <input class="mdc-text-field__input" type="text" value="{{ old('street',$property->street) }}" name="street">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -253,7 +264,7 @@
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="text" value="{{ old('zip_code') }}" name="zip_code">
+                                        <input class="mdc-text-field__input" type="text" value="{{ old('zip_code',$property->zip_code) }}" name="zip_code">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -286,7 +297,7 @@
                                 </div>  
                                 <div class="col-xs-12 col-sm-6 col-md-4 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" name="bedroom" type="number" value="{{ old('bedroom') }}">
+                                        <input class="mdc-text-field__input" name="bedroom" type="number" value="{{ old('bedroom',$property->bedroom) }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -298,7 +309,7 @@
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 col-md-4 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="number" name="bathroom" value="{{ old('bathroom') }}" >
+                                        <input class="mdc-text-field__input" type="number" name="bathroom" value="{{ old('bathroom',$property->bathroom) }}" >
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -310,7 +321,7 @@
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 col-md-4 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="number" name="garage" value="{{ old('garage') }}">
+                                        <input class="mdc-text-field__input" type="number" name="garage" value="{{ old('garage',$property->garage) }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -322,7 +333,7 @@
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="number" name="size" value="{{ old('size') }}">
+                                        <input class="mdc-text-field__input" type="number" name="size" value="{{ old('size',$property->size) }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -334,7 +345,7 @@
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="date" name="year_built" value="year_built">
+                                        <input class="mdc-text-field__input" type="date" name="year_built"  value="{{ old('year_built',$property->year_built) }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -351,7 +362,7 @@
                                         @foreach ($amenities as $item)
                                         <div class="mdc-form-field">
                                             <div class="mdc-checkbox">
-                                                <input type="checkbox" value="{{ $item->id }}" name="amenity_id[]" class="mdc-checkbox__native-control" id="{{ $item->id }}"/>
+                                                <input type="checkbox" value="{{ $item->id }}" name="amenity_id[]" @if(in_array($item->id,$propertyAmenities)) checked @endif class="mdc-checkbox__native-control" id="{{ $item->id }}"/>
                                                 <div class="mdc-checkbox__background">
                                                     <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                                                         <path class="mdc-checkbox__checkmark-path" fill="none" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
@@ -399,7 +410,7 @@
                                                     <div class="row"> 
                                                         <div class="col-xs-12 col-sm-12 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" name="video_link" type="text" value="{{ old('video_link') }}">
+                                                                <input class="mdc-text-field__input" name="video_link" type="text" value="{{ old('video_link',$property->video_link) }}">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -421,6 +432,7 @@
                                         <p class="mb-0"><span class="uppercase fw-500">Plans</span></p>                            
                                         <button class="mdc-icon-button material-icons primary-color add-step" type="button" data-template-name="plans">add_circle</button>  
                                     </div>
+                                    
                                     <div class="steps">
                                         <div class="step-section">
                                             <div class="row middle-xs">
@@ -500,6 +512,7 @@
                                             </div> 
                                         </div> 
                                     </div>  
+
                                 </div>
                                 <script id="plans" type="text/template">
                                     <div class="step-section">

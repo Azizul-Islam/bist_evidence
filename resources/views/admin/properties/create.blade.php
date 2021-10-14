@@ -318,7 +318,7 @@
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="date" name="year_built" value="year_built">
+                                        <input class="mdc-text-field__input" type="date" name="year_built" value="{{ old('year_built',$property->year_built) }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">

@@ -17,4 +17,6 @@ class PropertyFloorPlan extends Model
         'floor_bath',
         'floor_photo'
     ];
+
+   
 }

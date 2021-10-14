@@ -57,4 +57,19 @@ class Property extends Model
     {
         return $this->morphMany(Image::class,'imageable');
     }
+
+    public function amenities()
+    {
+        return $this->belongsToMany(Amenity::class,'property_amenities');
+    }
+
+    public function floorPlans()
+    {
+        return $this->hasMany(PropertyFloorPlan::class);
+    }
+
+    public function features()
+    {
+        return $this->hasMany(PropertyFeature::class);
+    }
 }
