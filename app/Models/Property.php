@@ -23,6 +23,7 @@ class Property extends Model
         'sub_area_id',
         'address',
         'street',
+        'zip_code',
         'bedroom',
         'bathroom',
         'garage',
@@ -33,6 +34,7 @@ class Property extends Model
         'is_featured',
         'status',
         'consumer',
+        'contract'
     ];
 
     public function area()

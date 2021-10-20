@@ -119,6 +119,7 @@
         responsive: true
     });
 </script>
+@include('admin.includes.message')
 @yield('scripts')
 </body>
 

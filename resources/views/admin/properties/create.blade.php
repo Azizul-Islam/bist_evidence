@@ -7,13 +7,11 @@
         }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/libs/swiper.min.css') }}"> --}}
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  
     <link rel="stylesheet" href="{{ asset('frontend/css/libs/dropzone.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/libs/material-components-web.min.css') }}">   
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}"> 
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/skins/blue.css') }}">   --}}
-    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">  
+    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">   
 @endsection
 @section('content')
     <div class="mb-4">
@@ -135,7 +133,7 @@
                                     </div> 
                                 </div>
                                 
-                                <div class="col-xs-12 col-sm-12 p-2">  
+                                <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
                                         <input class="mdc-text-field__input" type="text" name="price" value="{{ old('price') }}">
                                         <div class="mdc-notched-outline">
@@ -149,19 +147,22 @@
                                 </div>
                                 
                                 <div class="col-xs-12 col-sm-6 p-2">  
-                                    <select name="purpose" required class="form-control" id="">
-                                        <option value="">Select Purpose *</option>
-                                        <option value="for sale">For Sale</option>
-                                        <option value="to rent">To Rent</option>
+                                    <select name="contract" required class="form-control" id="">
+                                        <option value="">Select Contract *</option>
+                                        <option value="pending">Pending</option>
+                                        <option value="hot offer">Hot Offer</option>
+                                        <option value="open house">Open House</option>
+                                        <option value="no fees">No Fees</option>
+                                        <option value="sold">Sold</option>
                                     </select>
                                 </div> 
-                                <div class="col-xs-12 col-sm-6 p-2">  
+                                {{-- <div class="col-xs-12 col-sm-6 p-2">  
                                     <select name="completion_status" class="form-control" id="">
                                         <option value="">Select Completion Status</option>
                                         <option value="ready">Ready</option>
                                         <option value="under constraction">Under Constraction</option>
                                     </select>
-                                </div> 
+                                </div>  --}}
                                 <div class="col-xs-12 col-sm-6 p-2">
                                     <select name="category_id" required class="form-control" id="category_id">
                                         <option value="">Select Category *</option>
@@ -174,11 +175,22 @@
                                     <select name="sub_category_id" class="form-control" id="sub_category_id">
                                        
                                     </select>
-                                </div>     
+                                </div> 
+                                    
                                 <div class="col-xs-12 mt-2">  
                                     <input class="form-control" type="file" multiple name="photos[]" >
                                     
                                 </div>  
+                                <div class="col-xs-12 col-sm-6 p-2">  
+                                    <label class="">Purpose *</label><br>
+                                    <input class="" type="radio" name="purpose" checked value="for sale" id="for sale"> <label for="for sale">For Sale</label>
+                                    <input class="" type="radio" name="purpose" value="to rent" id="to rent"> <label for="to rent">To Rent</label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 p-2">  
+                                    <label class="">Completion Status *</label><br>
+                                    <input class="" type="radio" name="completion_status" checked value="ready" id="ready"> <label for="ready">Ready</label>
+                                    <input class="" type="radio" name="completion_status" value="under constraction" id="under constraction"> <label for="under constraction">Under Constraction</label>
+                                </div> 
                                 <div class="col-xs-12 p-2 mt-3 end-xs"> 
                                     <button class="mdc-button mdc-button--raised next-tab" type="button">
                                         <span class="mdc-button__ripple"></span> 
@@ -318,7 +330,7 @@
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
-                                        <input class="mdc-text-field__input" type="date" name="year_built" value="{{ old('year_built',$property->year_built) }}">
+                                        <input class="mdc-text-field__input" type="date" name="year_built" value="{{ old('year_built') }}">
                                         <div class="mdc-notched-outline">
                                             <div class="mdc-notched-outline__leading"></div>
                                             <div class="mdc-notched-outline__notch">
@@ -687,7 +699,6 @@
 @section('scripts')
     @include('admin.includes.message')
     <script src="{{ asset('frontend/js/libs/material-components-web.min.js') }}"></script> 
-    {{-- <script src="{{ asset('frontend/js/libs/swiper.min.js') }}"></script>   --}}
     <script src="{{ asset('frontend/js/libs/dropzone.js') }}"></script>  
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>  
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s&amp;callback=initMap" async defer></script>  

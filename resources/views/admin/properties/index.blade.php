@@ -81,7 +81,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td class="text-danger text-center" colspan="9">Data Not Found!</td>
+                    <td class="text-danger text-center" colspan="9">Data not available in this table!</td>
                 </tr>
                 @endforelse
                 </tbody>
@@ -122,7 +122,7 @@
         });
     </script>
     
-    @include('admin.includes.message')
+   
     
     
 @endsection

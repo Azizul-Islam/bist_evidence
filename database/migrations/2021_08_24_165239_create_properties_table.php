@@ -38,7 +38,8 @@ class CreatePropertiesTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('is_featured')->nullable()->default(0);
             $table->enum('consumer',['owner','manager','guard','representative','admin'])->default('admin');
-            $table->enum('status',['pending','active','inactive'])->default('active');
+            $table->enum('status',['active','inactive'])->default('active');
+            $table->enum('contract',['pending','hot offer','no fees','open house','sold'])->default('pending');
             $table->timestamps();
         });
     }

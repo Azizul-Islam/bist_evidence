@@ -46,7 +46,8 @@ class PropertyRequest extends FormRequest
             'is_featured' => 'nullable',
             'consumer' => 'nullable',
             'status' => 'nullable',
-            'photo' => 'nullable|mimes:jpeg,jpg,png'
+            'photo' => 'nullable|mimes:jpeg,jpg,png',
+            'contract' => 'required',
         ];
     }
 }

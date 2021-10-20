@@ -5,14 +5,15 @@
         .mdc-icon-button{
             width: 48px !important;
         }
+        .showImage{
+            height: 80px;width:100px;margin-right:5px
+        }
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/libs/swiper.min.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/libs/dropzone.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/libs/material-components-web.min.css') }}">   
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}"> 
-    {{-- <link rel="stylesheet" href="{{ asset('frontend/css/skins/blue.css') }}">   --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">  
 @endsection
 @section('content')
@@ -136,7 +137,7 @@
                                     </div> 
                                 </div>
                                 
-                                <div class="col-xs-12 col-sm-12 p-2">  
+                                <div class="col-xs-12 col-sm-6 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined">
                                         <input class="mdc-text-field__input" type="text" name="price" value="{{ old('price',$property->price) }}">
                                         <div class="mdc-notched-outline">
@@ -148,19 +149,14 @@
                                         </div>
                                     </div> 
                                 </div>
-                                
                                 <div class="col-xs-12 col-sm-6 p-2">  
-                                    <select name="purpose" required class="form-control" id="">
-                                        <option value="">Select Purpose *</option>
-                                        <option value="for sale" {{ $property->purpose == 'for sale' ? 'selected' : '' }}>For Sale</option>
-                                        <option value="to rent" {{ $property->purpose == 'to rent' ? 'selected' : '' }}>To Rent</option>
-                                    </select>
-                                </div> 
-                                <div class="col-xs-12 col-sm-6 p-2">  
-                                    <select name="completion_status" class="form-control" id="">
-                                        <option value="">Select Completion Status</option>
-                                        <option value="ready" {{ $property->completion_status == 'ready' ? 'selected' : '' }}>Ready</option>
-                                        <option value="under constraction" {{ $property->completion_status == 'under constraction' ? 'selected' : '' }}>Under Constraction</option>
+                                    <select name="contract" required class="form-control" id="">
+                                        <option value="">Select Contract *</option>
+                                        <option value="pending" {{ $property->contract == 'pending' ? 'selected' : '' }}>Pending</option>
+                                        <option value="hot offer" {{ $property->contract == 'hot offer' ? 'selected' : '' }}>Hot Offer</option>
+                                        <option value="open house" {{ $property->contract == 'open house' ? 'selected' : '' }}>Open House</option>
+                                        <option value="no fees" {{ $property->contract == 'no fees' ? 'selected' : '' }}>No Fees</option>
+                                        <option value="sold" {{ $property->contract == 'sold' ? 'selected' : '' }}>Sold</option>
                                     </select>
                                 </div> 
                                 <div class="col-xs-12 col-sm-6 p-2">
@@ -191,10 +187,20 @@
                                     <input class="form-control" type="file" multiple name="photos[]" >
                                     <div class="mt-2">
                                         @foreach ($property->images as $item)
-                                            <img src="{{ asset('backend/properties/'.$item->path) }}"  style="height: 80px;width:100px;margin-right:5px" >
+                                            <img src="{{ asset('backend/properties/'.$item->path) }}"  class="showImage" >
                                         @endforeach
                                     </div>
-                                </div>  
+                                </div>
+                                <div class="col-xs-12 col-sm-6 p-2">  
+                                    <label class="">Purpose *</label><br>
+                                    <input class="" type="radio" name="purpose" {{ $property->purpose == 'for sale' ? 'checked' : '' }} value="for sale" id="for sale"> <label for="for sale">For Sale</label>
+                                    <input class="" type="radio" name="purpose" {{ $property->purpose == 'to rent' ? 'checked' : '' }} value="to rent" id="to rent"> <label for="to rent">To Rent</label>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 p-2">  
+                                    <label class="">Completion Status *</label><br>
+                                    <input class="" type="radio" name="completion_status" {{ $property->completion_status == 'ready' ? 'checked' : '' }} value="ready" id="ready"> <label for="ready">Ready</label>
+                                    <input class="" type="radio" name="completion_status" {{ $property->completion_status == 'under constraction' ? 'checked' : '' }} value="under constraction" id="under constraction"> <label for="under constraction">Under Constraction</label>
+                                </div>   
                                 <div class="col-xs-12 p-2 mt-3 end-xs"> 
                                     <button class="mdc-button mdc-button--raised next-tab" type="button">
                                         <span class="mdc-button__ripple"></span> 
@@ -433,85 +439,91 @@
                                         <button class="mdc-icon-button material-icons primary-color add-step" type="button" data-template-name="plans">add_circle</button>  
                                     </div>
                                     
-                                    <div class="steps">
-                                        <div class="step-section">
-                                            <div class="row middle-xs">
-                                                <div class="col-xs-1 text-center fw-500">
-                                                    <span class="num">1</span>
-                                                </div>
-                                                <div class="col-xs-10">
-                                                    <div class="row"> 
-                                                        <div class="col-xs-12 col-sm-5 p-2">  
-                                                            <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="text" name="floor_name[]">
-                                                                <div class="mdc-notched-outline">
-                                                                    <div class="mdc-notched-outline__leading"></div>
-                                                                    <div class="mdc-notched-outline__notch">
-                                                                        <label class="mdc-floating-label">Name</label>
-                                                                    </div>
-                                                                    <div class="mdc-notched-outline__trailing"></div>
+                                   @foreach ($property->floorPlans as $i=>$floor)
+                                   <div class="steps">
+                                    <div class="step-section">
+                                        <div class="row middle-xs">
+                                            <div class="col-xs-1 text-center fw-500">
+                                                <span class="num">{{ $i+1 }}</span>
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <div class="row"> 
+                                                    <div class="col-xs-12 col-sm-5 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input type="hidden" name="floor_id[]" value="{{ $floor->id }}" id="">
+                                                            <input class="mdc-text-field__input" type="text" value="{{ old('floor_name',$floor->floor_name) }}" name="floor_name[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Name</label>
                                                                 </div>
-                                                            </div> 
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
                                                         </div> 
-                                                        <div class="col-xs-12 col-sm-7 p-2">  
-                                                            <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="text" name="floor_description[]">
-                                                                <div class="mdc-notched-outline">
-                                                                    <div class="mdc-notched-outline__leading"></div>
-                                                                    <div class="mdc-notched-outline__notch">
-                                                                        <label class="mdc-floating-label">Desc</label>
-                                                                    </div>
-                                                                    <div class="mdc-notched-outline__trailing"></div>
-                                                                </div>
-                                                            </div> 
-                                                        </div> 
-                                                        <div class="col-xs-12 col-sm-4 p-2">  
-                                                            <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" name="floor_size[]" type="number">
-                                                                <div class="mdc-notched-outline">
-                                                                    <div class="mdc-notched-outline__leading"></div>
-                                                                    <div class="mdc-notched-outline__notch">
-                                                                        <label class="mdc-floating-label">Area (ft²)</label>
-                                                                    </div>
-                                                                    <div class="mdc-notched-outline__trailing"></div>
-                                                                </div>
-                                                            </div> 
-                                                        </div>  
-                                                        <div class="col-xs-12 col-sm-4 p-2">  
-                                                            <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="number" name="floor_room[]">
-                                                                <div class="mdc-notched-outline">
-                                                                    <div class="mdc-notched-outline__leading"></div>
-                                                                    <div class="mdc-notched-outline__notch">
-                                                                        <label class="mdc-floating-label">Rooms</label>
-                                                                    </div>
-                                                                    <div class="mdc-notched-outline__trailing"></div>
-                                                                </div>
-                                                            </div> 
-                                                        </div>  
-                                                        <div class="col-xs-12 col-sm-4 p-2">  
-                                                            <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="number" name="floor_bath[]">
-                                                                <div class="mdc-notched-outline">
-                                                                    <div class="mdc-notched-outline__leading"></div>
-                                                                    <div class="mdc-notched-outline__notch">
-                                                                        <label class="mdc-floating-label">Baths</label>
-                                                                    </div>
-                                                                    <div class="mdc-notched-outline__trailing"></div>
-                                                                </div>
-                                                            </div> 
-                                                        </div>  
-                                                        <div class="col-xs-12 mt-2">  
-                                                           <input type="file" name="floor_photo[]" class="form-control">
-                                                        </div>  
                                                     </div> 
-                                                </div>
-                                                <div class="col-xs-1 text-center">
-                                                    <button class="mdc-icon-button material-icons warn-color remove-step" type="button">cancel</button> 
-                                                </div>
-                                            </div> 
+                                                    <div class="col-xs-12 col-sm-7 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" type="text" value="{{ old('floor_description',$floor->floor_description) }}" name="floor_description[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Desc</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                    <div class="col-xs-12 col-sm-4 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" name="floor_size[]" value="{{ old('floor_size',$floor->floor_size) }}" type="number">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Area (ft²)</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>  
+                                                    <div class="col-xs-12 col-sm-4 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" type="number" value="{{ old('floor_room',$floor->floor_room) }}" name="floor_room[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Rooms</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>  
+                                                    <div class="col-xs-12 col-sm-4 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" type="number" value="{{ old('floor_bath',$floor->floor_bath) }}" name="floor_bath[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Baths</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>  
+                                                    <div class="col-xs-12 mt-2">  
+                                                       <input type="file" name="floor_photo[]" value="{{ $floor->floor_photo }}" class="form-control">
+                                                        <div>
+                                                            <img src="{{ asset('backend/properties/floor/'.$floor->floor_photo) }}" class="showImage" alt="">
+                                                        </div>
+                                                    </div>  
+                                                </div> 
+                                            </div>
+                                            <div class="col-xs-1 text-center">
+                                                <button class="mdc-icon-button material-icons warn-color remove-step" type="button">cancel</button> 
+                                            </div>
                                         </div> 
-                                    </div>  
+                                    </div> 
+                                </div> 
+                                   @endforeach 
 
                                 </div>
                                 <script id="plans" type="text/template">
@@ -598,17 +610,19 @@
                                         <p class="mb-0"><span class="uppercase fw-500">Additional features</span></p>                            
                                         <button class="mdc-icon-button material-icons primary-color add-step" type="button" data-template-name="features">add_circle</button>  
                                     </div>
+                                    @foreach ($property->features as $i=>$feature)
                                     <div class="steps">
                                         <div class="step-section">
                                             <div class="row middle-xs">
                                                 <div class="col-xs-1 text-center fw-500">
-                                                    <span class="num">1</span>
+                                                    <span class="num">{{ $i+1 }}</span>
                                                 </div>
                                                 <div class="col-xs-10">
                                                     <div class="row"> 
                                                         <div class="col-xs-12 col-sm-5 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="text" name="feature_name[]">
+                                                                <input type="hidden" name="feature_id[]" value="{{ $feature->id }}" id="">
+                                                                <input class="mdc-text-field__input" type="text" value="{{ old('feature_name',$feature->feature_name) }}" name="feature_name[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -620,7 +634,7 @@
                                                         </div> 
                                                         <div class="col-xs-12 col-sm-7 p-2">  
                                                             <div class="mdc-text-field mdc-text-field--outlined">
-                                                                <input class="mdc-text-field__input" type="text" name="feature_value[]">
+                                                                <input class="mdc-text-field__input" type="text" value="{{ old('feature_value',$feature->feature_value) }}" name="feature_value[]">
                                                                 <div class="mdc-notched-outline">
                                                                     <div class="mdc-notched-outline__leading"></div>
                                                                     <div class="mdc-notched-outline__notch">
@@ -638,6 +652,7 @@
                                             </div> 
                                         </div> 
                                     </div>  
+                                    @endforeach
                                 </div> 
                                 <script id="features" type="text/template">
                                     <div class="step-section">
@@ -684,7 +699,7 @@
                                         <div class="mdc-switch__track"></div>
                                         <div class="mdc-switch__thumb-underlay">
                                             <div class="mdc-switch__thumb">
-                                                <input type="checkbox" id="featured" name="is_featured" class="mdc-switch__native-control">
+                                                <input type="checkbox" id="featured" {{ $property->is_featured == true ? 'checked' : '' }} name="is_featured" class="mdc-switch__native-control">
                                             </div>
                                         </div>
                                     </div>
@@ -698,7 +713,7 @@
                                     </button>
                                     <button class="mdc-button mdc-button--raised " type="submit">
                                         <span class="mdc-button__ripple"></span> 
-                                        <span class="mdc-button__label">Submit</span> 
+                                        <span class="mdc-button__label">Update</span> 
                                         <i class="material-icons mdc-button__icon">navigate_next</i>
                                     </button>  
                                 </div>  
@@ -716,7 +731,6 @@
 @section('scripts')
     @include('admin.includes.message')
     <script src="{{ asset('frontend/js/libs/material-components-web.min.js') }}"></script> 
-    {{-- <script src="{{ asset('frontend/js/libs/swiper.min.js') }}"></script>   --}}
     <script src="{{ asset('frontend/js/libs/dropzone.js') }}"></script>  
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>  
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s&amp;callback=initMap" async defer></script>  
