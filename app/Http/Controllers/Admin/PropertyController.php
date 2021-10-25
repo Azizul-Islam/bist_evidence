@@ -193,7 +193,7 @@ class PropertyController extends Controller
 
         $floors = $request->floor_name;
         //property floor plan here
-        if (!empty(array_filter($floors))) {
+        if ($request->has('floor_name') && !blank($request->floor_name)) {
             foreach ($floors as $i => $item) {
                 if(!empty($request->floor_id[$i])){
                     $floor = PropertyFloorPlan::findOrFail($request->floor_id[$i]);
@@ -219,7 +219,7 @@ class PropertyController extends Controller
 
         $features = $request->feature_name;
         // property feature part here
-        if (!empty(array_filter($features))) {
+        if ($request->has('feature_name') && !blank($request->feature_name)) {
             foreach ($features as $i => $item) {
                 if(!empty($request->feature_id)) {
                     $feature = PropertyFeature::findOrFail($request->feature_id[$i]);

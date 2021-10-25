@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function(){
@@ -32,5 +34,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //consumer request
         Route::get('consumer-request',[App\Http\Controllers\Admin\ConsumerRequestController::class,'index'])->name('consumer-request.index');
         Route::get('consumer-request/{show}/show',[App\Http\Controllers\Admin\ConsumerRequestController::class,'show'])->name('consumer-request.show');
+
+        //service Route
+        Route::resource('service',ServiceController::class);
+        Route::get('allservice',[ServiceController::class,'allService'])->name('service.allservice');
+
+        //client route
+        Route::resource('clients', ClientController::class);
+        Route::post('client/status',[ClientController::class,'clientStatus'])->name('client.status');
     });
 });

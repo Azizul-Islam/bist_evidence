@@ -6,15 +6,15 @@
                 <div class="page-sidenav-content">
                     <div class="mdc-card row between-xs middle-xs p-3">             
                         <div>
-                            <h2 class="uppercase">Spacious and warm flat</h2>
+                            <h2 class="uppercase">{{ $property->title }}</h2>
                             <p class="row flex-nowrap address mb-0">
                                 <i class="material-icons text-muted">location_on</i>
-                                <span class="fw-500 text-muted">55 W Jackson Blvd, Chicago, IL 60604, USA</span>
+                                <span class="fw-500 text-muted">{{ $property->address }}</span>
                             </p>
                         </div>
                         <div class="column mx-3"> 
                             <h2 class="primary-color price">
-                                <span>$ 1,450,000</span> 
+                                <span>{{ number_format($property->price,2) }}</span> 
                             </h2> 
                             <div class="row start-xs middle-xs ratings" title="29">      
                                 <i class="material-icons mat-icon-sm">star</i>
@@ -40,26 +40,12 @@
                             </div>  
                             <div class="swiper-container">
                                 <div class="swiper-wrapper"> 
+                                    @foreach ($property->images as $image)
                                     <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/1-big.jpg') }}" class="slide-item swiper-lazy">
+                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('backend/properties/'.$image->path) }}" class="slide-item swiper-lazy">
                                         <div class="swiper-lazy-preloader"></div> 
                                     </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/2-big.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/3-big.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/4-big.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/5-big.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div>    
+                                    @endforeach
                                 </div>     
                                 <button class="swiper-button-prev swipe-arrow mdc-fab mdc-fab--mini primary">
                                     <span class="mdc-fab__ripple"></span>
@@ -74,27 +60,14 @@
 
                         <div class="small-carousel">   
                             <div id="small-carousel" class="swiper-container"> 
-                                <div class="swiper-wrapper">  
+                                <div class="swiper-wrapper"> 
+                                    @foreach ($property->images as $image)
                                     <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/1-small.jpg') }}" class="slide-item swiper-lazy">
+                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('backend/properties/'.$image->path) }}" class="slide-item swiper-lazy">
                                         <div class="swiper-lazy-preloader"></div> 
                                     </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/1-small.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/1-small.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/1-small.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div> 
-                                    <div class="swiper-slide">
-                                        <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('frontend/assets/images/props/flat-2/1-small.jpg') }}" class="slide-item swiper-lazy">
-                                        <div class="swiper-lazy-preloader"></div> 
-                                    </div>  
+                                    @endforeach 
+                                    
                                 </div>  
                             </div>
                         </div>
@@ -106,142 +79,86 @@
                         <div class="row details">
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Property Type:</span>
-                                <span>Apartment</span>
+                                <span>{{ ucfirst($property->category->name ?? '') }} | {{ ucfirst($property->sub_category->name) ?? '' }}</span>
                             </div> 
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Property Status:</span>
                                 <div class="row list">
-                                    <span>Hot Offer</span>
-                                    <span class="last">No Fees</span>
+                                    <span>{{ ucfirst($property->contract) }}</span>
+                                    {{-- <span class="last">No Fees</span> --}}
                                 </div>
                             </div> 
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>City:</span>
-                                <span>Chicago</span>
+                                <span>{{ $property->city }}</span>
                             </div>
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Zip Code:</span>
-                                <span>60604</span>
+                                <span>{{ $property->zip_code }}</span>
                             </div> 
-                            <div class="row col-xs-12 col-sm-6 item">
+                            {{-- <div class="row col-xs-12 col-sm-6 item">
                                 <span>Neighborhood:</span>
                                 <div class="row list">
                                     <span>Astoria</span>
                                     <span class="last">Midtown</span>
                                 </div> 
-                            </div>
+                            </div> --}}
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Street:</span>
                                 <div class="row list">
-                                    <span>Astoria Street #1</span>
-                                    <span class="last">Midtown Street #2</span>
+                                    <span>{{ $property->street }}</span>
+                                    {{-- <span class="last">Midtown Street #2</span> --}}
                                 </div>
                             </div>
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Bedrooms:</span>
-                                <span>2</span>
+                                <span>{{ $property->bedroom }}</span>
                             </div>
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Bathrooms:</span>
-                                <span>2</span>
+                                <span>{{ $property->bathroom }}</span>
                             </div>
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Garages:</span>
-                                <span>1</span>
+                                <span>{{ $property->garage }}</span>
                             </div>
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Property size:</span>
-                                <span>2380 ft²</span>
+                                <span>{{ $property->size }} ft²</span>
                             </div>
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Year Built:</span>
-                                <span>2007</span>
+                                <span>{{ date('Y',strtotime($property->year_built)) }}</span>
                             </div>
                         </div>   
                     </div>
                     <div class="mdc-card p-3 mt-3"> 
-                        <h2 class="uppercase text-center fw-500 mb-2">Features</h2>  
+                        <h2 class="uppercase text-center fw-500 mb-2">Amenities</h2>  
                         <div class="row">
+                            @foreach ($property->amenities as $item)
                             <div class="col-xs-12 col-sm-4 row middle-xs">
                                 <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">Conditioning</span>
+                                <span class="mx-2">{{ $item->name }}</span>
                             </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">Barbeque</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">Dryer</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">Microwave</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">Refrigerator</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">Fireplace</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">Swimming Pool</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">TV Cable</span>
-                            </div>
-                            <div class="col-xs-12 col-sm-4 row middle-xs">
-                                <i class="material-icons mat-icon-sm primary-color">check</i>
-                                <span class="mx-2">WiFi</span>
-                            </div> 
+                            @endforeach
+                            
                         </div> 
                     </div>
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Additional features</h2>  
                         <div class="row details">
+                            @foreach ($property->features as $item)
                             <div class="row col-xs-12 col-sm-6 item">
-                                <span>Heat:</span>
-                                <span>Natural Gas</span>
+                                <span>{{ $item->feature_name }}:</span>
+                                <span>{{ $item->feature_value }}</span>
                             </div>
-                            <div class="row col-xs-12 col-sm-6 item">
-                                <span>Roof:</span>
-                                <span>Composition/Shingle</span>
-                            </div>
-                            <div class="row col-xs-12 col-sm-6 item">
-                                <span>Floors:</span>
-                                <span>Wall-to-Wall Carpet</span>
-                            </div>
-                            <div class="row col-xs-12 col-sm-6 item">
-                                <span>Water:</span>
-                                <span>District/Public</span>
-                            </div>
-                            <div class="row col-xs-12 col-sm-6 item">
-                                <span>Cross Streets:</span>
-                                <span>Orangethorpe-Gilbert</span>
-                            </div>
-                            <div class="row col-xs-12 col-sm-6 item">
-                                <span>Windows:</span>
-                                <span>Skylights</span>
-                            </div>
-                            <div class="row col-xs-12 col-sm-6 item">
-                                <span>Flat:</span>
-                                <span>5</span>
-                            </div>
-                            <div class="row col-xs-12 col-sm-6 item">
-                                <span>Childroom:</span>
-                                <span>2</span>
-                            </div>
+                            @endforeach
+                            
                         </div> 
                     </div>
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Description</h2>  
-                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, suscipit, numquam accusantium eligendi veniam dolor placeat earum illo corporis esse nulla facere sunt assumenda? Perferendis omnis magni quos fugiat explicabo.</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit laboriosam voluptates dignissimos? Dolorum sed culpa repellat, itaque quas nostrum, eos qui nemo fugit reiciendis laboriosam vero magnam nam, dolorem officia.</p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus voluptas assumenda ab, quos sequi rerum. Quos iusto ab alias, exercitationem autem a doloribus non. Vel porro tenetur omnis ut numquam.</p>
+                        <p>{{ $property->description }}</p>
                     </div>
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Location</h2> 
@@ -250,48 +167,36 @@
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Plans</h2> 
                         <div class="expansion-panel-wrapper"> 
+                            @foreach ($property->floorPlans as $item)
                             <div class="mdc-card expansion-panel">
                                 <div class="row between-xs middle-xs expansion-panel-header">
-                                    <div class="fw-500">First floor</div>
+                                    <div class="fw-500">{{ $item->floor_name }}</div>
                                     <div class="text-muted d-none d-md-flex d-lg-flex d-xl-flex"> 
-                                        <span>Area: <span class="fw-500">1180 ft²</span></span>
-                                        <span class="mx-3">Rooms: <span class="fw-500">3</span></span>
-                                        <span>Baths: <span class="fw-500">1</span></span>  
+                                        <span>Area: <span class="fw-500">{{ $item->floor_size }} ft²</span></span>
+                                        <span class="mx-3">Rooms: <span class="fw-500">{{ $item->floor_room }}</span></span>
+                                        <span>Baths: <span class="fw-500">{{ $item->floor_bath }}</span></span>  
                                     </div>                         
                                 </div>
                                 <div class="expansion-panel-body text-center">
-                                    <img src="{{ asset('frontend/assets/images/others/plan-1.jpg') }}" alt="plan-1" class="mw-100">
-                                    <p>Plan description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium magnam veniam sit reprehenderit deserunt ad voluptates id aperiam veritatis! Nobis saepe quos eveniet numquam vitae quis, tenetur consectetur impedit dolore.</p>
+                                    <img src="{{ asset('backend/properties/floor/'.$item->floor_photo) }}" alt="plan-1" class="mw-100">
+                                    <p>{{ $item->floor_description }}</p>
                                 </div>
                             </div> 
-                            <div class="mdc-card expansion-panel">
-                                <div class="row between-xs middle-xs expansion-panel-header">
-                                    <div class="fw-500">Second floor</div>
-                                    <div class="text-muted d-none d-md-flex d-lg-flex d-xl-flex"> 
-                                        <span>Area: <span class="fw-500">1200 ft²</span></span>
-                                        <span class="mx-3">Rooms: <span class="fw-500">5</span></span>
-                                        <span>Baths: <span class="fw-500">2</span></span>  
-                                    </div>                        
-                                </div>
-                                <div class="expansion-panel-body text-center">
-                                    <img src="{{ asset('frontend/assets/images/others/plan-2.jpg') }}" alt="plan-2" class="mw-100">
-                                    <p>Plan description. Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium magnam veniam sit reprehenderit deserunt ad voluptates id aperiam veritatis! Nobis saepe quos eveniet numquam vitae quis, tenetur consectetur impedit dolore.</p>
-                                </div>
-                            </div>  
+                            @endforeach
                         </div>
                     </div>
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Videos</h2> 
                         <div class="videoWrapper">
-                            <iframe src="https://www.youtube.com/embed/-NInBEdSvp8"></iframe>
+                            {!! $property->video_link !!}
                         </div> 
                     </div>
-                    <div class="mdc-card p-3 mt-3 row between-xs middle-xs"> 
+                    {{-- <div class="mdc-card p-3 mt-3 row between-xs middle-xs"> 
                         <span>ID:<span class="fw-500 mx-2">1</span></span>
                         <span>Published:<span class="fw-500 mx-2">12 August, 2012</span></span>
                         <span>Last Update:<span class="fw-500 mx-2">20 May, 2019</span></span>
                         <span>Views:<span class="fw-500 mx-2">322</span></span> 
-                    </div> 
+                    </div>  --}}
                     
 
                     <div class="mdc-card p-5 mt-5"> 
