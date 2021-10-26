@@ -46,7 +46,8 @@ class ServiceController extends Controller
         $data = Validator::make($request->all(),[
             'icon' => 'required|string',
             'title' => 'required|string|unique:services,title',
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'status' => 'required|string'
         ]);
 
         if(!$data->passes()){
@@ -95,7 +96,8 @@ class ServiceController extends Controller
         $data = Validator::make($request->all(),[
             'icon' => 'required|string',
             'title' => 'required|string|unique:services,title,'.$service->id,
-            'description' => 'required|string'
+            'description' => 'required|string',
+            'status' => 'required|string'
         ]);
         
 

@@ -21,6 +21,8 @@ Route::post('getarea/{area_id}/sub',[FrontendController::class,'getChildAreaByPa
 Route::post('add/property',[FrontendController::class,'addPropertyStore'])->name('add-property');
 Route::get('property/details/{slug}',[FrontendController::class,'propertyDetails'])->name('property.details');
 Route::get('property',[FrontendController::class,'property'])->name('property');
+Route::get('/contct',[FrontendController::class,'contact'])->name('contact');
+Route::get('/about',[FrontendController::class,'about'])->name('about');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

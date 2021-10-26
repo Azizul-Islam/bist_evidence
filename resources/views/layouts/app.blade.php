@@ -222,13 +222,13 @@
                     </div>  
                 </div> 
                 <div>
-                    <a href="contact.html" class="mdc-button">
+                    <a href="{{ route('contact') }}" class="mdc-button">
                         <span class="mdc-button__ripple"></span>
                         <span class="mdc-button__label">Contact</span> 
                     </a> 
                 </div> 
                 <div>
-                    <a href="about.html" class="mdc-button">
+                    <a href="{{ route('about') }}" class="mdc-button">
                         <span class="mdc-button__ripple"></span>
                         <span class="mdc-button__label">About us</span> 
                     </a> 
@@ -601,13 +601,13 @@
                         </div>  
                     </div>  
                     <div>
-                        <a href="contact.html" class="mdc-button">
+                        <a href="{{ route('contact') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Contact</span> 
                         </a> 
                     </div> 
                     <div>
-                        <a href="about.html" class="mdc-button">
+                        <a href="{{ route('about') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">About us</span> 
                         </a> 

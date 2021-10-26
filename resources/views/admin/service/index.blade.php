@@ -39,6 +39,7 @@
                     <th>Icon</th>
                     <th>Title</th>
                     <th>Description</th>
+                    <th>Status</th>
                     <th class="text-end">Actions</th>
                 </tr>
                 </thead>
@@ -106,7 +107,14 @@
             <textarea class="form-control" name="description" id="message-text">{{ old('description') }}</textarea>
             <span class="text-danger error-text description_error"></span>
           </div>
-        
+          <div class="mb-3">
+            <label for="" class="col-form-label">Status:</label>
+            <select name="status" id="status" class="form-control">
+                <option value="service">Service</option>
+                <option value="mission">Mission</option>
+            </select>
+            <span class="text-danger error-text status_error"></span>
+          </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -143,7 +151,14 @@
               <textarea class="form-control" name="description" id="description">{{ old('description') }}</textarea>
               <span class="text-danger error-text description_error"></span>
             </div>
-          
+            <div class="mb-3">
+                <label for="" class="col-form-label">Status:</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="service">Service</option>
+                    <option value="mission">Mission</option>
+                </select>
+                <span class="text-danger error-text status_error"></span>
+              </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
@@ -169,8 +184,9 @@
                         '<tr>'+
                             '<td>'+(k+1)+'</td>'+
                             '<td><i class="material-icons mat-icon-xlg primary-color">'+v.icon+'</i></td>'+
-                            '<td>'+v.title+'</td>'+
-                            '<td>'+v.description+'</td>'+
+                            '<td>'+v.title.substring(0,20)+'...'+'</td>'+
+                            '<td>'+v.description.substring(0,50)+'...'+'</td>'+
+                            '<td>'+v.status+'</td>'+
                             '<td class="text-end">'+
                                 '<div class="btn-group">'+
                                     '<a href="" data-bs-toggle="modal" data-bs-target="#editService" data-bs-whatever="@mdo" onclick="editService('+v.id+')" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>'+
@@ -225,6 +241,7 @@
                     $('#icon').val(data.icon);
                     $('#title').val(data.title);
                     $('#description').val(data.description);
+                    $('#status').val(data.status);
                 },
             });
         }

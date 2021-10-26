@@ -14,9 +14,10 @@ class FrontendController extends Controller
     public function index()
     {
         $query = Property::query();
-        $properties =$query->where('status','active')->latest()->paginate(8);
-        $featureProperties = $query->where(['status'=>'active','is_featured'=>1])->latest()->limit(8)->get();
-        return view('frontend.index',compact('properties','featureProperties'));
+        $data['properties'] =$query->where('status','active')->latest()->paginate(8);
+        $data['featureProperties'] = $query->where(['status'=>'active','is_featured'=>1])->latest()->limit(8)->get();
+        $data['hotOfferProperty'] = Property::where(['status'=>'active','contract'=>'hot offer'])->latest()->first();
+        return view('frontend.index',$data);
     }
 
     public function addPropertyIndex()
@@ -67,5 +68,15 @@ class FrontendController extends Controller
     public function property()
     {
         return view('frontend.pages.property-details');
+    }
+
+    public function contact()
+    {
+        return view('frontend.pages.contact');
+    }
+
+    public function about()
+    {
+        return view('frontend.pages.about');
     }
 }

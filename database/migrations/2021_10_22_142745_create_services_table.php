@@ -18,6 +18,7 @@ class CreateServicesTable extends Migration
             $table->string('title')->unique();
             $table->string('description');
             $table->string('icon');
+            $table->enum('status',['service','mission'])->default('service');
             $table->timestamps();
         });
     }
