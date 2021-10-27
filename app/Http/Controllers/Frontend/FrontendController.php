@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\CustomerRespons;
 use App\Models\FrontendProperty;
 use App\Models\Property;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FrontendController extends Controller
 {
@@ -62,12 +64,35 @@ class FrontendController extends Controller
     public function propertyDetails($slug)
     {
         $property = Property::where('slug',$slug)->first();
-        return view('frontend.pages.property-details',compact('property'));
+        $featureProperties = Property::where(['status'=>'active','is_featured'=>1])->latest()->limit(3)->get();
+        $relatedProperties = Property::where('id','<>',$property->id)
+                                    ->where('area_id',$property->area_id)
+                                    ->orWhere('sub_area_id',$property->sub_area_id)
+                                    ->orWhere('category_id',$property->category_id)
+                                    ->orWhere('sub_category_id',$property->sub_category_id)
+                                    ->orWhere('address','RLIKE',$property->address)
+                                    ->orWhere('title','RLIKE',$property->title)
+                                    ->latest()
+                                    ->limit(8)
+                                    ->get();
+        return view('frontend.pages.property-details',compact('property','featureProperties','relatedProperties'));
     }
 
-    public function property()
+    public function customerResponse(Request $request)
     {
-        return view('frontend.pages.property-details');
+        $data = Validator::make($request->all(),[
+            'name' => 'required|string|max:255',
+            'phone' => 'required|numeric|min:8',
+            'email' => 'nullable|email',
+            'message' => 'nullable|string'
+        ]);
+        if(!$data->passes()){
+            return response()->json(['status'=>0,'errors'=>$data->errors()->toArray()]);
+        }
+        else {
+            CustomerRespons::create($request->all());
+            return response()->json(['status'=>1,'msg'=>'Your response successfully']);
+        }
     }
 
     public function contact()
@@ -79,4 +104,12 @@ class FrontendController extends Controller
     {
         return view('frontend.pages.about');
     }
+
+    public function properties()
+    {
+        $properties = Property::where('status','active')->latest()->get();
+        return view('frontend.pages.properties',compact('properties'));
+    }
+
+
 }

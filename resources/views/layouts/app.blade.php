@@ -11,10 +11,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  
     <link rel="stylesheet" href="{{ asset('frontend/css/libs/swiper.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/libs/material-components-web.min.css') }}">  
+    <link rel="stylesheet" href="{{ asset('frontend/css/libs/material-components-web.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">  
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}"> 
     <link rel="stylesheet" href="{{ asset('frontend/css/skins/blue.css') }}">  
-    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">  
+    <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
+    @yield('styles')  
 </head>
 <body class="mdc-theme--background"> 
     <div class="spinner-wrapper" id="preloader">
@@ -119,7 +121,7 @@
                     </div>  
                 </div>   
                 <div>
-                    <a href="properties.html" class="mdc-button">
+                    <a href="{{ route('properties') }}" class="mdc-button">
                         <span class="mdc-button__ripple"></span>
                         <span class="mdc-button__label">Properties</span> 
                     </a> 
@@ -498,7 +500,7 @@
                         </div>  
                     </div>   
                     <div>
-                        <a href="properties.html" class="mdc-button">
+                        <a href="{{ route('properties') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Properties</span> 
                         </a> 
@@ -669,8 +671,11 @@
     <script src="{{ asset('frontend/js/libs/jquery.min.js') }}"></script> 
     <script src="{{ asset('frontend/js/libs/material-components-web.min.js') }}"></script> 
     <script src="{{ asset('frontend/js/libs/swiper.min.js') }}"></script> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>  
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s&amp;callback=initMap" async defer></script>
+    @include('admin.includes.message')
+    @yield('scripts')
 </body>
 
 <!-- Mirrored from www.housekey-html.themeseason.com/header-image.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 03 Oct 2021 12:06:54 GMT -->

@@ -40,7 +40,8 @@ class ClientController extends Controller
         $data = $request->validate([
             'photo' => 'required',
             'link' => 'nullable|string',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'type' => 'nullable'
         ]);
         if($request->has('photo')) {
             $file = $request->file('photo');
@@ -90,7 +91,8 @@ class ClientController extends Controller
         $data = $request->validate([
             'photo' => 'nullable',
             'link' => 'nullable|string',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'type' => 'nullable',
         ]);
         $path = public_path('frontend/assets/images/clients/'.$client->photo);
         if($request->has('photo')) {

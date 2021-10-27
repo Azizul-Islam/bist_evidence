@@ -23,6 +23,8 @@ Route::get('property/details/{slug}',[FrontendController::class,'propertyDetails
 Route::get('property',[FrontendController::class,'property'])->name('property');
 Route::get('/contct',[FrontendController::class,'contact'])->name('contact');
 Route::get('/about',[FrontendController::class,'about'])->name('about');
+Route::get('/properties',[FrontendController::class,'properties'])->name('properties');
+Route::post('customer-response',[FrontendController::class,'customerResponse'])->name('customer-response.store');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

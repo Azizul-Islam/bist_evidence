@@ -18,6 +18,7 @@ class CreateClientsTable extends Migration
             $table->string('link')->nullable();
             $table->string('photo');
             $table->enum('status',['active','inactive'])->default('active');
+            $table->enum('type',['client','sister concern','media partner'])->default('client');
             $table->timestamps();
         });
     }

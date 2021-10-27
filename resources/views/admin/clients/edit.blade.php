@@ -34,26 +34,6 @@
                         @method('PUT')
                         
                         <div class="row">
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="link" class="form-label">Link <small class="text-danger">( optional )</small></label>
-                                <input type="text" class="form-control @error('link') is-invalid @enderror" value="{{ old('link',$client->link) }}" name="link" id="link"
-                                    placeholder="Enter link">
-                                @error('link')
-                                    <span class="invalid-feedback">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="Status" class="form-label">Status <small class="text-danger">(optional)</small></label>
-                                <select name="status" class="select2-example form-control">
-                                    <option value="active" {{ $client->status == 'active' ? 'selected' : '' }}>Active</option>
-                                    <option value="inactive" {{ $client->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
-                                  </select>
-                            </div>
-                        </div>
-                        <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="Photo" class="form-label">Photo <small class="text-danger">*</small></label>
@@ -64,6 +44,39 @@
                                     <div class="photo mt-2">
                                         <img src="{{ asset('frontend/assets/images/clients/'.$client->photo) }}" style="height: 60px" alt="">
                                     </div>
+                                </div>
+                            </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="link" class="form-label">Link <small class="text-danger">( optional )</small></label>
+                                <input type="text" class="form-control @error('link') is-invalid @enderror" value="{{ old('link',$client->link) }}" name="link" id="link"
+                                    placeholder="Enter link">
+                                @error('link')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Status" class="form-label">Status <small class="text-danger"></small></label>
+                                    <select name="status" class="select2-example form-control">
+                                        <option value="active" {{ $client->status == 'active' ? 'selected' : '' }}>Active</option>
+                                        <option value="inactive" {{ $client->status == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="type" class="form-label">Type <small
+                                            class="text-danger"></small></label>
+                                    <select name="type" class="select2-example form-control">
+                                        <option value="">Select One</option>
+                                        <option value="client" {{ $client->type == 'client' ? 'selected' : '' }}>Client</option>
+                                        <option value="sister concern" {{ $client->type == 'sister concern' ? 'selected' : '' }}>Sister Concern</option>
+                                        <option value="media partner" {{ $client->type == 'media partner' ? 'selected' : '' }}>Media Partner</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

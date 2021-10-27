@@ -38,6 +38,7 @@
                         <th>S.L</th>
                         <th>Photo</th>
                         <th>Link</th>
+                        <th>Type</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -50,7 +51,7 @@
                                 <img src="{{ asset('frontend/assets/images/clients/'.$item->photo) }}" style="height: 60px" alt="">
                             </td>
                            <td>{{ Str::limit($item->link,30,'...') }}</td>
-                           
+                           <td>{{ ucfirst($item->type) }}</td>
                            
                             <td>
                                 <input type="checkbox" name="status"  data-toggle="toggle" {{ $item->status == 'active' ? 'checked' : '' }} value="{{ $item->id }}" data-size="sm" data-on="Active" data-off="Inactive" data-onstyle="success" data-offstyle="danger">
@@ -79,6 +80,7 @@
                         <th>S.L</th>
                         <th>Photo</th>
                         <th>Link</th>
+                        <th>Type</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -161,7 +163,6 @@
             
         });
     </script>
-    @include('admin.includes.message')
     
     
 @endsection
