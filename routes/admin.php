@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\CustomerResponseController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function(){
@@ -31,13 +33,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::resource('properties','App\Http\Controllers\Admin\PropertyController');
         Route::post('property/status',[App\Http\Controllers\Admin\PropertyController::class,'propertyStatus'])->name('property.status');
 
-        //consumer request
-        Route::get('consumer-request',[App\Http\Controllers\Admin\ConsumerRequestController::class,'index'])->name('consumer-request.index');
-        Route::get('consumer-request/{show}/show',[App\Http\Controllers\Admin\ConsumerRequestController::class,'show'])->name('consumer-request.show');
+        //customer response
+        Route::get('customer-response',[CustomerResponseController::class,'index'])->name('customer-response.index');
+        Route::put('customer-response/status',[CustomerResponseController::class,'status'])->name('customer-response.status');
+        Route::get('customer-response/{show}/show',[CustomerResponseController::class,'show'])->name('customer-response.show');
 
         //service Route
         Route::resource('service',ServiceController::class);
         Route::get('allservice',[ServiceController::class,'allService'])->name('service.allservice');
+
+        //testimonials route
+        Route::resource('testimonials',TestimonialController::class);
 
         //client route
         Route::resource('clients', ClientController::class);

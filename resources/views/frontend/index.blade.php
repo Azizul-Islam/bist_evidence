@@ -1,4 +1,7 @@
 @extends('layouts.app')  
+@section('styles')
+    
+@endsection
 @section('content')
 
     <div class="header-image-wrapper">
@@ -8,11 +11,11 @@
             <h1 class="title">Find your house key</h1>
             <p class="desc">Leading Real Estate Company</p>
             <div class="mt-4">
-                <a href="#" class="mdc-button mdc-button--raised">
+                <a href="{{ route('about') }}" class="mdc-button mdc-button--raised">
                     <span class="mdc-button__ripple"></span>
                     <span class="mdc-button__label">about us</span> 
                 </a>
-                <a href="#" class="mdc-button mdc-button--raised">
+                <a href="{{ route('contact') }}" class="mdc-button mdc-button--raised">
                     <span class="mdc-button__ripple"></span>
                     <span class="mdc-button__label">contact</span> 
                 </a>      

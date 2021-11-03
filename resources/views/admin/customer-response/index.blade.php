@@ -1,5 +1,5 @@
 @extends('layouts.admin-app')
-@section('title','Consumer Request')
+@section('title','Customer Response')
 @section('styles')
 
 @endsection
@@ -12,7 +12,7 @@
                     <i class="bi bi-globe2 small me-2"></i> Dashboard
                 </a>
             </li>
-            <li class="breadcrumb-item active" aria-current="page">Consumer Request</li>
+            <li class="breadcrumb-item active" aria-current="page">Customer Response</li>
         </ol>
     </nav>
 </div>
@@ -22,7 +22,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-md-flex gap-4 align-items-center">
-                    <div class="d-none d-md-flex"><h4>Total Consumer Request</h4></div>
+                    <div class="d-none d-md-flex"><h4>Total Customer Response</h4></div>
                     
                     {{-- <div class="dropdown ms-auto">
                         <a href="{{ route('properties.create') }}" class="btn btn-primary btn-icon"><i class="bi bi-plus-circle"></i> Create</a>
@@ -34,20 +34,18 @@
             <table class="table table-custom table-lg mb-0" id="properties" >
                 <thead>
                 <tr>
-                    <th>ID</th>
+                    <th>S.L</th>
                     <th>Name</th>
                     <th>Phone</th>
-                    {{-- <th>Email</th> --}}
-                    <th>Location</th>
-                    <th>Purpose</th>
+                    <th>Email</th>
+                    <th>Message</th>
                     <th>Status</th>
                     <th>Date</th>
                     <th class="text-end">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($consumer_requests as $i=>$item)
-                
+                @forelse($customerResponses as $i=>$item)
                 <tr>
                     
                     <td>
@@ -56,22 +54,21 @@
                     
                    <td>{{ $item->name }}</td>
                    <td>{{ $item->phone }}</td>
-                   {{-- <td>{{ $item->email }}</td> --}}
-                   <td>{{ $item->area->name }} →&nbsp @if(!blank($item->sub_area_id)) {{ $item->sub_area->name }} @endif</td>
-                   <td><span class="badge {{ $item->purpose == 'sell' ? 'bg-primary' : 'bg-info' }}">{{ ucfirst($item->purpose) }}</span></td>
-                   <td>{{ $item->status }}</td>
+                   <td>{{ $item->email }}</td>
+                   <td>{{ $item->message }}</td>
+                   <td>
+                    <input type="checkbox" name="status"  data-toggle="toggle" {{ $item->status == 'read' ? 'checked' : '' }} value="{{ $item->id }}" data-size="sm" data-on="Read" data-off="Unread" data-onstyle="success" data-offstyle="danger">
+                   </td>
                    <td>{{ $item->created_at->diffForHumans() }}</td>
                     <td class="text-end">
-                        
                         <div class="btn-group">
-                            <a href="{{ route('consumer-request.show',$item) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-eye"></i></a>
-                            
+                            <a href="{{ route('admin.customer-response.show',$item->id) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-eye"></i></a>
                         </div>
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td class="text-danger text-center" colspan="8">Data Not Found!</td>
+                    <td class="text-danger text-center" colspan="7">Data Not Found!</td>
                 </tr>
                 @endforelse
                 </tbody>
@@ -79,7 +76,7 @@
         </div>
         <nav class="mt-4" aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-                {{ $consumer_requests->links('pagination::bootstrap-4') }}
+                {{ $customerResponses->links('pagination::bootstrap-4') }}
             </ul>
         </nav>
     </div>
@@ -90,6 +87,28 @@
 @section('scripts')
     
     @include('admin.includes.message')
-    
+    <script>
+        $('input[name=status]').change(function(){
+            let mode = $(this).prop('checked');
+            let id = $(this).val();
+            $.ajax({
+                url: "{{ route('admin.customer-response.status') }}",
+                method: 'PUT',
+                dataType: 'JSON',
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    mode: mode,
+                    id: id,
+                },
+                success: function(data) {
+                    if(data.status){
+                        toastr.success(data.msg);
+                    }else{
+                       toastr.error('Something went wrong!');
+                    }
+                }
+            });
+        });
+    </script>
     
 @endsection

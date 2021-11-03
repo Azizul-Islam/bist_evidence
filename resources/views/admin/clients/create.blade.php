@@ -98,12 +98,5 @@
 @endsection
 @section('scripts')
     @include('admin.includes.message')
-    <script src="{{ asset('vendor/laravel-filemanager/js/stand-alone-button.js') }}"></script>
-
-    <script>
-        $('#lfm').filemanager('image');
-        $('.select2-example').select2({
-            placeholder: 'Select'
-        });
-    </script>
+  
 @endsection

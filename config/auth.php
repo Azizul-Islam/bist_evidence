@@ -22,6 +22,10 @@ return [
         'driver' => 'eloquent',
         'model' => App\Models\Admin::class
     ],
+    'agent' => [
+        'driver' => 'eloquent',
+        'model' => App\Models\Agent::class
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -49,6 +53,10 @@ return [
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+        ],
+        'agent' => [
+            'driver' => 'session',
+            'provider' => 'agents',
         ],
        
     ],
@@ -79,6 +87,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'agents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Agent::class,
         ],
 
         // 'users' => [
@@ -113,6 +125,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'agents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Agent::class,
         ],
     ],
 

@@ -8,11 +8,11 @@
                  alt="...">
         </div>
         <div class="my-4 my-md-0">
-            <h3 class="mb-1">{{ $frontendProperty->name }}</h3>
-            <small>{{ ucfirst($frontendProperty->consumer) }}</small>
+            <h3 class="mb-1">{{ $customerResponse->property->title ?? '' }}</h3>
+            <small>{{ ucfirst($customerResponse->status) }}</small>
         </div>
         <div class="ms-md-auto">
-            <a href="{{ route('consumer-request.index') }}" class="btn btn-primary btn-lg btn-icon">
+            <a href="{{ route('admin.customer-response.index') }}" class="btn btn-primary btn-lg btn-icon">
                 <i class="bi bi-arrow-left-circle"></i> Back To List
             </a>
         </div>
@@ -23,7 +23,7 @@
 <div class="col-lg-7 col-md-12">
 <div class="card mb-4">
     <div class="card-body">
-        <h6 class="card-title mb-4">Request Details</h6>
+        <h6 class="card-title mb-4">Response Details</h6>
         <form class="d-flex">
            
             <div class="flex-grow-1">
@@ -32,20 +32,20 @@
                     <p class="btn btn-icon" data-bs-toggle="tooltip" title="Location">
                         <i class="bi bi-geo-alt me-0"></i>
                     </p>
-                    <p><strong>{{ $frontendProperty->area->name }}  @if(!blank($frontendProperty->sub_area_id)) →&nbsp {{ $frontendProperty->sub_area->name }} @endif</strong></p>
+                    <p><strong>{{ $customerResponse->property->area->name ?? '' }}  @if(!blank($customerResponse->property->sub_area_id)) →&nbsp {{ $customerResponse->property->sub_area->name ?? '' }} @endif</strong></p>
                 </div>
                 <div class="item-inner" style="float: left;margin-right:15px">
                     <p class="btn btn-icon" data-bs-toggle="tooltip" title="Location">
                         <i class="bi bi-telephone me-0"></i>
                     </p>
-                    <p><strong>{{ $frontendProperty->phone }}</strong></p>
+                    <p><strong>{{ $customerResponse->phone }}</strong></p>
                 </div>
-                @if(!blank($frontendProperty->email))
+                @if(!blank($customerResponse->email))
                 <div class="item-inner" style="float: left">
                     <p class="btn btn-icon" data-bs-toggle="tooltip" title="Location">
                         <i class="bi bi-envelope me-0"></i>
                     </p>
-                    <p><strong>{{ $frontendProperty->email }}</strong></p>
+                    <p><strong>{{ $customerResponse->email }}</strong></p>
                 </div>
                 @endif
                 
@@ -55,7 +55,7 @@
 </div>
 
     </div>
-    <div class="col-lg-5 col-md-12">
+    {{-- <div class="col-lg-5 col-md-12">
         <div class="card mb-4">
             <div class="card-body">
                 <div class="row row-vertical-border text-center">
@@ -74,6 +74,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endsection

@@ -359,82 +359,93 @@
                             </ul>
                         </div> 
                     </div>  
-                    <div class="mdc-menu-surface--anchor"> 
-                        <button class="mdc-button mdc-ripple-surface"> 
-                            <span class="mdc-button__ripple"></span>
-                            <i class="material-icons mdc-button__icon mx-1">person</i>
-                            <span class="mdc-button__label">account</span>
-                            <i class="material-icons mdc-button__icon m-0">arrow_drop_down</i>
-                        </button> 
-                        <div class="mdc-menu mdc-menu-surface user-menu">
-                            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                                <li class="user-info row start-xs middle-xs">                   
-                                    <img src="{{ asset('assets/images/others/user.jpg') }}" alt="user-image" width="50">
-                                    <p class="m-0">Emilio Verdines <br> <small><i>emilio_v</i></small></p>
-                                </li>
-                                <li role="separator" class="mdc-list-divider m-0"></li> 
-                                <li>
-                                    <a href="submit-property.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">add_circle</i> 
-                                        <span class="mdc-list-item__text px-3">Submit Property</span>
-                                    </a> 
-                                </li>
-                                <li>
-                                    <a href="my-properties.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">home</i> 
-                                        <span class="mdc-list-item__text px-3">My Properties</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="favorites.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">favorite_border</i> 
-                                        <span class="mdc-list-item__text px-3">Favorites
-                                            <span class="badge warn">2</span>
-                                        </span> 
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="compare.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">compare_arrows</i> 
-                                        <span class="mdc-list-item__text px-3">Compare
-                                            <span class="badge primary">3</span>
-                                        </span> 
-                                    </a>
-                                </li> 
-                                <li>
-                                    <a href="#" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">search</i> 
-                                        <span class="mdc-list-item__text px-3">Saved Searches</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="profile.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">edit</i> 
-                                        <span class="mdc-list-item__text px-3">Edit Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="lock-screen.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">lock</i> 
-                                        <span class="mdc-list-item__text px-3">Lock screen</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="faqs.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">help</i> 
-                                        <span class="mdc-list-item__text px-3">Help</span>
-                                    </a>
-                                </li>
-                                <li role="separator" class="mdc-list-divider m-0"></li>
-                                <li>
-                                    <a href="login.html" class="mdc-list-item" role="menuitem">
-                                        <i class="material-icons mat-icon-sm text-muted">power_settings_new</i> 
-                                        <span class="mdc-list-item__text px-3">Sign Out</span>
-                                    </a>
-                                </li> 
-                            </ul>
-                        </div> 
+                   @if (auth()->guard('agent')->check())
+                   <div class="mdc-menu-surface--anchor"> 
+                    <button class="mdc-button mdc-ripple-surface"> 
+                        <span class="mdc-button__ripple"></span>
+                        <i class="material-icons mdc-button__icon mx-1">person</i>
+                        <span class="mdc-button__label">account</span>
+                        <i class="material-icons mdc-button__icon m-0">arrow_drop_down</i>
+                    </button> 
+                    <div class="mdc-menu mdc-menu-surface user-menu">
+                        <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
+                            <li class="user-info row start-xs middle-xs">                   
+                                <img src="{{ asset('assets/images/others/user.jpg') }}" alt="user-image" width="50">
+                                <p class="m-0">Emilio Verdines <br> <small><i>emilio_v</i></small></p>
+                            </li>
+                            <li role="separator" class="mdc-list-divider m-0"></li> 
+                            <li>
+                                <a href="{{ route('agent.submit-property') }}" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">add_circle</i> 
+                                    <span class="mdc-list-item__text px-3">Submit Property</span>
+                                </a> 
+                            </li>
+                            <li>
+                                <a href="{{ route('agent.my-properties') }}" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">home</i> 
+                                    <span class="mdc-list-item__text px-3">My Properties</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('agent.favorite') }}" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">favorite_border</i> 
+                                    <span class="mdc-list-item__text px-3">Favorites
+                                        <span class="badge warn">2</span>
+                                    </span> 
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('agent.compare') }}" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">compare_arrows</i> 
+                                    <span class="mdc-list-item__text px-3">Compare
+                                        <span class="badge primary">3</span>
+                                    </span> 
+                                </a>
+                            </li> 
+                            <li>
+                                <a href="#" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">search</i> 
+                                    <span class="mdc-list-item__text px-3">Saved Searches</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="profile.html" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">edit</i> 
+                                    <span class="mdc-list-item__text px-3">Edit Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="lock-screen.html" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">lock</i> 
+                                    <span class="mdc-list-item__text px-3">Lock screen</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="faqs.html" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">help</i> 
+                                    <span class="mdc-list-item__text px-3">Help</span>
+                                </a>
+                            </li>
+                            <li role="separator" class="mdc-list-divider m-0"></li>
+                            <li>
+                                <a href="login.html" class="mdc-list-item" role="menuitem">
+                                    <i class="material-icons mat-icon-sm text-muted">power_settings_new</i> 
+                                    <span class="mdc-list-item__text px-3">Sign Out</span>
+                                </a>
+                            </li> 
+                        </ul>
                     </div> 
+                </div>
+                @else
+                <div class="mdc-menu-surface--anchor"> 
+                    <a href="{{ route('agent.login') }}" class="mdc-button mdc-ripple-surface"> 
+                        <span class="mdc-button__ripple"></span>
+                        <i class="material-icons mdc-button__icon mx-1">person</i>
+                        <span class="mdc-button__label">Login / Register</span>
+                    </a> 
+                  
+                </div>
+                @endif 
                 </div> 
             </div> 
         </div>  
@@ -616,13 +627,13 @@
                     </div>  
                 </div>  
                 <div class="row middle-xs"> 
-                    <a href="favorites.html" class="mdc-icon-button material-icons d-none d-lg-flex d-xl-flex" title="Favorites">favorite_border</a> 
-                    <a href="compare.html" class="mdc-icon-button material-icons d-none d-lg-flex d-xl-flex mr-3 ml-2" title="Compare list">compare_arrows</a>  
-                    <a href="submit-property.html" class="mdc-fab mdc-fab--mini primary d-sm-none d-md-none d-lg-none d-xl-none">
+                    <a href="{{ route('agent.favorite') }}" class="mdc-icon-button material-icons d-none d-lg-flex d-xl-flex" title="Favorites">favorite_border</a> 
+                    <a href="{{ route('agent.compare') }}" class="mdc-icon-button material-icons d-none d-lg-flex d-xl-flex mr-3 ml-2" title="Compare list">compare_arrows</a>  
+                    <a href="{{ route('agent.submit-property') }}" class="mdc-fab mdc-fab--mini primary d-sm-none d-md-none d-lg-none d-xl-none">
                         <span class="mdc-fab__ripple"></span>
                         <span class="mdc-fab__icon material-icons">add</span>
                     </a>  
-                    <a href="submit-property.html" class="mdc-button mdc-button--raised d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
+                    <a href="{{ route('agent.submit-property') }}" class="mdc-button mdc-button--raised d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
                         <span class="mdc-button__ripple"></span>
                         <span class="mdc-button__label">submit property</span> 
                     </a> 

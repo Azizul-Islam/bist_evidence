@@ -92,14 +92,14 @@
                     
                 </ul>
             </li>
-            {{-- <li>
-                <a class="{{ \Request::is('admin/consumer-request') ? 'active' : '' }}" href="{{ route('admin.consumer-request') }}">
+            <li>
+                <a class="{{ \Request::is('admin/customer-response') ? 'active' : '' }}" href="{{ route('admin.customer-response.index') }}">
                     <span class="nav-link-icon">
                         <i class="bi bi-cpu"></i>
                     </span>
-                    <span>Request Property</span>
+                    <span>Customer Response</span>
                 </a>
-            </li> --}}
+            </li>
             
 
             <li class="menu-divider">Pages</li>
@@ -109,6 +109,14 @@
                         <i class="bi bi-cpu"></i>
                     </span>
                     <span>Service</span>
+                </a>
+            </li>
+            <li>
+                <a class="{{ \Request::is('admin/testimonials') || Request::is('admin/testimonials/*') ? 'active' : '' }}" href="{{ route('admin.testimonials.index') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-cpu"></i>
+                    </span>
+                    <span>Testimonial</span>
                 </a>
             </li>
             {{-- <li>

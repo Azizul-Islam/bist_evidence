@@ -28,6 +28,10 @@ class RedirectIfAuthenticated
                     return redirect()->route('admin.home');
                 }
 
+                if($guard === 'agent') {
+                    return redirect()->route('agent.home');
+                }
+
                 return redirect(RouteServiceProvider::HOME);
             }
 

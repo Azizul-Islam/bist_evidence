@@ -83,6 +83,10 @@
 
                     </div>
                     <div class="mdc-card p-3 mt-3"> 
+                        <h2 class="uppercase text-center fw-500 mb-2">Description</h2>  
+                        <p>{{ $property->description }}</p>
+                    </div>
+                    <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Details</h2>  
                         <div class="row details">
                             <div class="row col-xs-12 col-sm-6 item">
@@ -164,10 +168,7 @@
                             
                         </div> 
                     </div>
-                    <div class="mdc-card p-3 mt-3"> 
-                        <h2 class="uppercase text-center fw-500 mb-2">Description</h2>  
-                        <p>{{ $property->description }}</p>
-                    </div>
+                   
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Location</h2> 
                         <div id="contact-map"></div>
