@@ -34,7 +34,8 @@ class Property extends Model
         'is_featured',
         'status',
         'consumer',
-        'contract'
+        'contract',
+        'property_status'
     ];
 
     public function area()
@@ -73,5 +74,10 @@ class Property extends Model
     public function features()
     {
         return $this->hasMany(PropertyFeature::class);
+    }
+
+    public function agent()
+    {
+        return $this->belongsTo(Agent::class,'user_id');
     }
 }

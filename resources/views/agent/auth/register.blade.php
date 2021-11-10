@@ -100,7 +100,7 @@
                 </div>  
                 <div class="row center-xs middle-xs"> 
                     <small>By clicking the "Create an Account" button you agree with our</small>
-                    <a href="terms.html" class="mdc-button normal">
+                    <a href="{{ route('terms') }}" class="mdc-button normal">
                         <span class="mdc-button__ripple"></span> 
                         <span class="mdc-button__label">Terms and conditions</span> 
                     </a>  

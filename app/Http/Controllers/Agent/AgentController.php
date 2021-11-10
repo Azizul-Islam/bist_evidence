@@ -13,7 +13,8 @@ class AgentController extends Controller
 {
     public function index()
     {
-        return view('agent.index');
+        $user = auth()->user();
+        return view('agent.index',compact('user'));
     }
     public function login()
     {

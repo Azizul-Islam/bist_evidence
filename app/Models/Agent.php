@@ -18,6 +18,13 @@ class Agent extends Authenticatable
         'photo',
         'password',
         'status',
-        'user_type'
+        'user_type',
+        'address',
+        'organization',
+        'facebook',
+        'twitter',
+        'linkedin',
+        'instagram',
+        'website'
     ];
 }

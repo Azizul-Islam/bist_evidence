@@ -37,9 +37,10 @@ class CreatePropertiesTable extends Migration
             $table->string('video_link')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
             $table->boolean('is_featured')->nullable()->default(0);
-            $table->enum('consumer',['owner','manager','guard','representative','admin'])->default('admin');
+            $table->enum('consumer',['owner','manager','guard','representative','admin','agent'])->default('admin');
             $table->enum('status',['active','inactive'])->default('active');
-            $table->enum('contract',['pending','hot offer','no fees','open house','sold'])->default('pending');
+            $table->enum('contract',['hot offer','no fees','open house','sold']);
+            $table->enum('property_status',['pending','approve','rejected'])->default('pending');
             $table->timestamps();
         });
     }

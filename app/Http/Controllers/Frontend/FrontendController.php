@@ -111,5 +111,15 @@ class FrontendController extends Controller
         return view('frontend.pages.properties',compact('properties'));
     }
 
+    public function terms()
+    {
+        return view('frontend.pages.terms');
+    }
+
+    public function faqs()
+    {
+        return view('frontend.pages.faqs');
+    }
+
 
 }

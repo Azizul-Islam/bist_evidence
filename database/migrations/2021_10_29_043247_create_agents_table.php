@@ -19,6 +19,13 @@ class CreateAgentsTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('photo')->nullable();
+            $table->string('address')->nullable();
+            $table->string('organization')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('website')->nullable();
             $table->enum('status',['active','inactive'])->default('inactive');
             $table->enum('user_type',['agent','customer'])->default('agent');
             $table->timestamp('email_verified_at')->nullable();

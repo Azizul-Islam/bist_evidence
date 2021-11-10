@@ -21,7 +21,9 @@ Route::post('getarea/{area_id}/sub',[FrontendController::class,'getChildAreaByPa
 Route::post('add/property',[FrontendController::class,'addPropertyStore'])->name('add-property');
 Route::get('property/details/{slug}',[FrontendController::class,'propertyDetails'])->name('property.details');
 Route::get('property',[FrontendController::class,'property'])->name('property');
-Route::get('/contct',[FrontendController::class,'contact'])->name('contact');
+Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
+Route::get('/terms',[FrontendController::class,'terms'])->name('terms');
+Route::get('/faqs',[FrontendController::class,'faqs'])->name('faqs');
 Route::get('/about',[FrontendController::class,'about'])->name('about');
 Route::get('/properties',[FrontendController::class,'properties'])->name('properties');
 Route::post('customer-response',[FrontendController::class,'customerResponse'])->name('customer-response.store');

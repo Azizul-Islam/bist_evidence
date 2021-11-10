@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Agent\AgentDashboardController;
+use App\Http\Controllers\Agent\PropertyController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('agent')->name('agent.')->group(function(){
@@ -11,6 +12,8 @@ Route::prefix('agent')->name('agent.')->group(function(){
         
         Route::get('register',[AgentController::class,'register'])->name('register');
         Route::post('register',[AgentController::class,'registerStore'])->name('register');
+        
+        Route::get('faqs',[AgentDashboardController::class,'faqs'])->name('faqs');
     });
 
     Route::middleware(['auth:agent'])->group(function(){
@@ -19,8 +22,13 @@ Route::prefix('agent')->name('agent.')->group(function(){
 
         Route::get('my-properties',[AgentDashboardController::class,'myProperties'])->name('my-properties');
         Route::get('favorite',[AgentDashboardController::class,'favorite'])->name('favorite');
-        Route::get('submit-property',[AgentDashboardController::class,'submitProperty'])->name('submit-property');
         Route::get('compare',[AgentDashboardController::class,'compare'])->name('compare');
+        Route::get('lock-screen',[AgentDashboardController::class,'lockScreen'])->name('lock-screen');
+        Route::put('profile/update',[AgentDashboardController::class,'agentProfileUpdate'])->name('profile.update');
+        Route::put('password/update',[AgentDashboardController::class,'agentPasswordUpdate'])->name('password.update');
+        Route::get('submit-property',[AgentDashboardController::class,'submitProperty'])->name('submit-property');
+        Route::post('property.store',[PropertyController::class,'store'])->name('property.store');
+        
     });
     
 });

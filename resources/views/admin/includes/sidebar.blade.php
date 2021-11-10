@@ -93,6 +93,14 @@
                 </ul>
             </li>
             <li>
+                <a class="{{ \Request::is('admin/agent-property') ? 'active' : '' }}" href="{{ route('admin.agent-property') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-house"></i>
+                    </span>
+                    <span>Agent Property</span>
+                </a>
+            </li>
+            <li>
                 <a class="{{ \Request::is('admin/customer-response') ? 'active' : '' }}" href="{{ route('admin.customer-response.index') }}">
                     <span class="nav-link-icon">
                         <i class="bi bi-cpu"></i>
@@ -106,7 +114,7 @@
             <li>
                 <a class="{{ \Request::is('admin/service') || Request::is('admin/service/*') ? 'active' : '' }}" href="{{ route('admin.service.index') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-cpu"></i>
+                        <i class="bi bi-distribute-vertical"></i>
                     </span>
                     <span>Service</span>
                 </a>
@@ -114,7 +122,7 @@
             <li>
                 <a class="{{ \Request::is('admin/testimonials') || Request::is('admin/testimonials/*') ? 'active' : '' }}" href="{{ route('admin.testimonials.index') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-cpu"></i>
+                        <i class="bi bi-patch-check"></i>
                     </span>
                     <span>Testimonial</span>
                 </a>

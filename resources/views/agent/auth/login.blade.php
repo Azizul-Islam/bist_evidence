@@ -126,7 +126,8 @@
                     }
                     else {
                         $('#login_form')[0].reset();
-                        window.location = "{{ route('agent.home') }}";
+                        window.location = "{{ url('/') }}";
+                        toastr.success(data.msg);
                     }
                 }
             });

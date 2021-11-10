@@ -24,7 +24,7 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        $properties = Property::latest()->paginate(10);
+        $properties = Property::where('property_status','approve')->latest()->paginate(10);
         return view('admin.properties.index', compact('properties'));
     }
 
@@ -50,7 +50,6 @@ class PropertyController extends Controller
      */
     public function store(PropertyRequest $request)
     {
-
         $data = $request->validated();
         //make slug form title
         $slug = Str::slug($data['title']);
@@ -259,5 +258,15 @@ class PropertyController extends Controller
             $property->update(['status' => 'inactive']);
         }
         return response()->json(['msg' => 'Status has been updated!', 'status' => true]);
+    }
+
+    public function propertyApprove(Request $request, Property $property)
+    {
+        $property->update([
+            'property_status' => 'approve',
+            'status' => 'active'
+        ]);
+
+        return back()->with('success','Property status updated');
     }
 }

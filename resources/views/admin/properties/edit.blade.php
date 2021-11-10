@@ -735,7 +735,7 @@
             var category_id = $(this).val();
             if (category_id != null) {
                 $.ajax({
-                    url: "/admin/category/" + category_id + "/sub",
+                    url: "/category/" + category_id + "/sub",
                     method: 'GET',
                     data: {
                         _token: "{{ csrf_token() }}",
@@ -761,7 +761,7 @@
             var area_id = $(this).val();
             if (area_id != null) {
                 $.ajax({
-                    url: "/admin/area/" + area_id + "/sub",
+                    url: "/area/" + area_id + "/sub",
                     method: 'GET',
                     data: {
                         _token: "{{ csrf_token() }}",

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/libs/material-components-web.min.css') }}">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">  
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('css/dropify.min.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/skins/blue.css') }}">  
     <link rel="stylesheet" href="{{ asset('frontend/css/responsive.css') }}">
     @yield('styles')  
@@ -133,60 +134,46 @@
                     </a>  
                     <div class="mdc-menu mdc-menu-surface">
                         <div class="mdc-list"> 
+                           
                             <div> 
-                                <a href="property.html" class="mdc-button"> 
-                                    <span class="mdc-button__ripple"></span>
-                                    <span class="mdc-button__label">Single Property</span> 
-                                </a>  
-                            </div><div> 
                                 <a href="agents.html" class="mdc-button"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Agents</span> 
                                 </a>  
                             </div>
+                            
                             <div> 
-                                <a href="agent.html" class="mdc-button"> 
-                                    <span class="mdc-button__ripple"></span>
-                                    <span class="mdc-button__label">Agent</span> 
-                                </a>  
-                            </div>
-                            <div> 
-                                <a href="login.html" class="mdc-button"> 
+                                <a href="{{ route('agent.login') }}" class="mdc-button"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Login</span> 
                                 </a>  
                             </div>
                             <div> 
-                                <a href="register.html" class="mdc-button"> 
+                                <a href="{{ route('agent.register') }}" class="mdc-button"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Register</span> 
                                 </a>  
                             </div>
                             <div> 
-                                <a href="faqs.html" class="mdc-button"> 
+                                <a href="{{ route('faqs') }}" class="mdc-button"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">FAQs</span> 
                                 </a>  
                             </div>
-                            <div> 
+                            {{-- <div> 
                                 <a href="pricing.html" class="mdc-button"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Pricing</span> 
                                 </a>  
-                            </div>
+                            </div> --}}
                             <div> 
-                                <a href="terms.html" class="mdc-button"> 
+                                <a href="{{ route('terms') }}" class="mdc-button"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Terms & Conditions</span> 
                                 </a>  
                             </div>
-                            <div> 
-                                <a href="index.html" class="mdc-button"> 
-                                    <span class="mdc-button__ripple"></span>
-                                    <span class="mdc-button__label">Landing</span> 
-                                </a>  
-                            </div>
-                            <div> 
+                            
+                            {{-- <div> 
                                 <a href="404.html" class="mdc-button"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">404 Page</span> 
@@ -219,7 +206,7 @@
                                         </div>
                                     </div>
                                 </div>                                          
-                            </div> 
+                            </div>  --}}
                         </div>
                     </div>  
                 </div> 
@@ -369,9 +356,13 @@
                     </button> 
                     <div class="mdc-menu mdc-menu-surface user-menu">
                         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                            <li class="user-info row start-xs middle-xs">                   
-                                <img src="{{ asset('assets/images/others/user.jpg') }}" alt="user-image" width="50">
-                                <p class="m-0">Emilio Verdines <br> <small><i>emilio_v</i></small></p>
+                            <li class="user-info row start-xs middle-xs">
+                                @if(empty(auth()->user()->photo))
+                                <img src="{{ asset('frontend/assets/agents/default_photo.png') }}" alt="user-image" width="50">
+                                @else
+                                <img src="{{ asset('frontend/assets/agents/'.auth()->user()->photo) }}" alt="user-image" width="50">
+                                @endif
+                                <p class="m-0">{{ auth()->user()->name ?? '' }} <br> <small></small></p>
                             </li>
                             <li role="separator" class="mdc-list-divider m-0"></li> 
                             <li>
@@ -409,26 +400,26 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="profile.html" class="mdc-list-item" role="menuitem">
+                                <a href="{{ route('agent.home') }}" class="mdc-list-item" role="menuitem">
                                     <i class="material-icons mat-icon-sm text-muted">edit</i> 
                                     <span class="mdc-list-item__text px-3">Edit Profile</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="lock-screen.html" class="mdc-list-item" role="menuitem">
+                                <a href="{{ route('agent.lock-screen') }}" class="mdc-list-item" role="menuitem">
                                     <i class="material-icons mat-icon-sm text-muted">lock</i> 
                                     <span class="mdc-list-item__text px-3">Lock screen</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="faqs.html" class="mdc-list-item" role="menuitem">
+                                <a href="{{ route('agent.faqs') }}" class="mdc-list-item" role="menuitem">
                                     <i class="material-icons mat-icon-sm text-muted">help</i> 
                                     <span class="mdc-list-item__text px-3">Help</span>
                                 </a>
                             </li>
                             <li role="separator" class="mdc-list-divider m-0"></li>
                             <li>
-                                <a href="login.html" class="mdc-list-item" role="menuitem">
+                                <a onclick="event.preventDefault();document.getElementById('logout_form').submit();" class="mdc-list-item" role="menuitem">
                                     <i class="material-icons mat-icon-sm text-muted">power_settings_new</i> 
                                     <span class="mdc-list-item__text px-3">Sign Out</span>
                                 </a>
@@ -443,7 +434,7 @@
                         <i class="material-icons mdc-button__icon mx-1">person</i>
                         <span class="mdc-button__label">Login / Register</span>
                     </a> 
-                  
+                    <form action="{{ route('agent.logout') }}" method="POST" id="logout_form">@csrf</form>
                 </div>
                 @endif 
                 </div> 
@@ -680,12 +671,16 @@
 
     
     <script src="{{ asset('frontend/js/libs/jquery.min.js') }}"></script> 
+    <script src="{{ asset('js/dropify.min.js') }}"></script>
     <script src="{{ asset('frontend/js/libs/material-components-web.min.js') }}"></script> 
     <script src="{{ asset('frontend/js/libs/swiper.min.js') }}"></script> 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script src="{{ asset('frontend/js/scripts.js') }}"></script>  
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1rF9bttCxRmsNdZYjW7FzIoyrul5jb-s&amp;callback=initMap" async defer></script>
     @include('admin.includes.message')
+    <script>
+        $('.dropify').dropify();
+    </script>
     @yield('scripts')
 </body>
 

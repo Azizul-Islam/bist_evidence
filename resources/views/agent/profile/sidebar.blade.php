@@ -2,7 +2,11 @@
     <a href="#" class="h-0"></a>
     <div class="mdc-card"> 
         <div class="row start-xs middle-xs p-3">
-            <img src="assets/images/others/user.jpg" alt="user-image" class="avatar">
+            @if(empty(auth()->user()->photo))
+            <img src="{{ asset('frontend/assets/agents/default_photo.png') }}" alt="user-image" width="50">
+            @else
+            <img src="{{ asset('frontend/assets/agents/'.auth()->user()->photo) }}" alt="user-image" width="50">
+            @endif
             <h2 class="text-muted fw-500 mx-3">{{ auth()->user()->name }}</h2> 
         </div>
         <hr class="mdc-list-divider m-0">

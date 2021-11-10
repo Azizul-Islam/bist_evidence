@@ -5,9 +5,16 @@ use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\CustomerResponseController;
+use App\Http\Controllers\Admin\DefaultController;
+use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\TestimonialController;
+use Faker\DefaultGenerator;
 use Illuminate\Support\Facades\Route;
+
+
+Route::get('category/{category_id}/sub',[CategoryController::class,'getChildCategoryByParent']);
+Route::get('area/{area_id}/sub',[App\Http\Controllers\Admin\AreaController::class,'getChildAreaByParent']);
 
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::middleware(['guest:admin'])->group(function () {
@@ -20,19 +27,20 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/',[AdminController::class,'index'])->name('home');
        //category route
         Route::resource('categories',CategoryController::class);
-        Route::get('category/{area_id}/sub',[CategoryController::class,'getChildCategoryByParent']);
+       
 
         //area route
         Route::resource('areas','App\Http\Controllers\Admin\AreaController');
-        Route::get('area/{area_id}/sub',[App\Http\Controllers\Admin\AreaController::class,'getChildAreaByParent']);
+        
 
         //amenities route
         Route::resource('amenities', AmenityController::class);
 
         //properties route
-        Route::resource('properties','App\Http\Controllers\Admin\PropertyController');
-        Route::post('property/status',[App\Http\Controllers\Admin\PropertyController::class,'propertyStatus'])->name('property.status');
-
+        Route::resource('properties',PropertyController::class);
+        Route::post('property/status',[PropertyController::class,'propertyStatus'])->name('property.status');
+        Route::put('property/approve/{property}',[PropertyController::class,'propertyApprove'])->name('property.approve');
+        Route::get('agent-property',[DefaultController::class,'agentProperty'])->name('agent-property');
         //customer response
         Route::get('customer-response',[CustomerResponseController::class,'index'])->name('customer-response.index');
         Route::put('customer-response/status',[CustomerResponseController::class,'status'])->name('customer-response.status');
