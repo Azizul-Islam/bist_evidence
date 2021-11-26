@@ -755,7 +755,7 @@
                             </div>  
                         </div> 
                         <div class="control-icons">
-                            <button class="mdc-button add-to-favorite" title="Add To Favorite">
+                            <button class="mdc-button add-to-favorite" data-id="{{ $hotOfferProperty->id }}" data-url="{{ route('add-to-favorite') }}" title="Add To Favorite">
                                 <i class="material-icons mat-icon-sm">favorite_border</i>
                             </button>
                             <button class="mdc-button" title="Add To Compare">
@@ -847,4 +847,31 @@
     @include('frontend.pages.client')
     {{-- clients section end --}}
  
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).on('click','.add-to-favorite',function(){
+            let url = $(this).data('url');
+            let id = $(this).data('id');
+            $.ajax({
+                url: url,
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    property_id: id,
+                },
+                success: function(data) {
+                    if(data.status == 1) {
+                        $('body #user_menu_count').html(data.html);
+                        toastr.success(data.msg);
+                    }
+                    else {
+                        toastr.error(data.msg);
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

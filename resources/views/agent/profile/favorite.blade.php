@@ -1,80 +1,89 @@
 @extends('layouts.app')
 @section('title','Favorite')
+@section('styles')
+    <style>
+        
+button[type=button]:disabled {cursor: no-drop !important;}
+.form__input-container.error_input{border-color: #ff0000;}
+.error-text{color: #ff0000;}
+.sidebar__spoiler-item.active{background-color: #4c73ff;}
+.pagination .page-item {display: inline-block;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
+.pagination .page-item a{display: inline-block;}
+.pagination{text-align: center; padding: 20px;}
+.pagination .page-item.active{background-color: #ccc;}
+.page-item.disabled{cursor: no-drop;}
+
+    </style>
+@endsection
 @section('content')
 <div class="px-3">  
     <div class="theme-container">   
         <div class="page-drawer-container mt-3">
            @include('agent.profile.sidebar')
             <div class="mdc-drawer-scrim page-sidenav-scrim"></div>  
-            <div class="page-sidenav-content"> 
-                <div class="row mdc-card between-xs middle-xs w-100 p-2 mdc-elevation--z1 text-muted d-md-none d-lg-none d-xl-none mb-3">
-                    <button id="page-sidenav-toggle" class="mdc-icon-button material-icons">more_vert</button> 
-                    <h3 class="fw-500">My Account</h3>
-                </div> 
-                <div class="mdc-card p-3">
-                    <div class="mdc-text-field mdc-text-field--outlined custom-field w-100">
-                        <input class="mdc-text-field__input" placeholder="Type for filter properties">
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label class="mdc-floating-label">Filter properties</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                        </div>
-                    </div>  
-                    <div class="mdc-data-table border-0 w-100 mt-3">
-                        <table class="mdc-data-table__table" aria-label="Dessert calories">
-                            <thead>
-                                <tr class="mdc-data-table__header-row">
-                                    <th class="mdc-data-table__header-cell">ID</th>
-                                    <th class="mdc-data-table__header-cell">Image</th>
-                                    <th class="mdc-data-table__header-cell">Title</th>
-                                    <th class="mdc-data-table__header-cell">Remove</th>
-                                </tr>
-                            </thead>
-                            <tbody class="mdc-data-table__content">
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">1</td>
-                                    <td class="mdc-data-table__cell"><img src="assets/images/props/flat-1/1-small.jpg" alt="pro-image" width="100" class="d-block py-3"></td>
-                                    <td class="mdc-data-table__cell"><a href="property.html" class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary normal">Modern and quirky flat</a></td>
-                                    <td class="mdc-data-table__cell"><button class="mdc-icon-button material-icons warn-color">delete</button></td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">2</td>
-                                    <td class="mdc-data-table__cell"><img src="assets/images/props/office/1-small.jpg" alt="pro-image" width="100" class="d-block py-3"></td>
-                                    <td class="mdc-data-table__cell"><a href="property.html" class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary normal">Centrally located office</a></td>
-                                    <td class="mdc-data-table__cell"><button class="mdc-icon-button material-icons warn-color">delete</button></td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">3</td>
-                                    <td class="mdc-data-table__cell"><img src="assets/images/props/house-1/1-small.jpg" alt="pro-image" width="100" class="d-block py-3"></td>
-                                    <td class="mdc-data-table__cell"><a href="property.html" class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary normal">Comfortable family house</a></td>
-                                    <td class="mdc-data-table__cell"><button class="mdc-icon-button material-icons warn-color">delete</button></td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">4</td>
-                                    <td class="mdc-data-table__cell"><img src="assets/images/props/flat-2/1-small.jpg" alt="pro-image" width="100" class="d-block py-3"></td>
-                                    <td class="mdc-data-table__cell"><a href="property.html" class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary normal">Spacious and warm flat</a></td>
-                                    <td class="mdc-data-table__cell"><button class="mdc-icon-button material-icons warn-color">delete</button></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div> 
-                </div> 
-                <div class="row center-xs middle-xs my-3 w-100">                
-                    <div class="mdc-card w-100"> 
-                        <ul class="theme-pagination">
-                            <li class="pagination-previous disabled"><span>Previous</span></li>
-                            <li class="current"><span>1</span></li>
-                            <li><a><span>2</span></a></li>
-                            <li><a><span>3</span></a></li>
-                            <li><a><span>4</span></a></li>
-                            <li class="pagination-next"><a><span>Next</span></a></li>
-                        </ul> 
-                    </div>
-                </div> 
+            <div class="page-sidenav-content" id="favorite_data"> 
+                @include('agent.partials._favorite_data')
             </div> 
         </div>  
     </div>  
 </div>
+@endsection
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href');
+            fetch_data(page);
+        });
+
+        function fetch_data(page) {
+            $.ajax({
+                url: page,
+                success: function(data) {
+                    $('#favorite_data').html(data);
+                    history.pushState({}, null, page);
+                }
+            });
+        }
+        
+
+});
+</script>
+
+//remove favorite
+<script>
+    $(document).on('click','.delFavorite',function(e){
+        e.preventDefault();
+        // return confirm('Are you sure?');
+        let id = $(this).data('id');
+        let url = $(this).data('url');
+        $.ajax({
+            url: url,
+            method: 'POST',
+            dataType: 'JSON',
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(data) {
+                if(data.status == 1) {
+                    $('body #favorite_data').html(data.html);
+                    $('body #user_menu_count').html(data.html1);
+                    toastr.info(data.msg);
+                }
+                else {
+                    toastr.error('Something went wrong!');
+                }
+            }
+        });
+    });
+</script>
 @endsection

@@ -41,11 +41,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::post('property/status',[PropertyController::class,'propertyStatus'])->name('property.status');
         Route::put('property/approve/{property}',[PropertyController::class,'propertyApprove'])->name('property.approve');
         Route::get('agent-property',[DefaultController::class,'agentProperty'])->name('agent-property');
+        Route::get('agent',[DefaultController::class,'agent'])->name('agent.index');
+        Route::put('agent/status',[DefaultController::class,'agentStatus'])->name('agent.status');
         //customer response
         Route::get('customer-response',[CustomerResponseController::class,'index'])->name('customer-response.index');
         Route::put('customer-response/status',[CustomerResponseController::class,'status'])->name('customer-response.status');
         Route::get('customer-response/{show}/show',[CustomerResponseController::class,'show'])->name('customer-response.show');
 
+        //frontend property
+        Route::get('frontend-property',[DefaultController::class,'frontendProperty'])->name('frontend-property');
         //service Route
         Route::resource('service',ServiceController::class);
         Route::get('allservice',[ServiceController::class,'allService'])->name('service.allservice');

@@ -5,7 +5,7 @@
     <div class="bg" style="background-image: url('{{ asset('frontend/assets/images/carousel/slide-3.jpg') }}');"></div>
     <div class="mask"></div>            
     <div class="header-image-content mh-200"> 
-        <p class="desc">“Home is where one starts from...” –T.S. Eliot</p> 
+        {{-- <p class="desc">“Home is where one starts from...” –T.S. Eliot</p>  --}}
     </div>
 </div>  
 <div class="px-3">  
@@ -722,7 +722,7 @@
                                     </div>  
                                 </div> 
                                 <div class="control-icons">
-                                    <button class="mdc-button add-to-favorite" title="Add To Favorite">
+                                    <button class="mdc-button add-to-favorite" data-id="{{ $property->id }}" data-url="{{ route('add-to-favorite') }}" title="Add To Favorite">
                                         <i class="material-icons mat-icon-sm">favorite_border</i>
                                     </button>
                                     <button class="mdc-button" title="Add To Compare">
@@ -887,4 +887,30 @@
         </div>
     </div>   
 </div> 
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).on('click','.add-to-favorite',function(){
+            let url = $(this).data('url');
+            let id = $(this).data('id');
+            $.ajax({
+                url: url,
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    _token: "{{ csrf_token() }}",
+                    property_id: id,
+                },
+                success: function(data) {
+                    if(data.status == 1) {
+                        toastr.success(data.msg);
+                    }
+                    else {
+                        toastr.error(data.msg);
+                    }
+                }
+            });
+        });
+    </script>
 @endsection

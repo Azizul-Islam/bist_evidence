@@ -110,7 +110,7 @@
         </div>
     </div>      
 </footer>  
-<div id="favorites-snackbar" class="mdc-snackbar">
+{{-- <div id="favorites-snackbar" class="mdc-snackbar">
     <div class="mdc-snackbar__surface">
         <div class="mdc-snackbar__label">The property has been added to favorites.</div>
         <div class="mdc-snackbar__actions">
@@ -122,6 +122,6 @@
             </button>
         </div>
     </div>
-</div> 
+</div>  --}}
 
 <div id="back-to-top"><i class="material-icons">arrow_upward</i></div>

@@ -101,6 +101,15 @@
                 </a>
             </li>
             <li>
+                <a class="{{ \Request::is('admin/frontend-property') ? 'active' : '' }}" href="{{ route('admin.frontend-property') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-house"></i>
+                    </span>
+                    <span>Frontend Property</span>
+                </a>
+            </li>
+            <li class="menu-divider">Users</li>
+            <li>
                 <a class="{{ \Request::is('admin/customer-response') ? 'active' : '' }}" href="{{ route('admin.customer-response.index') }}">
                     <span class="nav-link-icon">
                         <i class="bi bi-cpu"></i>
@@ -108,7 +117,24 @@
                     <span>Customer Response</span>
                 </a>
             </li>
-            
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-house"></i>
+                    </span>
+                    <span>Users</span>
+                </a>
+                <ul>
+                   
+                    <li>
+                        <a class="{{ \Request::is('admin/agent') ? 'active' : '' }}" href="{{ route('admin.agent.index') }}">Agent</a>
+                    </li>
+                    <li>
+                        <a class="{{ \Request::is('admin/users') ? 'active' : '' }}" href="">Admin User</a>
+                    </li>
+                    
+                </ul>
+            </li>
 
             <li class="menu-divider">Pages</li>
             <li>

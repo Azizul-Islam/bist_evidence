@@ -12,11 +12,19 @@ class FrontendProperty extends Model
 
     public function area()
     {
-        return $this->belongsTo(Area::class,'area_id');
+        return $this->belongsTo(Area::class);
     }
-
     public function sub_area()
     {
         return $this->belongsTo(Area::class,'sub_area_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+    public function sub_category()
+    {
+        return $this->belongsTo(Category::class,'sub_category_id');
     }
 }

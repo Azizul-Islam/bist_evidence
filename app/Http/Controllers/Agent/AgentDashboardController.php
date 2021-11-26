@@ -7,6 +7,7 @@ use App\Models\Agent;
 use App\Models\Amenity;
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\Favorite;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +23,13 @@ class AgentDashboardController extends Controller
 
     public function favorite()
     {
-        return view('agent.profile.favorite');
+        $favorites = Favorite::where(['user_id'=>auth()->guard('agent')->id()])->latest()->paginate(5);
+        if (request()->ajax()) {
+            $html = view('agent.partials._favorite_data', compact('favorites'))->render();
+            return response()->json($html);
+        } else {
+            return view('agent.profile.favorite',compact('favorites'));
+        }
     }
 
     public function submitProperty()

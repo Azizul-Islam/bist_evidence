@@ -3,6 +3,7 @@
 use App\Http\Controllers\Agent\AgentController;
 use App\Http\Controllers\Agent\AgentDashboardController;
 use App\Http\Controllers\Agent\PropertyController;
+use App\Http\Controllers\Frontend\FavoriteController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('agent')->name('agent.')->group(function(){
@@ -28,6 +29,7 @@ Route::prefix('agent')->name('agent.')->group(function(){
         Route::put('password/update',[AgentDashboardController::class,'agentPasswordUpdate'])->name('password.update');
         Route::get('submit-property',[AgentDashboardController::class,'submitProperty'])->name('submit-property');
         Route::post('property.store',[PropertyController::class,'store'])->name('property.store');
+        Route::post('favorite/destroy/{id}',[FavoriteController::class,'destroy'])->name('favorite.destroy');
         
     });
     

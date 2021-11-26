@@ -22,13 +22,6 @@ class FrontendController extends Controller
         return view('frontend.index',$data);
     }
 
-    public function addPropertyIndex()
-    {
-        $data = Category::getCategories(true);
-        $categories = Category::generateCategories($data);
-        $areas = Area::whereNull('parent_id')->latest()->get();
-        return view('frontend.add-property',compact('categories','areas'));
-    }
 
     public function getChildAreaByParent(Request $request,$id)
     {
@@ -44,22 +37,7 @@ class FrontendController extends Controller
     }
     }
 
-    public function addPropertyStore(Request $request)
-    {
-        $data = $request->validate([
-            'name' => 'required|string',
-            'phone' => 'required|string',
-            'email' => 'nullable|email',
-            'purpose' => 'required',
-            'consumer' => 'required',
-            'category_id' => 'required',
-            'area_id' => 'required',
-            'sub_area_id' => 'nullable',
-        ]);
-
-        FrontendProperty::create($data);
-        return redirect()->back()->with('success','Your response submited');
-    }
+    
 
     public function propertyDetails($slug)
     {
@@ -121,5 +99,32 @@ class FrontendController extends Controller
         return view('frontend.pages.faqs');
     }
 
+    public function addProperty()
+    {
+        $data['categories'] = Category::whereNull('parent_id')->latest()->get();
+        $data['areas'] = Area::whereNull('parent_id')->latest()->get();
+        return view('frontend.pages.add-property',$data);
+    }
+
+    public function addPropertyStore(Request $request)
+    {
+        $data = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'email' => 'nullable|email',
+            'purpose' => 'required',
+            'consumer' => 'required',
+            'category_id' => 'required',
+            'area_id' => 'required',
+            'sub_area_id' => 'nullable',
+        ]);
+
+        if(!$data->passes()) {
+            return response()->json(['status'=>0,'errors'=>$data->errors()->toArray()]);
+        }
+
+        FrontendProperty::create($request->all());
+        return response()->json(['status'=>1,'msg'=>'Your response submited']);
+    }
 
 }
