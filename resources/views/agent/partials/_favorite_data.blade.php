@@ -44,6 +44,10 @@
         </table>
     </div> 
 </div> 
-<div class="row center-xs middle-xs my-3 w-100">  
-    {!! $favorites->appends(request()->query())->links('pagination::bootstrap-4') !!}
+
+<div class="row center-xs middle-xs p-2 w-100">                
+    <div class="mdc-card w-100"> 
+        {!! $favorites->appends(request()->query())->links('pagination::bootstrap-4') !!}
+       
+    </div>
 </div> 

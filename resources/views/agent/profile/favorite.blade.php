@@ -1,17 +1,17 @@
 @extends('layouts.app')
 @section('title','Favorite')
 @section('styles')
-    <style>
+<style>
         
-button[type=button]:disabled {cursor: no-drop !important;}
-.form__input-container.error_input{border-color: #ff0000;}
-.error-text{color: #ff0000;}
-.sidebar__spoiler-item.active{background-color: #4c73ff;}
-.pagination .page-item {display: inline-block;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
-.pagination .page-item a{display: inline-block;}
-.pagination{text-align: center; padding: 20px;}
-.pagination .page-item.active{background-color: #ccc;}
-.page-item.disabled{cursor: no-drop;}
+    button[type=button]:disabled {cursor: no-drop !important;}
+    .form__input-container.error_input{border-color: #ff0000;}
+    .error-text{color: #ff0000;}
+    .sidebar__spoiler-item.active{background-color: #4c73ff;}
+    .pagination .page-item {display: inline-block;}
+    .pagination .page-item a{display: inline-block;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
+    .pagination{text-align: center; padding: 20px;}
+    .pagination .page-item.active{background-color: #ccc;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
+    .page-item.disabled{cursor: no-drop;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
 
     </style>
 @endsection

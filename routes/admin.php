@@ -39,6 +39,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //properties route
         Route::resource('properties',PropertyController::class);
         Route::post('property/status',[PropertyController::class,'propertyStatus'])->name('property.status');
+        Route::post('floor/photo',[PropertyController::class,'floorPhotoUpdate'])->name('floor-photo.update');
+        Route::get('floor/destroy/{id}',[PropertyController::class,'floorDestroy'])->name('floor.destroy');
+        Route::get('feature/destroy/{id}',[PropertyController::class,'featureDestroy'])->name('feature.destroy');
         Route::put('property/approve/{property}',[PropertyController::class,'propertyApprove'])->name('property.approve');
         Route::get('agent-property',[DefaultController::class,'agentProperty'])->name('agent-property');
         Route::get('agent',[DefaultController::class,'agent'])->name('agent.index');

@@ -28,7 +28,10 @@ Route::prefix('agent')->name('agent.')->group(function(){
         Route::put('profile/update',[AgentDashboardController::class,'agentProfileUpdate'])->name('profile.update');
         Route::put('password/update',[AgentDashboardController::class,'agentPasswordUpdate'])->name('password.update');
         Route::get('submit-property',[AgentDashboardController::class,'submitProperty'])->name('submit-property');
-        Route::post('property.store',[PropertyController::class,'store'])->name('property.store');
+        Route::put('property/update/{property}',[PropertyController::class,'update'])->name('properties.update');
+        Route::post('property/destroy/{id}',[PropertyController::class,'destroy'])->name('property.destroy');
+        Route::post('property/store',[PropertyController::class,'store'])->name('property.store');
+        Route::get('property/edit/{property}',[PropertyController::class,'edit'])->name('property.edit');
         Route::post('favorite/destroy/{id}',[FavoriteController::class,'destroy'])->name('favorite.destroy');
         
     });

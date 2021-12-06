@@ -206,12 +206,14 @@ class PropertyController extends Controller
                 $floor->floor_size = $request->floor_size[$i];
                 $floor->floor_room = $request->floor_room[$i];
                 $floor->floor_bath = $request->floor_bath[$i];
+
                 // if (!empty($request->floor_photo)) {
-                //     $file = $request->floor_photo[$i];
+                //     $file = $request->file('floor_photo');
                 //     $name_gen = rand() . "." . $file->getClientOriginalExtension();
                 //     $file->move(public_path('backend/properties/floor'), $name_gen);
                 //     $floor->floor_photo = $name_gen;
                 // }
+
                 $floor->save();
             }
         }
@@ -220,7 +222,8 @@ class PropertyController extends Controller
         // property feature part here
         if ($request->has('feature_name') && !blank($request->feature_name)) {
             foreach ($features as $i => $item) {
-                if(!empty($request->feature_id)) {
+                // dd($request->feature_id[$i]);
+                if(!empty($request->feature_id[$i])) {
                     $feature = PropertyFeature::findOrFail($request->feature_id[$i]);
                 }
                 else{
@@ -268,5 +271,23 @@ class PropertyController extends Controller
         ]);
 
         return back()->with('success','Property status updated');
+    }
+
+    public function floorDestroy($id)
+    {
+        $floor = PropertyFloorPlan::findOrFail($id);
+        $floor->delete();
+        return response()->json(['msg'=>'Floor plan has been deleted']);
+    }
+    public function featureDestroy($id)
+    {
+        $feature = PropertyFeature::findOrFail($id);
+        $feature->delete();
+        return response()->json(['msg'=>'Floor plan has been deleted']);
+    }
+
+    public function floorPhotoUpdate(Request $request)
+    {
+        dd($request->all());
     }
 }

@@ -1,77 +1,88 @@
 @extends('layouts.app')
 @section('title','My Properties')
+@section('styles')
+<style>
+        
+    button[type=button]:disabled {cursor: no-drop !important;}
+    .form__input-container.error_input{border-color: #ff0000;}
+    .error-text{color: #ff0000;}
+    .sidebar__spoiler-item.active{background-color: #4c73ff;}
+    .pagination .page-item {display: inline-block;}
+    .pagination .page-item a{display: inline-block;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
+    .pagination{text-align: center; padding: 20px;}
+    .pagination .page-item.active{background-color: #ccc;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
+    .page-item.disabled{cursor: no-drop;padding: 5px 12px;border: 1px solid #ccc; font-size: 18px;}
+
+    </style>
+@endsection
 @section('content')
 <div class="px-3">  
     <div class="theme-container">   
         <div class="page-drawer-container mt-3">
             @include('agent.profile.sidebar')
             <div class="mdc-drawer-scrim page-sidenav-scrim"></div>  
-            <div class="page-sidenav-content"> 
-                <div class="row mdc-card between-xs middle-xs w-100 p-2 mdc-elevation--z1 text-muted d-md-none d-lg-none d-xl-none mb-3">
-                    <button id="page-sidenav-toggle" class="mdc-icon-button material-icons">more_vert</button> 
-                    <h3 class="fw-500">My Account</h3>
-                </div> 
-                <div class="mdc-card p-3">
-                    <div class="mdc-text-field mdc-text-field--outlined custom-field w-100">
-                        <input class="mdc-text-field__input" placeholder="Type for filter properties">
-                        <div class="mdc-notched-outline">
-                            <div class="mdc-notched-outline__leading"></div>
-                            <div class="mdc-notched-outline__notch">
-                                <label class="mdc-floating-label">Filter properties</label>
-                            </div>
-                            <div class="mdc-notched-outline__trailing"></div>
-                        </div>
-                    </div>  
-                    <div class="mdc-data-table border-0 w-100 mt-3">
-                        <table class="mdc-data-table__table" aria-label="Dessert calories">
-                            <thead>
-                                <tr class="mdc-data-table__header-row">
-                                    <th class="mdc-data-table__header-cell">ID</th>
-                                    <th class="mdc-data-table__header-cell">Image</th>
-                                    <th class="mdc-data-table__header-cell">Title</th>
-                                    <th class="mdc-data-table__header-cell">Published</th>
-                                    <th class="mdc-data-table__header-cell">Status</th>
-                                    {{-- <th class="mdc-data-table__header-cell">Views</th> --}}
-                                    <th class="mdc-data-table__header-cell">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="mdc-data-table__content">
-                                @forelse ($properties as $property)
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">1</td>
-                                    <td class="mdc-data-table__cell"><img src="{{ isset($property->images[0]->path) ? asset('backend/properties/'.$property->images[0]->path)  : '' }}" alt="pro-image" width="100" class="d-block py-3"></td>
-                                    <td class="mdc-data-table__cell"><a href="{{ route('property.details',$property->slug) }}" class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary normal">{{ Str::limit($property->title, 30, '...') }}</a></td>
-                                    <td class="mdc-data-table__cell">{{ date('d M, Y',strtotime($property->created_at)) }}</td>
-                                    <td class="mdc-data-table__cell">{{ ucfirst($property->property_status) }}</td>
-                                    <td class="mdc-data-table__cell">
-                                        <button class="mdc-icon-button material-icons primary-color">edit</button>
-                                        <button class="mdc-icon-button material-icons warn-color">delete</button>
-                                    </td>
-                                </tr>
-                                @empty
-                                    <tr>
-                                        <td>No data available in this table</td>
-                                    </tr>
-                                @endforelse
-                               
-                            </tbody>
-                        </table>
-                    </div> 
-                </div> 
-                <div class="row center-xs middle-xs my-3 w-100">                
-                    <div class="mdc-card w-100"> 
-                        <ul class="theme-pagination">
-                            <li class="pagination-previous disabled"><span>Previous</span></li>
-                            <li class="current"><span>1</span></li>
-                            <li><a><span>2</span></a></li>
-                            <li><a><span>3</span></a></li>
-                            <li><a><span>4</span></a></li>
-                            <li class="pagination-next"><a><span>Next</span></a></li>
-                        </ul> 
-                    </div>
-                </div> 
+            <div class="page-sidenav-content" id="property_data"> 
+                @include('agent.partials._property_data')
             </div> 
         </div>  
     </div>  
 </div>
+@endsection
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $.ajaxSetup({
+            headers: {
+              'X-CSRF-Token': $('meta[name="_token"]').attr('content')
+            }
+        });
+
+
+        $(document).on('click', '.pagination a', function(event) {
+            event.preventDefault();
+            let page = $(this).attr('href');
+            fetch_data(page);
+        });
+
+        function fetch_data(page) {
+            $.ajax({
+                url: page,
+                success: function(data) {
+                    $('#property_data').html(data);
+                    history.pushState({}, null, page);
+                }
+            });
+        }
+        
+
+});
+</script>
+<script>
+    //remove properties
+    $(document).on('click','.delProperty',function(e){
+        e.preventDefault();
+        var c = confirm("Are you sure you want to permanently remove this record ?");
+        if(! c){
+            return false;
+        }
+        let url = $(this).data('url');
+        $.ajax({
+            url: url,
+            method: 'post',
+            dataType: 'JSON',
+            data: {
+                _token: '{{ csrf_token() }}',
+            },
+            success: function(data) {
+                if(data.status == 1) {
+                    $('body #property_data').html(data.html);
+                    toastr.info(data.msg);
+                }
+                else {
+                    toastr.error('Something went wrong!');
+                }
+            }
+        });
+    });
+</script>
 @endsection

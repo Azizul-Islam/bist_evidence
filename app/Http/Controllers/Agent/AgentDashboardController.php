@@ -17,8 +17,14 @@ class AgentDashboardController extends Controller
 {
     public function myProperties()
     {
-        $properties = Property::where('user_id',auth()->user()->id)->latest()->get();
-        return view('agent.profile.my-properties',compact('properties'));
+        $properties = Property::where('user_id',auth()->user()->id)->latest()->paginate(5);
+        if(request()->ajax()) {
+            $html = view('agent.partials._property_data',compact('properties'))->render();
+            return response()->json($html);
+        }
+        else {
+            return view('agent.profile.my-properties',compact('properties'));
+        }
     }
 
     public function favorite()

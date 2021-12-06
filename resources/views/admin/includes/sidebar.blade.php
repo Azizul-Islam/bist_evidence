@@ -11,11 +11,12 @@
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center" data-bs-toggle="dropdown">
                 <div class="avatar me-3">
-                    @if(!blank(auth()->user()->photo))
-                    <img src="{{ auth()->user()->photo }}" class="rounded-circle" alt="image">
+                    @if(empty(auth()->user()->photo))
+                    <img src="{{ asset('backend/assets/images/default_photo.png') }}" alt="user-image" width="50">
                     @else
-                    <img src="{{ asset('backend/assets/images/default.png') }}" class="rounded-circle" alt="image">
+                    <img src="{{ asset('backend/assets/images/'.auth()->user()->photo) }}" alt="user-image" width="50">
                     @endif
+                   
                 </div>
                 <div>
                     <div class="fw-bold">{{ ucfirst(auth()->user()->name) }}</div>

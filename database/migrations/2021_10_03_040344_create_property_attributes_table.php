@@ -15,8 +15,8 @@ class CreatePropertyAttributesTable extends Migration
     {
         Schema::create('property_attributes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id')->constrained();
-            $table->foreignId('attribute_id')->constrained();
+            $table->foreignId('property_id');
+            $table->foreignId('attribute_id');
             $table->mediumText('value');
             $table->timestamps();
         });

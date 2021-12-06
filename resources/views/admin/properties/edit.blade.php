@@ -8,6 +8,7 @@
         .showImage{
             height: 80px;width:100px;margin-right:5px
         }
+        
     </style>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">  
@@ -101,7 +102,7 @@
                                 </div>
                             </div>
                         </div>
-                    <form action="{{ route('admin.properties.update',$property) }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.properties.update',$property) }}" id="update_property"  method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
                         <div class="tab-content tab-content--active">  
@@ -229,9 +230,9 @@
                                         </div>
                                     </div>  
                                 </div>  
-                                <div class="col-xs-12 p-2">
+                                {{-- <div class="col-xs-12 p-2">
                                     <div id="contact-map"></div>
-                                </div> 
+                                </div>  --}}
                                 <div class="col-xs-12 col-sm-6 p-2">
                                     <select name="area_id" required class="form-control" id="area_id">
                                         <option value="">Select Area *</option>
@@ -510,10 +511,91 @@
                                                         </div> 
                                                     </div>  
                                                     <div class="col-xs-12 mt-2">  
-                                                       <input type="file" name="floor_photo[]"  class="form-control">
+                                                       <input type="file" name="floor_photo[]" class="floor_photo" data-id="{{ $floor->id }}"  class="form-control">
                                                         <div>
                                                             <img src="{{ asset('backend/properties/floor/'.$floor->floor_photo) }}" class="showImage" alt="">
                                                         </div>
+                                                    </div>  
+                                                </div> 
+                                            </div>
+                                            <div class="col-xs-1 text-center">
+                                                <button class="mdc-icon-button material-icons warn-color remove-btn" data-url="{{ route('admin.floor.destroy',$floor->id) }}" data-id="{{ $floor->id }}" type="button">cancel</button> 
+                                            </div>
+                                        </div> 
+                                    </div> 
+                                </div> 
+                                   @endforeach 
+                                   @if(count($property->floorPlans) == 0)
+                                   <div class="steps">
+                                    <div class="step-section">
+                                        <div class="row middle-xs">
+                                            <div class="col-xs-1 text-center fw-500">
+                                                <span class="num">1</span>
+                                            </div>
+                                            <div class="col-xs-10">
+                                                <div class="row"> 
+                                                    <div class="col-xs-12 col-sm-5 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" type="text" name="floor_name[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Name</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                    <div class="col-xs-12 col-sm-7 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" type="text" name="floor_description[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Desc</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div> 
+                                                    <div class="col-xs-12 col-sm-4 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" name="floor_size[]" type="number">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Area (ft²)</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>  
+                                                    <div class="col-xs-12 col-sm-4 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" type="number" name="floor_room[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Rooms</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>  
+                                                    <div class="col-xs-12 col-sm-4 p-2">  
+                                                        <div class="mdc-text-field mdc-text-field--outlined">
+                                                            <input class="mdc-text-field__input" type="number" name="floor_bath[]">
+                                                            <div class="mdc-notched-outline">
+                                                                <div class="mdc-notched-outline__leading"></div>
+                                                                <div class="mdc-notched-outline__notch">
+                                                                    <label class="mdc-floating-label">Baths</label>
+                                                                </div>
+                                                                <div class="mdc-notched-outline__trailing"></div>
+                                                            </div>
+                                                        </div> 
+                                                    </div>  
+                                                    <div class="col-xs-12 mt-2">  
+                                                       <input type="file" name="floor_photo[]" class="form-control">
                                                     </div>  
                                                 </div> 
                                             </div>
@@ -523,7 +605,7 @@
                                         </div> 
                                     </div> 
                                 </div> 
-                                   @endforeach 
+                                   @endif
 
                                 </div>
                                 <script id="plans" type="text/template">
@@ -645,12 +727,54 @@
                                                     </div> 
                                                 </div>
                                                 <div class="col-xs-1 text-center">
-                                                    <button class="mdc-icon-button material-icons warn-color remove-step" type="button">cancel</button> 
+                                                    <button class="mdc-icon-button material-icons warn-color remove-feature-step" data-url="{{ route('admin.feature.destroy',$feature->id) }}" type="button">cancel</button> 
                                                 </div>
                                             </div> 
                                         </div> 
                                     </div>  
                                     @endforeach
+                                    @if(count($property->features) == 0)
+                                    <div class="steps">
+                                        <div class="step-section">
+                                            <div class="row middle-xs">
+                                                <div class="col-xs-1 text-center fw-500">
+                                                    <span class="num">1</span>
+                                                </div>
+                                                <div class="col-xs-10">
+                                                    <div class="row"> 
+                                                        <div class="col-xs-12 col-sm-5 p-2">  
+                                                            <div class="mdc-text-field mdc-text-field--outlined">
+                                                                <input class="mdc-text-field__input" type="text" name="feature_name[]">
+                                                                <div class="mdc-notched-outline">
+                                                                    <div class="mdc-notched-outline__leading"></div>
+                                                                    <div class="mdc-notched-outline__notch">
+                                                                        <label class="mdc-floating-label">Name</label>
+                                                                    </div>
+                                                                    <div class="mdc-notched-outline__trailing"></div>
+                                                                </div>
+                                                            </div> 
+                                                        </div> 
+                                                        <div class="col-xs-12 col-sm-7 p-2">  
+                                                            <div class="mdc-text-field mdc-text-field--outlined">
+                                                                <input class="mdc-text-field__input" type="text" name="feature_value[]">
+                                                                <div class="mdc-notched-outline">
+                                                                    <div class="mdc-notched-outline__leading"></div>
+                                                                    <div class="mdc-notched-outline__notch">
+                                                                        <label class="mdc-floating-label">Value</label>
+                                                                    </div>
+                                                                    <div class="mdc-notched-outline__trailing"></div>
+                                                                </div>
+                                                            </div> 
+                                                        </div>  
+                                                    </div> 
+                                                </div>
+                                                <div class="col-xs-1 text-center">
+                                                    <button class="mdc-icon-button material-icons warn-color remove-step" type="button">cancel</button> 
+                                                </div>
+                                            </div> 
+                                        </div> 
+                                    </div> 
+                                    @endif
                                 </div> 
                                 <script id="features" type="text/template">
                                     <div class="step-section">
@@ -784,4 +908,66 @@
             }
         });
     </script>
+
+    <script>
+        //remove floor plans
+        $(document).on('click','.remove-btn',function(){
+            var c = confirm("Are you sure you want to permanently remove this record ?");
+			if(! c){
+				return false;
+			}
+            let id = $(this).data('id');
+            let url = $(this).data('url');
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(data) {
+                    toastr.success(data.msg);
+                }
+            });
+            $(this).closest(".step-section").remove();
+        });
+        //remove feature
+        $(document).on('click','.remove-feature-step',function(){
+            var c = confirm("Are you sure you want to permanently remove this record ?");
+			if(! c){
+				return false;
+			}
+            let url = $(this).data('url');
+            $.ajax({
+                url: url,
+                method: 'GET',
+                success: function(data) {
+                    toastr.success(data.msg);
+                }
+            });
+            $(this).closest(".step-section").remove();
+        });
+
+        //update photo
+        $(document).on('change','.floor_photo',function(){
+            let photo = $(this)[0].files[0];
+            let id = $(this).data('id');
+            // let formData = new formData($('#update_property')[0]);
+            // formData.append('photo',photo);
+            // formData.append('id',id);
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: "{{ route('admin.floor-photo.update') }}",
+                method: "POST",
+                dataType: 'JSON',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(data){
+                    console.log(data);
+                },
+            });
+        });
+    </script>
+
 @endsection

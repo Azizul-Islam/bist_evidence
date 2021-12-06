@@ -15,7 +15,7 @@ class CreatePropertyFloorPlansTable extends Migration
     {
         Schema::create('property_floor_plans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('property_id')->constrained();
+            $table->foreignId('property_id');
             $table->string('floor_name');
             $table->mediumText('floor_description')->nullable();
             $table->string('floor_size');

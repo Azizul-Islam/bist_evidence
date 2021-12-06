@@ -1,7 +1,7 @@
 @extends('layouts.admin-app')
 @section('title','Admin Dashboard')
 @section('content')
-<div class="row row-cols-1 row-cols-md-3 g-4">
+{{-- <div class="row row-cols-1 row-cols-md-3 g-4">
     <div class="col-lg-7 col-md-12">
         <div class="card widget h-100">
             <div class="card-header d-flex">
@@ -633,5 +633,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 @endsection
