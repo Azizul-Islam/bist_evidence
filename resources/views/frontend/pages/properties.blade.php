@@ -314,13 +314,40 @@
                                             <h3 class="primary-color price">
                                                 <span>{{ number_format($property->price,2) }}</span> 
                                             </h3> 
-                                            <div class="row start-xs middle-xs ratings" title="29">      
-                                                <i class="material-icons mat-icon-sm">star</i>
-                                                <i class="material-icons mat-icon-sm">star</i>
-                                                <i class="material-icons mat-icon-sm">star</i>
-                                                <i class="material-icons mat-icon-sm">star</i>
-                                                <i class="material-icons mat-icon-sm">star</i>
-                                            </div>
+                                            @php
+                                            $ratings = App\Models\Review::where('property_id',$property->id)->get();
+                                            $ratingValue = [];
+                                            foreach($ratings as $aRating) {
+                                                $ratingValue[] = $aRating->rating;
+                                            }
+                                            $ratingAvarage = null;
+                                            if(count($ratings) != 0 && $ratingValue != null){
+                                                $ratingAvarage = ceil(collect($ratingValue)->sum() / $ratings->count());
+                                            }
+                                        @endphp
+                                        <div class="row start-xs middle-xs ratings" title="29">      
+                                            @if($ratingAvarage == 1)     
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            @elseif($ratingAvarage == 2)
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            @elseif($ratingAvarage == 3)
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            @elseif($ratingAvarage == 4)
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            @elseif($ratingAvarage == 5)
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            <i class="material-icons mat-icon-sm">star</i>
+                                            @endif
+                                        </div>
                                         </div>
                                         <div class="d-none d-md-flex d-lg-flex d-xl-flex">
                                             <div class="description mt-3"> 
@@ -340,7 +367,7 @@
                                             <i class="material-icons text-muted">date_range</i>
                                             <span class="mx-2">{{ date('d M , Y',strtotime($property->year_built)) }}</span>
                                         </p> 
-                                        <a href="javascript:void(0);" class="mdc-button mdc-button--outlined">
+                                        <a href="{{ route('property.details',$property->slug) }}" class="mdc-button mdc-button--outlined">
                                             <span class="mdc-button__ripple"></span>
                                             <span class="mdc-button__label">Details</span> 
                                         </a>  

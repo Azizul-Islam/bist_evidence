@@ -39,4 +39,14 @@ class DefaultController extends Controller
         $frontendProperties = FrontendProperty::latest()->get();
         return view('admin.properties.frontend-property',compact('frontendProperties'));
     }
+
+    public function frontendPropertyStatys(Request $request, FrontendProperty $frontendProperty)
+    {
+        // dd($frontendProperty);
+        $frontendProperty->update([
+            'status' => $request->status,
+        ]);
+
+        return back()->with('success','Status updated success');
+    }
 }

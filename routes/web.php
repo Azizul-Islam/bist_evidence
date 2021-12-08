@@ -29,6 +29,7 @@ Route::get('/add-your-property',[FrontendController::class,'addProperty'])->name
 Route::post('add-property',[FrontendController::class,'addPropertyStore'])->name('add-property');
 Route::post('add-to-favorite',[FavoriteController::class,'addToFavorite'])->name('add-to-favorite');
 Route::post('customer-response',[FrontendController::class,'customerResponse'])->name('customer-response.store');
+Route::post('review/store',[FrontendController::class,'reviewStore'])->name('review.store');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

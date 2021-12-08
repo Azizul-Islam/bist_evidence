@@ -85,10 +85,10 @@
                 <ul>
                    
                     <li>
-                        <a {{ \Request::is('admin/properties') ? 'active' : '' }} href="{{ route('admin.properties.index') }}">Property List</a>
+                        <a class="{{ \Request::is('admin/properties') ? 'active' : '' }}" href="{{ route('admin.properties.index') }}">Property List</a>
                     </li>
                     <li>
-                        <a {{ \Request::is('admin/properties/create') ? 'active' : '' }} href="{{ route('admin.properties.create') }}">Add Property</a>
+                        <a class="{{ \Request::is('admin/properties/create') ? 'active' : '' }}" href="{{ route('admin.properties.create') }}">Add Property</a>
                     </li>
                     
                 </ul>
@@ -143,7 +143,7 @@
                     <span class="nav-link-icon">
                         <i class="bi bi-distribute-vertical"></i>
                     </span>
-                    <span>Service</span>
+                    <span>Service & Mission</span>
                 </a>
             </li>
             <li>

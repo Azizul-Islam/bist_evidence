@@ -153,7 +153,7 @@
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <select name="contract" required class="form-control" id="">
                                         <option value="">Select Contract *</option>
-                                        <option value="pending" {{ $property->contract == 'pending' ? 'selected' : '' }}>Pending</option>
+                                        {{-- <option value="pending" {{ $property->contract == 'pending' ? 'selected' : '' }}>Pending</option> --}}
                                         <option value="hot offer" {{ $property->contract == 'hot offer' ? 'selected' : '' }}>Hot Offer</option>
                                         <option value="open house" {{ $property->contract == 'open house' ? 'selected' : '' }}>Open House</option>
                                         <option value="no fees" {{ $property->contract == 'no fees' ? 'selected' : '' }}>No Fees</option>

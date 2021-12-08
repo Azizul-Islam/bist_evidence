@@ -39,10 +39,10 @@
                     <th>Phone</th>
                     <th>Category</th>
                     <th>Area</th>
-                    <th>Sub Area</th>
                     <th>Purpose</th>
-                    <th class="text-end">Status</th>
-                    {{-- <th class="text-end">Actions</th> --}}
+                    <th>Status</th>
+                    <th>Created Date</th>
+                    <th class="text-end">Actions</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -57,23 +57,29 @@
                     <td>{{ $item->name ?? '' }}</td>
                     <td>{{ $item->phone }}</td>
                     <td>{{ $item->category->name ?? '' }}</td>
-                    <td>{{ $item->area->name ?? '' }}</td>
-                    <td>{{ $item->sub_area->name ?? '' }}</td>
-                    <td>{{ ucfirst($item->status) }}</td>
+                    <td>{{ $item->area->name ?? '' }}  {{ $item->sub_area->name ?? '' }}</td>
                     <td><span class="badge {{ $item->purpose == 'sell' ? 'bg-primary' : 'bg-info' }}">{{ ucfirst($item->purpose) }}</span></td>
+                    <td>{{ ucfirst($item->status) }}</td>
+                    <td>{{ date('d M Y',strtotime($item->created_at)) }}</td>
                    
-                    {{-- <td class="text-end">
+                    <td class="text-end">
                         @if($item->status == 'pending')
                         <div class="btn-group">
-                            <form action="{{ route('admin.property.approve',$item) }}" method="POST" onsubmit="return confirm('Are you sure?')">
+                        <form action="{{ route('admin.frontend-property.status',$item) }}" method="POST">
                             @csrf
-                            <input type="hidden" name="approve" value="approve" id="">
                             @method('PUT')
+                            <input type="hidden" name="status" value="approve" id="">
                                 <button class="delBtn btn btn-sm btn-outline-success rounded" title="Approve"><i class="bi bi-check2"></i></button>
-                            </form>
+                        </form>
+                        <form action="{{ route('admin.frontend-property.status',$item) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="status" value="cancel" id="">
+                                <button class="delBtn btn btn-sm btn-outline-danger rounded" title="Cancel"><i class="bi bi-x"></i></button>
+                        </form>
                         </div>
                         @endif
-                    </td> --}}
+                    </td>
                 </tr>
                 @empty
                 <tr>

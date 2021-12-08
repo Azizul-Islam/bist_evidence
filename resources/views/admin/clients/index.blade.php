@@ -59,7 +59,7 @@
                             <td>
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                     <a href="{{ route('admin.clients.edit',$item->id) }}" class="btn btn-sm btn-info rounded"><i class="bi bi-pencil small"></i></a>
-                                    <form id="delete-client-form" action="{{ route('admin.clients.destroy',$item->id) }}" method="POST">
+                                    <form id="delete-client-form" action="{{ route('admin.clients.destroy',$item->id) }}" onsubmit="return confirm('Are you sure?')" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button id="deleteClient" type="submit" data-id="{{ $item->id }}" class="delBtn btn btn-sm btn-primary rounded"><i class="bi bi-trash"></i></button>
@@ -121,47 +121,47 @@
     </script>
     <script>
         //delete service
-        $(document).on('click','#deleteClient',function(e){
-            e.preventDefault();
-            let id = $(this).data('id');
-            let url = "{{ route('admin.clients.destroy',":id") }}";
-            url = url.replace(':id',id);
+        // $(document).on('click','#deleteClient',function(e){
+        //     e.preventDefault();
+        //     let id = $(this).data('id');
+        //     let url = "{{ route('admin.clients.destroy',":id") }}";
+        //     url = url.replace(':id',id);
 
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                if (result.isConfirmed) {
-                    $.ajax({
-                    url: url,
-                    method: "DELETE",
-                    dataType: 'JSON',
-                    data: {
-                        _token: "{{ csrf_token() }}",
-                        id: id,
-                    },
-                    success: function (data) {
-                        if(data.status) {
-                            location.reload();
-                            Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                            )
+        //     Swal.fire({
+        //         title: 'Are you sure?',
+        //         text: "You won't be able to revert this!",
+        //         icon: 'warning',
+        //         showCancelButton: true,
+        //         confirmButtonColor: '#3085d6',
+        //         cancelButtonColor: '#d33',
+        //         confirmButtonText: 'Yes, delete it!'
+        //         }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             $.ajax({
+        //             url: url,
+        //             method: "DELETE",
+        //             dataType: 'JSON',
+        //             data: {
+        //                 _token: "{{ csrf_token() }}",
+        //                 id: id,
+        //             },
+        //             success: function (data) {
+        //                 if(data.status) {
+        //                     location.reload();
+        //                     Swal.fire(
+        //                     'Deleted!',
+        //                     'Your file has been deleted.',
+        //                     'success'
+        //                     )
                             
-                        }
-                    },         
-                });
+        //                 }
+        //             },         
+        //         });
                    
-                }
-                });
+        //         }
+        //         });
             
-        });
+        // });
     </script>
     
     

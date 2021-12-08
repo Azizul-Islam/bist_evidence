@@ -120,10 +120,10 @@
                         <div class="mdc-chip bg-warn">
                             <div class="mdc-chip__ripple"></div>
                             <span>
-                                <span role="button" tabindex="0" class="mdc-chip__text uppercase">32 found</span>
+                                <span role="button" tabindex="0" class="mdc-chip__text uppercase">{{ count($properties) }} found</span>
                             </span> 
                         </div>
-                        <div class="mdc-chip">
+                        {{-- <div class="mdc-chip">
                             <div class="mdc-chip__ripple"></div>
                             <span>
                                 <span role="button" tabindex="0" class="mdc-chip__text">House</span>
@@ -158,7 +158,7 @@
                             <span>
                                 <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1" role="button">cancel</i>
                             </span>
-                        </div>
+                        </div> --}}
                     </div> 
                 </div> 
                 {{-- <div class="row p-2 w-100">  
@@ -303,12 +303,39 @@
                                     <h3 class="primary-color price">
                                         <span>{{ number_format($hotOfferProperty->price,2) }}</span> 
                                     </h3> 
+                                    @php
+                                        $ratings = App\Models\Review::where('property_id',$hotOfferProperty->id)->get();
+                                        $ratingValue = [];
+                                        foreach($ratings as $aRating) {
+                                            $ratingValue[] = $aRating->rating;
+                                        }
+                                        $ratingAvarage = null;
+                                        if(count($ratings) != 0 && $ratingValue != null){
+                                            $ratingAvarage = ceil(collect($ratingValue)->sum() / $ratings->count());
+                                        }
+                                    @endphp
                                     <div class="row start-xs middle-xs ratings" title="29">      
+                                        @if($ratingAvarage == 1)     
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        @elseif($ratingAvarage == 2)
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        @elseif($ratingAvarage == 3)
                                         <i class="material-icons mat-icon-sm">star</i>
                                         <i class="material-icons mat-icon-sm">star</i>
                                         <i class="material-icons mat-icon-sm">star</i>
-                                        <i class="material-icons mat-icon-sm">star_half</i>
-                                        <i class="material-icons mat-icon-sm">star_border</i>
+                                        @elseif($ratingAvarage == 4)
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        @elseif($ratingAvarage == 5)
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        <i class="material-icons mat-icon-sm">star</i>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="d-none d-md-flex d-lg-flex d-xl-flex">
@@ -374,6 +401,14 @@
     {{-- clients section start --}}
     @include('frontend.pages.client')
     {{-- clients section end --}}
+
+    {{-- sister-concern section start --}}
+    @include('frontend.pages.sister-concern')
+    {{-- sister-concern section end --}}
+
+    {{-- media-partner section start --}}
+    @include('frontend.pages.media-partner')
+    {{-- media-partner section end --}}
  
 @endsection
 

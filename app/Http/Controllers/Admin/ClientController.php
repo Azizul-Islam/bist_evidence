@@ -138,6 +138,7 @@ class ClientController extends Controller
             unlink($path);
         }
         $client->delete();
-        return response()->json(['status'=>1,'msg'=>'Client deleted success']);
+        return back()->with('info','Deleted success');
+        // return response()->json(['status'=>1,'msg'=>'Client deleted success']);
     }
 }

@@ -59,11 +59,14 @@
 });
 </script>
 
-//remove favorite
 <script>
+    //remove favorite
     $(document).on('click','.delFavorite',function(e){
         e.preventDefault();
-        // return confirm('Are you sure?');
+        var c = confirm("Are you sure you want to permanently remove this record ?");
+        if(! c){
+            return false;
+        }
         let id = $(this).data('id');
         let url = $(this).data('url');
         $.ajax({

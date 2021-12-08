@@ -53,6 +53,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //frontend property
         Route::get('frontend-property',[DefaultController::class,'frontendProperty'])->name('frontend-property');
+        Route::put('frontend-property/status{frontendProperty}',[DefaultController::class,'frontendPropertyStatys'])->name('frontend-property.status');
         //service Route
         Route::resource('service',ServiceController::class);
         Route::get('allservice',[ServiceController::class,'allService'])->name('service.allservice');

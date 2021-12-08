@@ -149,7 +149,7 @@
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <select name="contract" required class="form-control" id="">
                                         <option value="">Select Contract *</option>
-                                        <option value="pending">Pending</option>
+                                        {{-- <option value="pending">Pending</option> --}}
                                         <option value="hot offer">Hot Offer</option>
                                         <option value="open house">Open House</option>
                                         <option value="no fees">No Fees</option>

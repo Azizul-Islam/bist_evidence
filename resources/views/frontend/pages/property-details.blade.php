@@ -6,6 +6,45 @@
             color: red;
         }
     </style>
+    <style>
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center
+        }
+
+        .rating>input {
+            display: none
+        }
+
+        .rating>label {
+            position: relative;
+            width: 1em;
+            font-size: 25px;
+            color: #FFD600;
+            cursor: pointer
+        }
+
+        .rating>label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0
+        }
+
+        .rating>label:hover:before,
+        .rating>label:hover~label:before {
+            opacity: 1 !important
+        }
+
+        .rating>input:checked~label:before {
+            opacity: 1
+        }
+
+        .rating:hover>input:checked~label:before {
+            opacity: 0.4
+        }
+
+    </style>
 @endsection
 @section('content')
     <div class="px-3">  
@@ -24,12 +63,28 @@
                             <h2 class="primary-color price">
                                 <span>{{ number_format($property->price,2) }}</span> 
                             </h2> 
-                            <div class="row start-xs middle-xs ratings" title="29">      
+                            <div class="row start-xs middle-xs ratings" title="29"> 
+                                @if($ratingAvarage == 1)     
+                                <i class="material-icons mat-icon-sm">star</i>
+                                @elseif($ratingAvarage == 2)
+                                <i class="material-icons mat-icon-sm">star</i>
+                                <i class="material-icons mat-icon-sm">star</i>
+                                @elseif($ratingAvarage == 3)
+                                <i class="material-icons mat-icon-sm">star</i>
+                                <i class="material-icons mat-icon-sm">star</i>
+                                <i class="material-icons mat-icon-sm">star</i>
+                                @elseif($ratingAvarage == 4)
                                 <i class="material-icons mat-icon-sm">star</i>
                                 <i class="material-icons mat-icon-sm">star</i>
                                 <i class="material-icons mat-icon-sm">star</i>
                                 <i class="material-icons mat-icon-sm">star</i>
-                                <i class="material-icons mat-icon-sm">star_half</i>
+                                @elseif($ratingAvarage == 5)
+                                <i class="material-icons mat-icon-sm">star</i>
+                                <i class="material-icons mat-icon-sm">star</i>
+                                <i class="material-icons mat-icon-sm">star</i>
+                                <i class="material-icons mat-icon-sm">star</i>
+                                <i class="material-icons mat-icon-sm">star</i>
+                                @endif
                             </div>  
                         </div>
                         <button id="page-sidenav-toggle" class="mdc-icon-button material-icons text-muted d-md-none d-lg-none d-xl-none"> 
@@ -91,7 +146,7 @@
                         <div class="row details">
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Property Type:</span>
-                                <span>{{ ucfirst($property->category->name ?? '') }} | {{ ucfirst($property->sub_category->name) ?? '' }}</span>
+                                <span>{{ ucfirst($property->category->name ?? '') }} | {{ ucfirst($property->sub_category->name ?? '')  }}</span>
                             </div> 
                             <div class="row col-xs-12 col-sm-6 item">
                                 <span>Property Status:</span>
@@ -207,74 +262,40 @@
                         <span>Views:<span class="fw-500 mx-2">322</span></span> 
                     </div>  --}}
                     
-
-                    {{-- <div class="mdc-card p-5 mt-5"> 
+                    @if(auth()->guard('agent')->check())
+                    <div class="mdc-card p-5 mt-5"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Leave a Reply</h2>                
                         <div class="row pb-3 p-relative">
                             <div class="divider"></div>
                         </div>  
-                        <div class="reviews mt-3">
-                            <div class="review-item">
-                                <img src="{{ asset('frontend/assets/images/avatars/avatar-1.png') }}" alt="avatar-1" class="author-img">
-                                <div class="review-content">
-                                    <p class="d-flex mb-0">
-                                        <span class="author-name">Bruno Vespa</span> 
-                                        <i class="material-icons text-muted px-1" title="Dissatisfied">sentiment_dissatisfied</i>
-                                    </p>
-                                    <p class="text-muted fw-500 mb-2"><small>13 January, 2018 at 7:09</small></p>
-                                    <p class="text">Integer id eros et mi fringilla imperdiet. In dictum turpis eget magna viverra condimentum. Ut malesuada interdum ultrices. Proin tristique sem pellentesque, posuere dui in, maximus magna. Aenean vehicula, tortor gravida elementum tincidunt, justo lorem vestibulum ex, eget egestas arcu tellus in magna.</p>
-                                </div> 
-                            </div> 
-                            <div class="review-item">
-                                <img src="{{ asset('frontend/assets/images/avatars/avatar-2.png') }}" alt="avatar-2" class="author-img">
-                                <div class="review-content">
-                                    <p class="d-flex mb-0">
-                                        <span class="author-name">Julia Aniston</span> 
-                                        <i class="material-icons text-muted px-1" title="Very Satisfied">sentiment_very_satisfied</i>
-                                    </p>
-                                    <p class="text-muted fw-500 mb-2"><small>04 February, 2018 at 10:22</small></p>
-                                    <p class="text">Nulla accumsan, lacus sed suscipit rutrum, turpis augue accumsan metus, in accumsan urna mi vehicula lorem. Pellentesque semper nibh vitae augue placerat finibus. Nulla sed porttitor nunc, quis tristique sem. Quisque in varius nisl. Integer turpis lorem, ultricies sed sem nec, commodo molestie arcu. Nulla finibus ex tortor, et suscipit magna semper consectetur. Cras sit amet metus dui. Maecenas eget dui at ex varius malesuada vel non felis.</p>
-                                </div> 
-                            </div> 
-                            <div class="review-item">
-                                <img src="{{ asset('frontend/assets/images/avatars/avatar-3.png') }}" alt="avatar-3" class="author-img">
-                                <div class="review-content">
-                                    <p class="d-flex mb-0">
-                                        <span class="author-name">Andy Warhol</span> 
-                                        <i class="material-icons text-muted px-1" title="Neutral">sentiment_neutral</i>
-                                    </p>
-                                    <p class="text-muted fw-500 mb-2"><small>14 February, 2018 at 11:10</small></p>
-                                    <p class="text">Pellentesque hendrerit vel turpis aliquam placerat. Suspendisse ullamcorper congue feugiat. Etiam gravida metus ac massa posuere venenatis. Pellentesque vehicula lobortis dolor, ac pretium dolor maximus quis. Fusce vitae iaculis mauris, quis posuere ex. Mauris vitae convallis nibh. Etiam eget enim at orci interdum maximus nec in ante.</p>
-                                </div> 
-                            </div> 
+                        @if (count($property->reviews) > 0 )
+                        <div class="reviews mt-3" id="review_data">
+                           @include('frontend.partials._review_data')
                         </div>  
+                        @endif
                         <h3 class="uppercase mt-3">Leave your review</h3>
                         <div class="row pb-2 p-relative">
                             <div class="divider"></div>
                         </div> 
                         <p class="mt-3 text-muted">Your email address will not be published. Required fields are marked *</p>
+                        <form action="javascript:void(0);" method="POST" id="review-form" class="row comment-form"> 
+                            @csrf
+                            <input type="hidden" name="user_id" value="{{ auth()->guard('agent')->id() }}">
+                            <input type="hidden" name="property_id" value="{{ $property->id }}">
                         <h3 class="row flex-nowrap middle-xs my-2 text-muted">
                             <span>Your Rating:</span> 
-                            <button class="mdc-icon-button d-flex middle-xs center-xs p-0" title="Very Dissatisfied"> 
-                                <span class="material-icons mat-icon-lg">sentiment_very_dissatisfied</span>
-                            </button>  
-                            <button class="mdc-icon-button d-flex middle-xs center-xs p-0" title="Dissatisfied"> 
-                                <span class="material-icons mat-icon-lg">sentiment_dissatisfied</span>
-                            </button>  
-                            <button class="mdc-icon-button d-flex middle-xs center-xs p-0" title="Neutral"> 
-                                <span class="material-icons mat-icon-lg">sentiment_neutral</span>
-                            </button>  
-                            <button class="mdc-icon-button d-flex middle-xs center-xs p-0" title="Satisfied"> 
-                                <span class="material-icons mat-icon-lg">sentiment_satisfied</span>
-                            </button>  
-                            <button class="mdc-icon-button d-flex middle-xs center-xs p-0" title="Very Satisfied"> 
-                                <span class="material-icons mat-icon-lg">sentiment_very_satisfied</span>
-                            </button>  
+                            <div class="rating"> 
+                                <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label> 
+                                <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label> 
+                                <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label> 
+                                <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                                <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                            </div>
                         </h3> 
-                        <form action="javascript:void(0);" class="row comment-form"> 
+                        
                             <div class="col-xs-12">
                                 <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea w-100 custom-field my-2">
-                                    <textarea class="mdc-text-field__input" rows="5"></textarea>
+                                    <textarea class="mdc-text-field__input" rows="5" name="comment"></textarea>
                                     <div class="mdc-notched-outline mdc-notched-outline--upgraded">
                                         <div class="mdc-notched-outline__leading"></div>
                                         <div class="mdc-notched-outline__notch">
@@ -283,8 +304,9 @@
                                         <div class="mdc-notched-outline__trailing"></div>
                                     </div>
                                 </div> 
+                                <span class="text-danger error-text comment_error"></span>
                             </div>
-                            <div class="col-xs-12 col-sm-6">
+                            {{-- <div class="col-xs-12 col-sm-6">
                                 <div class="mdc-text-field mdc-text-field--outlined w-100 custom-field my-2">
                                     <input class="mdc-text-field__input">
                                     <div class="mdc-notched-outline">
@@ -307,15 +329,25 @@
                                         <div class="mdc-notched-outline__trailing"></div>
                                     </div>
                                 </div> 
-                            </div> 
+                            </div>  --}}
                             <div class="col-xs-12 text-center mt-3">
-                                <button class="mdc-button mdc-button--raised" type="button">
+                                <button class="mdc-button mdc-button--raised" type="submit">
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Submit review</span> 
                                 </button> 
                             </div> 
                         </form>   
-                    </div>  --}}
+                    </div> 
+                    @else 
+                    <div class="mdc-card p-5 mt-5"> 
+                    <div class="col-xs-12 text-center mt-3">
+                        <a href="{{ route('agent.login') }}" class="mdc-button mdc-button--raised" type="button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Login To Review</span> 
+                        </a> 
+                    </div>
+                </div> 
+                    @endif
                 </div>  
                 <aside class="mdc-drawer mdc-drawer--modal page-sidenav">
                     <a href="#" class="h-0"></a>
@@ -532,12 +564,39 @@
                                                 <h3 class="primary-color price">
                                                     <span>{{ number_format($property->price,2) }}</span> 
                                                 </h3> 
+                                                @php
+                                                    $ratings = App\Models\Review::where('property_id',$property->id)->get();
+                                                    $ratingValue = [];
+                                                    foreach($ratings as $aRating) {
+                                                        $ratingValue[] = $aRating->rating;
+                                                    }
+                                                    $ratingAvarage = null;
+                                                    if(count($ratings) != 0 && $ratingValue != null){
+                                                        $ratingAvarage = ceil(collect($ratingValue)->sum() / $ratings->count());
+                                                    }
+                                                @endphp
                                                 <div class="row start-xs middle-xs ratings" title="29">      
+                                                    @if($ratingAvarage == 1)     
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    @elseif($ratingAvarage == 2)
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    @elseif($ratingAvarage == 3)
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    @elseif($ratingAvarage == 4)
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    <i class="material-icons mat-icon-sm">star</i>
+                                                    @elseif($ratingAvarage == 5)
                                                     <i class="material-icons mat-icon-sm">star</i>
                                                     <i class="material-icons mat-icon-sm">star</i>
                                                     <i class="material-icons mat-icon-sm">star</i>
                                                     <i class="material-icons mat-icon-sm">star</i>
                                                     <i class="material-icons mat-icon-sm">star</i>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="d-none d-md-flex d-lg-flex d-xl-flex">
@@ -621,6 +680,31 @@
                     }
                     else {
                         $('#customer_submit')[0].reset();
+                        toastr.success(data.msg);
+                    }
+                },
+            });
+        });
+
+        $('#review-form').on('submit',function(e){
+            e.preventDefault();
+            $.ajax({
+                url: "{{ route('review.store') }}",
+                method: "POST",
+                dataType: 'JSON',
+                data: $('#review-form').serialize(),
+                beforeSend: function(){
+                    $(document).find('span.error-text').text();
+                },
+                success: function(data) {
+                    if(data.status == 0) {
+                        $.each(data.errors,function(prefix,val){
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }
+                    else {
+                        $('#review-form')[0].reset();
+                        location.reload();
                         toastr.success(data.msg);
                     }
                 },

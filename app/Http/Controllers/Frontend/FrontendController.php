@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\CustomerRespons;
 use App\Models\FrontendProperty;
 use App\Models\Property;
+use App\Models\Review;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,6 +46,15 @@ class FrontendController extends Controller
     public function propertyDetails($slug)
     {
         $property = Property::where('slug', $slug)->first();
+        $ratings = Review::where('property_id',$property->id)->get();
+        $ratingValue = [];
+        foreach($ratings as $aRating) {
+            $ratingValue[] = $aRating->rating;
+        }
+        $ratingAvarage = null;
+        if($ratingValue != null && count($ratings) != 0){
+            $ratingAvarage = ceil(collect($ratingValue)->sum() / $ratings->count());
+        }
         $featureProperties = Property::where(['status' => 'active', 'is_featured' => 1])->latest()->limit(3)->get();
         $relatedProperties = Property::where('id', '<>', $property->id)
             ->where('area_id', $property->area_id)
@@ -56,7 +66,7 @@ class FrontendController extends Controller
             ->latest()
             ->limit(8)
             ->get();
-        return view('frontend.pages.property-details', compact('property', 'featureProperties', 'relatedProperties'));
+        return view('frontend.pages.property-details', compact('property', 'featureProperties', 'relatedProperties','ratingAvarage'));
     }
 
     public function customerResponse(Request $request)
@@ -163,8 +173,25 @@ class FrontendController extends Controller
         if (!$data->passes()) {
             return response()->json(['status' => 0, 'errors' => $data->errors()->toArray()]);
         }
+        else{
+            FrontendProperty::create($request->all());
+            return response()->json(['status' => 1, 'msg' => 'Your response submited']);
+        }
+    }
 
-        FrontendProperty::create($request->all());
-        return response()->json(['status' => 1, 'msg' => 'Your response submited']);
+    public function reviewStore(Request $request)
+    {
+        $data = Validator::make($request->all(),[
+            'comment' => 'required|string',
+        ]);
+
+        if (!$data->passes()) {
+            return response()->json(['status' => 0, 'errors' => $data->errors()->toArray()]);
+        }
+        else{
+            Review::create($request->all()); 
+            return response()->json(['status' => 1, 'msg' => 'Your review submited']);
+        }
+
     }
 }

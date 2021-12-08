@@ -63,6 +63,7 @@ class PropertyController extends Controller
         } else {
             $data['is_featured'] = 0;
         }
+        $data['property_status'] = 'approve';
 
         $property = Property::create($data);
 

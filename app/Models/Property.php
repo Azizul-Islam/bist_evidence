@@ -80,4 +80,9 @@ class Property extends Model
     {
         return $this->belongsTo(Agent::class,'user_id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }

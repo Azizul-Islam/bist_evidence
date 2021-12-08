@@ -1,3 +1,4 @@
+@if(\App\Models\Client::where(['status'=>'active','type'=>'client'])->latest()->count() > 0)
 <div class="section mt-3">
     <div class="px-3">
         <div class="theme-container">
@@ -24,3 +25,4 @@
         </div>
     </div>   
 </div> 
+@endif

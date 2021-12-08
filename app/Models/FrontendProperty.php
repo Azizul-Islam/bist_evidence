@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class FrontendProperty extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','email','phone','area_id','sub_area_id','category_id','consumer','purpose'];
+    protected $fillable = ['name','email','phone','area_id','sub_area_id','category_id','consumer','purpose','status'];
 
     public function area()
     {
