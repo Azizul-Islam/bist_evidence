@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Area;
 use App\Models\Category;
+use App\Models\Contact;
 use App\Models\CustomerRespons;
+use App\Models\Faq;
 use App\Models\FrontendProperty;
+use App\Models\Page;
 use App\Models\Property;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -140,14 +143,16 @@ class FrontendController extends Controller
         return view('frontend.pages.properties', $data);
     }
 
-    public function terms()
+    public function page($slug)
     {
-        return view('frontend.pages.terms');
+        $page = Page::where('slug',$slug)->first();
+        return view('frontend.pages.dynamic_page',compact('page'));
     }
 
     public function faqs()
     {
-        return view('frontend.pages.faqs');
+        $faqs = Faq::latest()->get();
+        return view('frontend.pages.faqs',compact('faqs'));
     }
 
     public function addProperty()
@@ -193,5 +198,23 @@ class FrontendController extends Controller
             return response()->json(['status' => 1, 'msg' => 'Your review submited']);
         }
 
+    }
+
+    public function contactStore(Request $request)
+    {
+        $data = Validator::make($request->all(),[
+            'name' => 'required|string',
+            'email' => 'nullable|string|email',
+            'phone' => 'required|numeric',
+            'message' => 'required|string'
+        ]);
+
+        if(!$data->passes()) {
+            return response()->json(['status'=>0,'errors'=>$data->errors()->toArray()]);
+        }
+        else {
+            Contact::create($request->all());
+            return response()->json(['status'=>1,'msg'=>'Your message send success']);
+        }
     }
 }

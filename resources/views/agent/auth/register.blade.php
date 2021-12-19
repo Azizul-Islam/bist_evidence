@@ -89,7 +89,7 @@
                     </div>
                     
                     <div class="text-center mt-4"> 
-                        <button class="mdc-button mdc-button--raised bg-accent" type="submit">
+                        <button class="mdc-button mdc-button--raised bg-accent" id="registerBtn" type="submit">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Create an Account</span> 
                         </button>
@@ -114,6 +114,8 @@
     <script>
         $('#agent_form').on('submit',function(e){
             e.preventDefault();
+            $('#registerBtn').text('Processing...');
+            $('#registerBtn').attr('disabled',true);
             $.ajax({
                 url: "{{ route('agent.register') }}",
                 method: 'POST',
@@ -124,11 +126,15 @@
                 },
                 success: function(data) {
                     if(data.status == 0) {
+                        $('#registerBtn').text('Submit');
+                        $('#registerBtn').attr('disabled',false);
                         $.each(data.errors,function(prefix,val){
                             $('span.'+prefix+'_error').text(val[0]);
                         });
                     }
                     else {
+                        $('#registerBtn').text('Submit');
+                        $('#registerBtn').attr('disabled',false);
                         $('#agent_form')[0].reset();
                         toastr.success(data.msg);
                     }

@@ -21,6 +21,8 @@ Route::post('getarea/{area_id}/sub',[FrontendController::class,'getChildAreaByPa
 Route::get('property/details/{slug}',[FrontendController::class,'propertyDetails'])->name('property.details');
 Route::get('property',[FrontendController::class,'property'])->name('property');
 Route::get('/contact',[FrontendController::class,'contact'])->name('contact');
+Route::post('/contact',[FrontendController::class,'contactStore'])->name('contact');
+Route::get('page/{slug}',[FrontendController::class,'page'])->name('page');
 Route::get('/terms',[FrontendController::class,'terms'])->name('terms');
 Route::get('/faqs',[FrontendController::class,'faqs'])->name('faqs');
 Route::get('/about',[FrontendController::class,'about'])->name('about');

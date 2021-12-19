@@ -4,10 +4,14 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\CustomerResponseController;
 use App\Http\Controllers\Admin\DefaultController;
+use App\Http\Controllers\Admin\FaqController;
+use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TestimonialController;
 use Faker\DefaultGenerator;
 use Illuminate\Support\Facades\Route;
@@ -64,5 +68,19 @@ Route::prefix('admin')->name('admin.')->group(function(){
         //client route
         Route::resource('clients', ClientController::class);
         Route::post('client/status',[ClientController::class,'clientStatus'])->name('client.status');
+
+        //faqs route 
+        Route::resource('faqs',FaqController::class);
+
+        //settings route
+        Route::get('settings',[SettingController::class,'index'])->name('settings.index');
+        Route::post('settings/store',[SettingController::class,'store'])->name('settings.store');
+        Route::post('settings/social/store',[SettingController::class,'socialStore'])->name('settings.social.store');
+        //page route
+        Route::resource('pages',PageController::class);
+        Route::post('page/status',[PageController::class,'pageStatus'])->name('page.status');
+
+        //contact
+        Route::get('contact',[ContactController::class,'index'])->name('contact');
     });
 });

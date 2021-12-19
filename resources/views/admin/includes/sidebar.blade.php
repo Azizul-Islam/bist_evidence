@@ -154,6 +154,31 @@
                     <span>Testimonial</span>
                 </a>
             </li>
+            
+            <li>
+                <a class="{{ \Request::is('admin/clients') || \Request::is('admin/clients/create') ? 'active' : '' }}" href="{{ route('admin.clients.index') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-person-badge"></i>
+                    </span>
+                    <span>Clients</span>
+                </a>
+            </li>
+            <li>
+                <a class="{{ \Request::is('admin/faqs') || \Request::is('admin/faqs/create') ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-person-badge"></i>
+                    </span>
+                    <span>Faqs</span>
+                </a>
+            </li>
+            <li>
+                <a class="{{ \Request::is('admin/pages') || \Request::is('admin/pages/create') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </span>
+                    <span>Pages</span>
+                </a>
+            </li>
             {{-- <li>
                 <a href="#">
                     <span class="nav-link-icon">
@@ -165,21 +190,9 @@
                     <li><a class="{{ \Request::is('admin/users') ? 'active' : '' }}" href="{{ route('users.index') }}">Admin User List</a></li>
                     <li><a class="{{ \Request::is('admin/users/create') ? 'active' : '' }}" href="{{ route('users.create') }}">Admin User Create</a></li>
                 </ul>
-            </li>
+            </li> --}}
             <li>
-                <a href="#">
-                    <span class="nav-link-icon">
-                        <i class="bi bi-people"></i>
-                    </span>
-                    <span>Seller</span>
-                </a>
-                <ul>
-                    <li><a class="{{ \Request::is('admin/sellers') ? 'active' : '' }}" href="{{ route('sellers.index') }}">Seller List</a></li>
-                    <li><a class="{{ \Request::is('admin/sellers/create') ? 'active' : '' }}" href="{{ route('sellers.create') }}">Seller Create</a></li>
-                </ul>
-            </li>
-            <li>
-                <a class="{{ \Request::is('admin/settings') ? 'active' : '' }}"  href="{{ route('settings.index') }}">
+                <a class="{{ \Request::is('admin/settings') ? 'active' : '' }}"  href="{{ route('admin.settings.index') }}">
                     <span class="nav-link-icon">
                         <i class="bi bi-gear"></i>
                     </span>
@@ -187,27 +200,19 @@
                 </a>
             </li>
             <li>
+                <a class="{{ \Request::is('admin/contact') ? 'active' : '' }}"  href="{{ route('admin.contact') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-eject"></i>
+                    </span>
+                    <span>Contact</span>
+                </a>
+            </li>
+            {{-- <li>
                 <a class="{{ \Request::is('admin/banners') || \Request::is('admin/banners/create') ? 'active' : '' }}" href="{{ route('banners.index') }}">
                     <span class="nav-link-icon">
                         <i class="bi bi-wallet2"></i>
                     </span>
                     <span>Banners</span>
-                </a>
-            </li> --}}
-            <li>
-                <a class="{{ \Request::is('admin/clients') || \Request::is('admin/clients/create') ? 'active' : '' }}" href="{{ route('admin.clients.index') }}">
-                    <span class="nav-link-icon">
-                        <i class="bi bi-person-badge"></i>
-                    </span>
-                    <span>Clients</span>
-                </a>
-            </li>
-            {{-- <li>
-                <a class="{{ \Request::is('admin/pages') || \Request::is('admin/pages/create') ? 'active' : '' }}" href="{{ route('pages.index') }}">
-                    <span class="nav-link-icon">
-                        <i class="bi bi-wallet2"></i>
-                    </span>
-                    <span>Pages</span>
                 </a>
             </li> --}}
             
