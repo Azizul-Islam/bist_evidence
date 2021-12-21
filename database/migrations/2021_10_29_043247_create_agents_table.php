@@ -21,6 +21,7 @@ class CreateAgentsTable extends Migration
             $table->string('photo')->nullable();
             $table->string('address')->nullable();
             $table->string('organization')->nullable();
+            $table->mediumText('bio')->nullable();
             $table->string('facebook')->nullable();
             $table->string('twitter')->nullable();
             $table->string('linkedin')->nullable();

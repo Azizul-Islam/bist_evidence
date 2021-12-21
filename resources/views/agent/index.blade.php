@@ -21,7 +21,7 @@
                 <div class="mdc-card p-3 row mb-3">
                     <div class="col-xs-12 col-md-6 px-3">
                         <h2 class="text-muted text-center fw-600 mb-3">Account details</h2>
-                        <form action="javascript:void(0);" method="POST" id="update_form">
+                        <form action="javascript:void(0);" method="POST" id="update_form" enctype="multipart/form-data">
                             @csrf  
                             <div class="mdc-text-field mdc-text-field--outlined w-100 custom-field my-2">
                                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
@@ -63,7 +63,7 @@
                                 <div class="mdc-notched-outline">
                                     <div class="mdc-notched-outline__leading"></div>
                                     <div class="mdc-notched-outline__notch">
-                                        <label class="mdc-floating-label">Organization</label>
+                                        <label class="mdc-floating-label">Photo</label>
                                     </div>
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
@@ -84,6 +84,17 @@
                                     <div class="mdc-notched-outline__leading"></div>
                                     <div class="mdc-notched-outline__notch">
                                         <label class="mdc-floating-label">Organization</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div>
+                        
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea w-100 custom-field my-2">
+                                <textarea class="mdc-text-field__input" rows="5" name="bio">{{ old('bio',$user->bio) }}</textarea>
+                                <div class="mdc-notched-outline mdc-notched-outline--upgraded">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch" style="">
+                                        <label for="feedback-message" class="mdc-floating-label" style="">Your bio</label>
                                     </div>
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
@@ -139,7 +150,7 @@
                                 </div>
                             </div> 
                             <div class="row around-xs middle-xs p-2 mb-3"> 
-                                <button class="mdc-button mdc-button--raised" type="submit">
+                                <button class="mdc-button mdc-button--raised" id="update_profile" type="submit">
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Update profile</span> 
                                 </button> 
@@ -184,7 +195,7 @@
                                 </div>
                             </div>  
                             <div class="row around-xs middle-xs p-2 mb-3"> 
-                                <button class="mdc-button mdc-button--raised" type="submit">
+                                <button class="mdc-button mdc-button--raised" id="change_pass_btn" type="submit">
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Change password</span> 
                                 </button> 
@@ -202,6 +213,9 @@
     <script>
         $('#update_form').on('submit',function(e){
             e.preventDefault();
+            $('#update_profile').text('Processing...');
+            $('#update_profile').attr('disabled',true);
+            
             $.ajax({
                 url: "{{ route('agent.profile.update') }}",
                 method: "PUT",
@@ -212,10 +226,14 @@
                 },
                 success: function(data) {
                     if(data.status) {
+                        $('#update_profile').text('Update profile');
+                        $('#update_profile').attr('disabled',false);
                         toastr.success(data.msg);
                         // location.reload();
                     }
                     else{
+                        $('#update_profile').text('Update profile');
+                        $('#update_profile').attr('disabled',false);
                         toastr.error('Something went wrong!');
                     }
                 },
@@ -224,6 +242,8 @@
 
         $('#update_password').on('submit',function(e){
             e.preventDefault();
+            $('#change_pass_btn').text('Processing...');
+            $('#change_pass_btn').attr('disabled',true);
             $.ajax({
                 url: "{{ route('agent.password.update') }}",
                 method: 'PUT',
@@ -235,11 +255,15 @@
                 success: function(data){
                     
                     if(data.status == 0) {
+                        $('#change_pass_btn').text('Change password');
+                        $('#change_pass_btn').attr('disabled',false);
                         $.each(data.errors,function(prefix,val){
                             $('span.'+prefix+'_error').text(val[0]);
                         });
                     }
                     else{
+                        $('#change_pass_btn').text('Change password');
+                        $('#change_pass_btn').attr('disabled',false);
                         $('#update_password')[0].reset();
                         toastr.success(data.msg);
                     }

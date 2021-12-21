@@ -1345,18 +1345,12 @@ main.content-offset-to-top .main-content-header{
   opacity: 0.15; 
 } 
 .section.testimonials:before{ 
-  background-image: url('frontend/assets/images/props/flat-1/3-big.jpg'); 
+  background-image: url("{{ asset('frontend/assets/images/props/flat-1/3-big.jpg') }}"); 
 }
 .section.agents:before{ 
-  background-image: url('frontend/assets/images/props/office-2/4-big.jpg'); 
+  background-image: url("{{ asset('frontend/assets/images/props/office-2/4-big.jpg') }}"); 
 }
-.section.default:before{ 
-  background-image: url('frontend/assets/images/others/default-bg.png');
-  background-repeat: repeat;
-  background-size: 350px;
-  background-position: center;
-  opacity: 1;
-}
+
 .section .section-title{
   text-transform: uppercase;
   text-align: center;

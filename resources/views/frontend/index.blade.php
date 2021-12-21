@@ -1,10 +1,24 @@
 @extends('layouts.app')  
 @section('styles')
-    
+    <style>
+        .section.default:before{ 
+        background-image: url('{{ asset("frontend/assets/images/others/default-bg.png") }}');
+        background-repeat: repeat;
+        background-size: 350px;
+        background-position: center;
+        opacity: 1;
+        }
+        .section.testimonials:before{ 
+        background-image: url("{{ asset('frontend/assets/images/props/flat-1/3-big.jpg') }}"); 
+        }
+        .section.agents:before{ 
+        background-image: url("{{ asset('frontend/assets/images/props/office-2/4-big.jpg') }}"); 
+        }
+    </style>
 @endsection
 @section('content')
 
-    <div class="header-image-wrapper">
+    {{-- <div class="header-image-wrapper">
         <div class="bg bg-anime" style="background-image: url('{{ asset('frontend/assets/images/others/homepage.jpg') }}');"></div>
         <div class="mask"></div>            
         <div class="header-image-content home-page offset-bottom">
@@ -21,13 +35,52 @@
                 </a>      
             </div>
         </div>
-    </div>  
+    </div>   --}}
+    <div class="header-carousel offset-bottom">
+        <div class="swiper-container h-100">
+            <div class="swiper-wrapper h-100">
+                @foreach ($properties as $item)
+                <div class="swiper-slide">
+                    <div class="slide-item swiper-lazy" data-background="{{ asset('backend/properties/'.$item->images[0]->path) }}">
+                        <div class="swiper-lazy-preloader"></div> 
+                        <span class="d-none" data-slide-title="{{ Str::limit($item->title,30,'...') }}"></span>
+                        <span class="d-none" data-slide-location="{{ $item->address }}"></span>
+                        <span class="d-none" data-slide-price="{{ $item->price }}"></span> 
+                    </div> 
+                </div>
+                @endforeach  
+                
+            </div>     
+            <button class="swiper-button-prev swipe-arrow mdc-fab mdc-fab--mini primary">
+                <span class="mdc-fab__ripple"></span>
+                <span class="mdc-fab__icon material-icons">keyboard_arrow_left</span> 
+            </button>
+            <button class="swiper-button-next swipe-arrow mdc-fab mdc-fab--mini primary"> 
+                <span class="mdc-fab__ripple"></span>
+                <span class="mdc-fab__icon material-icons">keyboard_arrow_right</span> 
+            </button>  
+            <div class="slide-info column center-xs middle-xs">
+                <div id="active-slide-info" class="mdc-card p-4 column center-xs middle-xs">
+                    <h1 class="slide-title">Title</h1>
+                    <p class="location row center-xs middle-xs"> 
+                        <i class="material-icons mat-icon-lg primary-color">location_on</i>
+                        <span class="px-1">Location</span>
+                    </p> 
+                    <a href="#" class="mdc-button mdc-button--raised price"> 
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">price</span>    
+                    </a>                  
+                </div>  
+            </div>  
+        </div>
+    </div>
     <div class="px-3">  
         <div class="theme-container"> 
             <div class="mdc-card main-content-header">  
                 <form action="{{ route('properties') }}" method="GET" id="filters" class="search-wrapper"> 
                     <div class="row">  
                         <div class="col-xs-12 col-sm-6 col-md-4 p-2">
+                            
                             <div class="mdc-select mdc-select--outlined">
                                 <div class="mdc-select__anchor">
                                     <i class="mdc-select__dropdown-icon"></i>
@@ -111,6 +164,7 @@
                             <span class="mdc-button__label">Search</span> 
                         </button>  
                     </div>
+                    
                 </form> 
             </div>  
             @if(count($properties) > 0)
@@ -234,7 +288,7 @@
                     @include('frontend.pages._single_property')
                 @endforeach
                 <div class="row center-xs middle-xs p-2 mt-2 w-100">                
-                    <a href="javascript:void(0);" class="mdc-button mdc-button--raised">
+                    <a href="{{ route('properties') }}" class="mdc-button mdc-button--raised">
                         <span class="mdc-button__ripple"></span>
                         <span class="mdc-button__label">load more</span> 
                     </a>
@@ -395,7 +449,37 @@
     </div>
     @endif
     {{-- agents section start --}}
-    @include('frontend.pages.agent')
+    <div class="section agents">
+        <div class="px-3">
+            <div class="theme-container">
+                <h1 class="section-title">Meet our agents</h1> 
+                <div class="agents-carousel"> 
+                    <div class="swiper-container carousel-outer"> 
+                        <div class="swiper-wrapper">  
+                           
+                            @include('frontend.pages.agent')
+                            
+                        </div>                      
+                        <button class="prop-prev swiper-button-prev swipe-arrow mdc-fab mdc-fab--mini primary">
+                            <span class="mdc-fab__ripple"></span>
+                            <span class="mdc-fab__icon material-icons">keyboard_arrow_left</span> 
+                        </button>
+                        <button class="prop-next swiper-button-next swipe-arrow mdc-fab mdc-fab--mini primary"> 
+                            <span class="mdc-fab__ripple"></span>
+                            <span class="mdc-fab__icon material-icons">keyboard_arrow_right</span> 
+                        </button> 
+                    </div>
+                </div> 
+                <div class="w-100 text-center mt-5">                
+                    <a href="javascript:void(0);" class="mdc-button mdc-button--raised">
+                        <span class="mdc-button__ripple"></span>
+                        <span class="mdc-button__label">Our agents</span> 
+                    </a>
+                </div>  
+            </div>
+        </div>   
+    </div>  
+   
     {{-- agents section end --}}
     
     {{-- clients section start --}}

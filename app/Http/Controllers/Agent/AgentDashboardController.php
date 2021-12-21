@@ -67,18 +67,22 @@ class AgentDashboardController extends Controller
         $agent = Agent::findOrFail($request->user_id);
         $data = Validator::make($request->all(),[
             'name' => 'required|string',
-            'phone' => 'required|min:8',
+            'phone' => 'required|min:8|unique:agents,phone,'.$agent->id,
             'organization' => 'nullable|string',
             'address' => 'nullable|string',
             'photo' => 'nullable|mimes:jpg,png,jpeg',
+            'bio' => 'nullable|string'
         ]);
 
         if(!$data->passes()){
             return response()->json(['status'=>0,'errors'=>$data->errors()->toArray()]);
         }
 
+        $agent->name = $request->name;
+        $agent->phone = $request->phone;
         $agent->organization = $request->organization;
         $agent->address = $request->address;
+        $agent->bio = $request->bio;
         $agent->facebook = $request->facebook;
         $agent->twitter = $request->twitter;
         $agent->linkedin = $request->linkedin;

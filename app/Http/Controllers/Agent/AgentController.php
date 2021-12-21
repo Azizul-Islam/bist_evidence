@@ -30,8 +30,8 @@ class AgentController extends Controller
     {
         $data = Validator::make($request->all(),[
             'name' => 'required|string',
-            'email' => 'required|email|string',
-            'phone' => 'required|min:8',
+            'email' => 'required|email|string|unique:agents,email',
+            'phone' => 'required|min:8|unique:agents,phone',
             'user_type' => 'required',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -63,8 +63,8 @@ class AgentController extends Controller
             return response()->json(['status'=>0,'errors'=>$data->errors()->toArray()]);
         }
 
-        $creds = $request->only('email','password');
-        if(Auth::guard('agent')->attempt($creds)) {
+        // $creds = $request->only('email','password');
+        if(Auth::guard('agent')->attempt(['email'=>$request->input('email'),'password'=>$request->input('password'),'status'=>'active'])) {
             return response()->json(['status'=>1,'msg'=>'Login successfully']);
             // return route('agent.home');
         }
