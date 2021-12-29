@@ -110,7 +110,8 @@
                 </form>  
             </div> 
             <div class="mt-5">
-                <div id="contact-map"></div>
+                {{-- <div id="contact-map"></div> --}}
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3644.9544824018994!2d90.38650031430197!3d23.99738438521454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWireless%20Gate%2C%20T%26T%20Road%2C%20Gazipur%20(Abdul%20Hakim%20Super%20Market)!5e0!3m2!1sen!2sbd!4v1640156803476!5m2!1sen!2sbd" width="1255" height="400" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div> 
         </div>
     </div>  

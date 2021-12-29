@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Area;
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Contact;
 use App\Models\CustomerRespons;
 use App\Models\Faq;
 use App\Models\FrontendProperty;
 use App\Models\Page;
+use App\Models\Project;
 use App\Models\Property;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -127,15 +129,16 @@ class FrontendController extends Controller
             $data['properties'] = Property::whereBetween('price', $request->price_range)->orderBy('id', 'DESC')->paginate(9);
         } 
         else if($request->status && !blank($request->status)) {
-            if($request->status == 'for sale' || $request->status == 'to rent'){
+            if($request->status == 'for sale' || $request->status == 'to rent' || $request->status == 'buy'){
                 $data['properties'] = Property::where(['status'=>'active','purpose'=>$request->status])->orderBy('id', 'DESC')->paginate(9);
             }
             else {
                 $data['properties'] = Property::where(['status'=>'active','contract'=>$request->status])->latest()->paginate(9);
             }
         }
+        
         else {
-            $data['properties'] = Property::where('status', 'active')->latest()->paginate(3);
+            $data['properties'] = Property::where('status', 'active')->latest()->paginate(9);
         }
         $data['route'] = 'properties';
         $data['categories'] = Category::whereNull('parent_id')->latest()->get();
@@ -203,7 +206,7 @@ class FrontendController extends Controller
     public function contactStore(Request $request)
     {
         $data = Validator::make($request->all(),[
-            'name' => 'required|string',
+            'name' => 'nullable|string',
             'email' => 'nullable|string|email',
             'phone' => 'required|numeric',
             'message' => 'required|string'
@@ -216,5 +219,26 @@ class FrontendController extends Controller
             Contact::create($request->all());
             return response()->json(['status'=>1,'msg'=>'Your message send success']);
         }
+    }
+
+
+    public function projects()
+    {
+        $data['newProjects'] = Project::where(['status'=>'active','project_status'=>'new'])->latest()->get();
+        $data['upcomingProjects'] = Project::where(['status'=>'active','project_status'=>'upcoming'])->latest()->get();
+        $data['ongoingProjects'] = Project::where(['status'=>'active','project_status'=>'ongoing'])->latest()->get();
+        return view('frontend.pages.projects',$data);
+    }
+
+    public function blogs()
+    {
+        $blogs = Blog::latest()->paginate(10);
+        return view('frontend.pages.blog',compact('blogs'));
+    }
+
+    public function blogDetails($slug)
+    {
+        $blog = Blog::where('slug',$slug)->first();
+        return view('frontend.pages.blog-details',compact('blog'));
     }
 }

@@ -1344,12 +1344,7 @@ main.content-offset-to-top .main-content-header{
   background-position: center;
   opacity: 0.15; 
 } 
-.section.testimonials:before{ 
-  background-image: url("{{ asset('frontend/assets/images/props/flat-1/3-big.jpg') }}"); 
-}
-.section.agents:before{ 
-  background-image: url("{{ asset('frontend/assets/images/props/office-2/4-big.jpg') }}"); 
-}
+
 
 .section .section-title{
   text-transform: uppercase;
@@ -3514,7 +3509,17 @@ footer .copyright .mdc-button{
 .comment-form{
   margin: -16px;
   padding: 8px;
-}  
+}
+
+
+.footer-menu li{
+  padding: 10px 0;
+}
+.footer-menu li a{
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+}
 
 
 

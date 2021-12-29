@@ -1,5 +1,8 @@
 @extends('layouts.admin-app')
 @section('title', 'Page create')
+@section('styles')
+
+@endsection
 @section('content')
     <div class="mb-4">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -71,6 +74,12 @@
                                     <option value="active" {{ old('active') ? 'selected' : '' }}>Active</option>
                                     <option value="inactive" {{ old('inactive') ? 'selected' : '' }}>Inactive</option>
                                   </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input type="checkbox" name="is_service" value="1" id="service">
+                                <label for="service" class="form-label">Service</label>
                             </div>
                         </div>
                     </div>

@@ -187,32 +187,7 @@
                                 </div> 
                             </div>
                             <div class="row middle-xs d-none d-sm-flex d-md-flex d-lg-flex d-xl-flex">
-                                <div class="mdc-menu-surface--anchor"> 
-                                    <button class="mdc-button mdc-ripple-surface text-muted"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Show<span class="mx-2 mutable">8</span></span>
-                                        <i class="material-icons mdc-button__icon m-0">arrow_drop_down</i>
-                                    </button> 
-                                    <div class="mdc-menu mdc-menu-surface">
-                                        <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                                            <li class="mdc-list-item" role="menuitem">
-                                                <span class="mdc-list-item__text">8</span>
-                                            </li>
-                                            <li class="mdc-list-item" role="menuitem">
-                                                <span class="mdc-list-item__text">12</span>
-                                            </li> 
-                                            <li class="mdc-list-item" role="menuitem">
-                                                <span class="mdc-list-item__text">16</span>
-                                            </li> 
-                                            <li class="mdc-list-item" role="menuitem">
-                                                <span class="mdc-list-item__text">24</span>
-                                            </li> 
-                                            <li class="mdc-list-item" role="menuitem">
-                                                <span class="mdc-list-item__text">36</span>
-                                            </li> 
-                                        </ul>
-                                    </div> 
-                                </div>
+                                
                                 <button class="mdc-icon-button material-icons view-type" data-view-type="list" data-col="1" data-full-width-page="false">view_list</button> 
                                 <button class="mdc-icon-button view-type" data-view-type="grid" data-col="2" data-full-width-page="false">
                                     <svg class="material-icons mat-icon-sm" viewBox="0 0 25 25">
@@ -228,45 +203,10 @@
                             <div class="mdc-chip bg-warn">
                                 <div class="mdc-chip__ripple"></div>
                                 <span>
-                                    <span role="button" tabindex="0" class="mdc-chip__text uppercase">32 found</span>
+                                    <span role="button" tabindex="0" class="mdc-chip__text uppercase">{{ count($properties) }} found</span>
                                 </span> 
                             </div>
-                            <div class="mdc-chip">
-                                <div class="mdc-chip__ripple"></div>
-                                <span>
-                                    <span role="button" tabindex="0" class="mdc-chip__text">House</span>
-                                </span>
-                                <span>
-                                    <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1" role="button">cancel</i>
-                                </span>
-                            </div> 
-                            <div class="mdc-chip">
-                                <div class="mdc-chip__ripple"></div>
-                                <span>
-                                    <span role="button" tabindex="0" class="mdc-chip__text">For sale</span>
-                                </span>
-                                <span>
-                                    <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1" role="button">cancel</i>
-                                </span>
-                            </div> 
-                            <div class="mdc-chip">
-                                <div class="mdc-chip__ripple"></div>
-                                <span>
-                                    <span role="button" tabindex="0" class="mdc-chip__text">Price > 150000</span>
-                                </span>
-                                <span>
-                                    <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1" role="button">cancel</i>
-                                </span>
-                            </div> 
-                            <div class="mdc-chip">
-                                <div class="mdc-chip__ripple"></div>
-                                <span>
-                                    <span role="button" tabindex="0" class="mdc-chip__text">Price &lt; 450000</span>
-                                </span>
-                                <span>
-                                    <i class="material-icons mdc-chip__icon mdc-chip__icon--trailing" tabindex="-1" role="button">cancel</i>
-                                </span>
-                            </div>
+                           
                         </div> 
                     </div> 
                     @foreach ($properties as $property)
@@ -297,9 +237,9 @@
                                     <button class="mdc-button add-to-favorite" data-id="{{ $property->id }}" data-url="{{ route('add-to-favorite') }}" title="Add To Favorite">
                                         <i class="material-icons mat-icon-sm">favorite_border</i>
                                     </button>
-                                    <button class="mdc-button" title="Add To Compare">
+                                    {{-- <button class="mdc-button" title="Add To Compare">
                                         <i class="material-icons mat-icon-sm">compare_arrows</i>
-                                    </button>  
+                                    </button>   --}}
                                 </div>  
                             </div>
                             <div class="property-content-wrapper"> 

@@ -59,6 +59,12 @@ class PageController extends Controller
             $file->move(public_path('backend/pages/'), $name_gen);
             $data['photo'] = $name_gen;
         }
+        if($request->has('is_service')) {
+            $data['is_service'] = $request->is_service;
+        }
+        else {
+            $data['is_service'] = 0;
+        }
         $success = Page::create($data);
         if($success){
             return redirect()->route('admin.pages.index')->with('success','Page create successfully');
@@ -107,13 +113,19 @@ class PageController extends Controller
         ]);
         $path = public_path('backend/pages/'.$page->photo);
         if ($request->has('photo')) {
-            if(file_exists($path)){
-                unlink($path);
-            }
+            // if(file_exists($path)){
+            //     unlink($path);
+            // }
             $file = $request->file('photo');
             $name_gen = rand() . "." . $file->getClientOriginalExtension();
             $file->move(public_path('backend/pages/'), $name_gen);
             $data['photo'] = $name_gen;
+        }
+        if($request->has('is_service')) {
+            $data['is_service'] = $request->is_service;
+        }
+        else {
+            $data['is_service'] = 0;
         }
         $success = $page->update($data);
         if($success){
@@ -132,10 +144,10 @@ class PageController extends Controller
      */
     public function destroy(Page $page)
     {
-        $path = public_path('backend/pages/'.$page->photo);
-        if(file_exists($path)){
-            unlink($path);
-        }
+        // $path = public_path('backend/pages/'.$page->photo);
+        // if(file_exists($path)){
+        //     unlink($path);
+        // }
         $success = $page->delete();
         if($success){
             return redirect()->back()->with('info','Page deleted successfully');

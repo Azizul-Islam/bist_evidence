@@ -15,7 +15,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/cc', function() {
+    \Artisan::call('cache:clear');
+    \Artisan::call('view:clear');
+    \Artisan::call('route:clear');
+    \Artisan::call('config:clear');
+    \Artisan::call('config:cache');
+    return 'DONE';
+});
 Route::get('/',[FrontendController::class,'index']);
 Route::post('getarea/{area_id}/sub',[FrontendController::class,'getChildAreaByParent']);
 Route::get('property/details/{slug}',[FrontendController::class,'propertyDetails'])->name('property.details');
@@ -32,6 +39,9 @@ Route::post('add-property',[FrontendController::class,'addPropertyStore'])->name
 Route::post('add-to-favorite',[FavoriteController::class,'addToFavorite'])->name('add-to-favorite');
 Route::post('customer-response',[FrontendController::class,'customerResponse'])->name('customer-response.store');
 Route::post('review/store',[FrontendController::class,'reviewStore'])->name('review.store');
+Route::get('projects',[FrontendController::class,'projects'])->name('projects');
+Route::get('blogs',[FrontendController::class,'blogs'])->name('blogs');
+Route::get('blog/{slug}',[FrontendController::class,'blogDetails'])->name('blog');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

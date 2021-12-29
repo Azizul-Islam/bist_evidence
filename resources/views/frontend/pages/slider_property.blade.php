@@ -25,9 +25,9 @@
                 <button class="mdc-button add-to-favorite" data-id="{{ $property->id }}" data-url="{{ route('add-to-favorite') }}" title="Add To Favorite">
                     <i class="material-icons mat-icon-sm">favorite_border</i>
                 </button>
-                <button class="mdc-button" title="Add To Compare">
+                {{-- <button class="mdc-button" title="Add To Compare">
                     <i class="material-icons mat-icon-sm">compare_arrows</i>
-                </button>  
+                </button>   --}}
             </div>  
         </div>
         <div class="property-content-wrapper"> 

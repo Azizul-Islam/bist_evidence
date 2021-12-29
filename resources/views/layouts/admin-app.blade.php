@@ -23,6 +23,7 @@
 
         <!-- Slick -->
     <link rel="stylesheet" href="{{ asset('backend/libs/slick/slick.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ asset('backend/richtexteditor/rte_theme_default.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('backend/libs/dataTable/datatables.min.css') }}" type="text/css">
      <!-- Data Table CSS -->
@@ -100,8 +101,11 @@
 <!-- Data Table Js -->
 {{-- <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.1/datatables.min.js"></script> --}}
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{ asset('backend/libs/ckeditor5/ckeditor.js') }}"></script>
-<script src="{{ asset('backend/dist/js/examples/ckeditor.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/richtexteditor/rte.js') }}"></script>
+<script type="text/javascript" src='{{ asset('backend/richtexteditor/all_plugins.js') }}'></script>
+<script>
+	var editor1 = new RichTextEditor("#editor");
+</script>
 <script src="{{ asset('backend/libs/select2/js/select2.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>

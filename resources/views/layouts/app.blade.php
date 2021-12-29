@@ -55,16 +55,8 @@
         <hr class="mdc-list-divider m-0">
         <div class="mdc-drawer__content"> 
             <div class="vertical-menu">   
-                <div class="mdc-menu-surface--anchor"> 
-                    <a href="{{ url('/') }}" class="mdc-button"> 
-                        <span class="mdc-button__ripple"></span> 
-                        <span class="mdc-button__label">Home</span>
-                    </a>  
-                    
-                </div>   
-               
                 @php
-                        $page = App\Models\Page::where(['status'=>'active','slug'=>'about-us'])->first();
+                    $page = App\Models\Page::where(['status'=>'active','slug'=>'about-us'])->first();
                     @endphp
                     @if(isset($page))
                     <div>
@@ -74,30 +66,62 @@
                         </a> 
                     </div>   
                     @endif
+                   
+                    <div>
+                        <a href="#" data-value="buy" id="buy" class="mdc-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Buy</span> 
+                        </a> 
+                    </div>
+                    <div>
+                        <a href="#" data-value="to rent" id="rent" class="mdc-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Rent</span> 
+                        </a> 
+                    </div>
                     <div>
                         <a href="{{ route('properties') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label">Properties</span> 
+                            <span class="mdc-button__label">All Properties</span> 
                         </a> 
                     </div>  
-                   
-                    @php
-                    $page = App\Models\Page::where(['status'=>'active','slug'=>'projects'])->first();
-                    @endphp
-                    @if(isset($page))
                     <div>
-                        <a href="{{ route('page',$page->slug) }}" class="mdc-button">
+                        <a href="{{ route('projects') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Projects</span> 
                         </a> 
-                    </div>   
-                    @endif
-                <div>
-                    <a href="{{ route('contact') }}" class="mdc-button">
-                        <span class="mdc-button__ripple"></span>
-                        <span class="mdc-button__label">Contact</span> 
-                    </a> 
-                </div> 
+                    </div>  
+                    <div class="mdc-menu-surface--anchor"> 
+                        <a href="javascript:void(0);" class="mdc-button menu-item-has-children mdc-ripple-upgraded" style="--mdc-ripple-fg-size:55px; --mdc-ripple-fg-scale:1.9995; --mdc-ripple-fg-translate-start:12.2656px, -3.5px; --mdc-ripple-fg-translate-end:18.7344px, -8.5px;"> 
+                            <span class="mdc-button__ripple"></span> 
+                            <span class="mdc-button__label">Our Services</span> 
+                        </a>  
+                        <div class="mdc-menu mdc-menu-surface">
+                            <div class="mdc-list"> 
+                                @foreach (App\Models\Page::where(['status'=>'active','is_service'=>1])->get() as $item)
+                                <div> 
+                                    <a href="{{ route('page',$item->slug) }}" class="mdc-button mdc-ripple-upgraded"> 
+                                        <span class="mdc-button__ripple"></span>
+                                        <span class="mdc-button__label">{{ $item->title }}</span> 
+                                    </a>  
+                                </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>  
+                    </div>
+                    <div>
+                        <a href="{{ route('contact') }}" class="mdc-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Contact</span> 
+                        </a> 
+                    </div> 
+                    <div>
+                        <a href="{{ route('blogs') }}" class="mdc-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Blog</span> 
+                        </a> 
+                    </div> 
                  
             </div>  
         </div>
@@ -257,15 +281,8 @@
                     <img src="{{ asset('frontend/assets/Logo.png') }}" style="height: 37px;width:212px" alt="logo">
                 </a>  
                 <div class="horizontal-menu d-none d-md-flex d-lg-flex d-xl-flex">   
-                    <div class="mdc-menu-surface--anchor"> 
-                        <a href="{{ url('/') }}" class="mdc-button"> 
-                            <span class="mdc-button__ripple"></span> 
-                            <span class="mdc-button__label">Home</span>
-                        </a>  
-                          
-                    </div>  
                     @php
-                        $page = App\Models\Page::where(['status'=>'active','slug'=>'about-us'])->first();
+                    $page = App\Models\Page::where(['status'=>'active','slug'=>'about-us'])->first();
                     @endphp
                     @if(isset($page))
                     <div>
@@ -275,120 +292,50 @@
                         </a> 
                     </div>   
                     @endif
+                   
+                    <div>
+                        <a href="#" data-value="buy" id="buy" class="mdc-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Buy</span> 
+                        </a> 
+                    </div>
+                    <div>
+                        <a href="#" data-value="to rent" id="rent" class="mdc-button">
+                            <span class="mdc-button__ripple"></span>
+                            <span class="mdc-button__label">Rent</span> 
+                        </a> 
+                    </div>
                     <div>
                         <a href="{{ route('properties') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label">Properties</span> 
+                            <span class="mdc-button__label">All Properties</span> 
                         </a> 
                     </div>  
-                    <div class="mdc-menu-surface--anchor"> 
-                        <a href="javascript:void(0);" class="mdc-button menu-item-has-children"> 
-                            <span class="mdc-button__ripple"></span> 
-                            <span class="mdc-button__label">Pages</span> 
-                        </a>  
-                        <div class="mdc-menu mdc-menu-surface">
-                            <div class="mdc-list"> 
-                                <div> 
-                                    <a href="property.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Single Property</span> 
-                                    </a>  
-                                </div><div> 
-                                    <a href="agents.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Agents</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="agent.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Agent</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="login.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Login</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="register.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Register</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="faqs.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">FAQs</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="pricing.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Pricing</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="terms.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Terms & Conditions</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="index.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">Landing</span> 
-                                    </a>  
-                                </div>
-                                <div> 
-                                    <a href="404.html" class="mdc-button"> 
-                                        <span class="mdc-button__ripple"></span>
-                                        <span class="mdc-button__label">404 Page</span> 
-                                    </a>  
-                                </div> 
-                                <div class="mdc-menu-surface--anchor"> 
-                                    <a href="#" class="mdc-button menu-item-has-children"> 
-                                        <span class="mdc-button__ripple"></span> 
-                                        <span class="mdc-button__label">Other</span> 
-                                    </a> 
-                                    <div class="mdc-menu mdc-menu-surface">
-                                        <div class="mdc-list"> 
-                                            <div> 
-                                                <a href="http://themeseason.com/" target="_blank" class="mdc-button"> 
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <span class="mdc-button__label">External Link</span> 
-                                                </a>  
-                                            </div>
-                                            <div> 
-                                                <a href="#" class="mdc-button"> 
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <span class="mdc-button__label">Menu Item</span> 
-                                                </a>  
-                                            </div>
-                                            <div> 
-                                                <a href="#" class="mdc-button"> 
-                                                    <span class="mdc-button__ripple"></span>
-                                                    <span class="mdc-button__label">Menu Item</span> 
-                                                </a>  
-                                            </div>
-                                        </div>
-                                    </div>                                          
-                                </div> 
-                            </div>
-                        </div>  
-                    </div>  
-                    @php
-                    $page = App\Models\Page::where(['status'=>'active','slug'=>'projects'])->first();
-                    @endphp
-                    @if(isset($page))
                     <div>
-                        <a href="{{ route('page',$page->slug) }}" class="mdc-button">
+                        <a href="{{ route('projects') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Projects</span> 
                         </a> 
-                    </div>   
-                    @endif
+                    </div>  
+                    <div class="mdc-menu-surface--anchor"> 
+                        <a href="javascript:void(0);" class="mdc-button menu-item-has-children mdc-ripple-upgraded" style="--mdc-ripple-fg-size:55px; --mdc-ripple-fg-scale:1.9995; --mdc-ripple-fg-translate-start:12.2656px, -3.5px; --mdc-ripple-fg-translate-end:18.7344px, -8.5px;"> 
+                            <span class="mdc-button__ripple"></span> 
+                            <span class="mdc-button__label">Our Services</span> 
+                        </a>  
+                        <div class="mdc-menu mdc-menu-surface">
+                            <div class="mdc-list"> 
+                                @foreach (App\Models\Page::where(['status'=>'active','is_service'=>1])->get() as $item)
+                                <div> 
+                                    <a href="{{ route('page',$item->slug) }}" class="mdc-button mdc-ripple-upgraded"> 
+                                        <span class="mdc-button__ripple"></span>
+                                        <span class="mdc-button__label">{{ $item->title }}</span> 
+                                    </a>  
+                                </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>  
+                    </div>
                     <div>
                         <a href="{{ route('contact') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
@@ -396,7 +343,7 @@
                         </a> 
                     </div> 
                     <div>
-                        <a href="{{ route('contact') }}" class="mdc-button">
+                        <a href="{{ route('blogs') }}" class="mdc-button">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Blog</span> 
                         </a> 
@@ -405,7 +352,6 @@
                 </div>  
                 <div class="row middle-xs"> 
                     <a href="{{ route('agent.favorite') }}" class="mdc-icon-button material-icons d-none d-lg-flex d-xl-flex" title="Favorites">favorite_border</a> 
-                    <a href="{{ route('agent.compare') }}" class="mdc-icon-button material-icons d-none d-lg-flex d-xl-flex mr-3 ml-2" title="Compare list">compare_arrows</a>  
                     @if(auth()->guard('agent')->check())
                     <a href="{{ route('agent.submit-property') }}" class="mdc-fab mdc-fab--mini primary d-sm-none d-md-none d-lg-none d-xl-none">
                         <span class="mdc-fab__ripple"></span>
@@ -480,6 +426,44 @@
     @include('admin.includes.message')
     <script>
         $('.dropify').dropify();
+    </script>
+    <script>
+        $(document).on('click','#rent',function(){
+            let status = $(this).data('value');
+            window.location = "{{ url('properties') }}?status="+status;
+        });
+        $(document).on('click','#buy',function(){
+            let status = $(this).data('value');
+            window.location = "{{ url('properties') }}?status="+status;
+        });
+        $(document).on('submit','#feedbac_form',function(e){
+            e.preventDefault();
+            $('#feedback_btn').text('Processing...');
+            $('#feedback_btn').attr('disabled',true);
+            $.ajax({
+                url: "{{ route('contact') }}",
+                method: "POST",
+                data: $('#feedbac_form').serialize(),
+                beforeSend: function(){
+                    $(document).find('span.error-text').text();
+                },
+                success: function(data) {
+                    if(data.status == 0){
+                        $('#feedback_btn').text('Feedback');
+                        $('#feedback_btn').attr('disabled',false);
+                        $.each(data.errors,function(prefix,val){
+                            $('span.'+prefix+'_error').text(val[0]);
+                        });
+                    }
+                    else {
+                        $('#feedback_btn').text('Feedback');
+                        $('#feedback_btn').attr('disabled',false);
+                        $('#feedbac_form')[0].reset();
+                        toastr.success(data.msg);
+                    }
+                }
+            });
+        });
     </script>
     @yield('scripts')
 </body>

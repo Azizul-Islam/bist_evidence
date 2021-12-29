@@ -72,6 +72,12 @@
                                   </select>
                             </div>
                         </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input type="checkbox" {{ $page->is_service == 1 ? 'checked' : '' }} name="is_service" value="1" id="service">
+                                <label for="service" class="form-label">Service</label>
+                            </div>
+                        </div>
                     </div>
                    
                     <div class="mb-3">

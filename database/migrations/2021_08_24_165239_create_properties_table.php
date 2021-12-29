@@ -22,7 +22,7 @@ class CreatePropertiesTable extends Migration
             // $table->unsignedBigInteger('type_id')->nullable();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('sub_category_id')->nullable();
-            $table->enum('purpose',['for sale','to rent']);
+            $table->enum('purpose',['for sale','to rent','buy']);
             $table->enum('completion_status',['ready','under constraction'])->default('ready');
             $table->string('address')->nullable();
             $table->unsignedBigInteger('area_id');

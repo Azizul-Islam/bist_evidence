@@ -196,6 +196,7 @@
                                     <label class="">Purpose *</label><br>
                                     <input class="" type="radio" name="purpose" {{ $property->purpose == 'for sale' ? 'checked' : '' }} value="for sale" id="for sale"> <label for="for sale">For Sale</label>
                                     <input class="" type="radio" name="purpose" {{ $property->purpose == 'to rent' ? 'checked' : '' }} value="to rent" id="to rent"> <label for="to rent">To Rent</label>
+                                    <input class="" type="radio" name="purpose" {{ $property->purpose == 'buy' ? 'checked' : '' }} value="buy" id="buy"> <label for="buy">Buy</label>
                                 </div>
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <label class="">Completion Status *</label><br>

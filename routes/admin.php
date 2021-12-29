@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AmenityController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ClientController;
 use App\Http\Controllers\Admin\ContactController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Admin\CustomerResponseController;
 use App\Http\Controllers\Admin\DefaultController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
@@ -82,5 +84,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //contact
         Route::get('contact',[ContactController::class,'index'])->name('contact');
+
+        //project
+        Route::resource('projects',ProjectController::class);
+        Route::post('project/status',[ProjectController::class,'projectStatus'])->name('project.status');
+
+        //blog
+        Route::resource('blogs',BlogController::class);
     });
 });

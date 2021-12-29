@@ -109,6 +109,24 @@
                     <span>Frontend Property</span>
                 </a>
             </li>
+            <li>
+                <a href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-house"></i>
+                    </span>
+                    <span>Projects</span>
+                </a>
+                <ul>
+                   
+                    <li>
+                        <a class="{{ \Request::is('admin/projects') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Property List</a>
+                    </li>
+                    <li>
+                        <a class="{{ \Request::is('admin/projects/create') ? 'active' : '' }}" href="{{ route('admin.projects.create') }}">Add Property</a>
+                    </li>
+                    
+                </ul>
+            </li>
             <li class="menu-divider">Users</li>
             <li>
                 <a class="{{ \Request::is('admin/customer-response') ? 'active' : '' }}" href="{{ route('admin.customer-response.index') }}">
@@ -177,6 +195,14 @@
                         <i class="bi bi-wallet2"></i>
                     </span>
                     <span>Pages</span>
+                </a>
+            </li>
+            <li>
+                <a class="{{ \Request::is('admin/blogs') || \Request::is('admin/blogs/create') ? 'active' : '' }}" href="{{ route('admin.blogs.index') }}">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-wallet2"></i>
+                    </span>
+                    <span>Blog</span>
                 </a>
             </li>
             {{-- <li>

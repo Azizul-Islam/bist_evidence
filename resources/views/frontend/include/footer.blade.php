@@ -61,21 +61,42 @@
                         </div>  
                     </div> 
                     <div class="col-xs-12 col-sm-5 col-md-3 p-0 feedback"> 
-                        <h2 class="uppercase">Feedback</h2>
-                        <p class="desc">We want your feedback about everything</p>
-                        <form action="javascript:void(0);" class="feedback-form pt-2">  
+                        <h2 class="uppercase">Usefull Links</h2>
+                        <div class="row">
+                            <div class="col-xs-6 col-md-6">
+                                <ul class="footer-menu" style="margin-top: 10px;list-style-type:circle">
+                                    @foreach (App\Models\Page::where(['status'=>'active','is_service'=>0])->take(4)->get() as $item)
+                                    <li style="padding: 5px 0;"><a style="color: #fff;font-size:15px;" href="{{ route('page',$item->slug) }}">{{ $item->title }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <div class="col-xs-6 col-md-6">
+                                <ul class="footer-menu" style="margin-top: 10px;list-style-type:circle">
+                                    <li style="padding: 5px 0;"><a style="color: #fff;font-size:15px;" href="{{ route('projects') }}">Projects</a></li>
+                                    <li style="padding: 5px 0;"><a style="color: #fff;font-size:15px;" href="{{ route('faqs') }}">FAQS</a></li>
+                                    @foreach (App\Models\Page::where(['status'=>'active','is_service'=>0])->skip(4)->take(2)->get() as $item)
+                                    <li style="padding: 5px 0;"><a style="color: #fff;font-size:15px;" href="{{ route('page',$item->slug) }}">{{ $item->title }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                       
+                        {{-- <h2 class="uppercase">Feedback</h2> --}}
+                        <form action="javascript:void(0);" class="feedback-form pt-2" id="feedbac_form">
+                            @csrf  
                             <div class="mdc-text-field mdc-text-field--outlined w-100">
-                                <input id="feedback-email" class="mdc-text-field__input" placeholder="Email is required">
+                                <input id="feedback-email" class="mdc-text-field__input" name="phone" type="text" placeholder="Phone is required">
                                 <div class="mdc-notched-outline">
                                 <div class="mdc-notched-outline__leading"></div>
                                 <div class="mdc-notched-outline__notch">
-                                    <label for="feedback-email" class="mdc-floating-label">Email</label>
+                                    <label for="feedback-email" class="mdc-floating-label">Phone</label>
                                 </div>
                                 <div class="mdc-notched-outline__trailing"></div>
                                 </div>
                             </div> 
+                            <span class="text-danger error-text phone_error"></span>
                             <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea w-100 mt-4">
-                                <textarea id="feedback-message" class="mdc-text-field__input" rows="5" placeholder="Message is required"></textarea>
+                                <textarea id="feedback-message" class="mdc-text-field__input" name="message" type="text" rows="5" placeholder="Message is required"></textarea>
                                 <div class="mdc-notched-outline mdc-notched-outline--upgraded">
                                     <div class="mdc-notched-outline__leading"></div>
                                     <div class="mdc-notched-outline__notch">
@@ -83,24 +104,26 @@
                                     </div>
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
-                            </div> 
+                            </div>
+                            <span class="text-danger error-text message_error"></span> 
                             <div class="w-100 text-center mt-4">
-                                <button type="submit" class="mdc-button mdc-button--raised">
+                                <button type="submit" id="feedback_btn" class="mdc-button mdc-button--raised">
                                     <span class="mdc-button__ripple"></span>
-                                    <span class="mdc-button__label">Submit</span> 
+                                    <span class="mdc-button__label">Feedback</span> 
                                 </button> 
                             </div> 
                         </form> 
                     </div> 
                     <div class="col-xs-12 col-md-4 p-0 location"> 
                         <h2 class="uppercase mb-3">Our location</h2>
-                        <div id="location-map"></div>
+                        {{-- <div id="location-map"></div> --}}
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3644.9544824018994!2d90.38650031430197!3d23.99738438521454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sWireless%20Gate%2C%20T%26T%20Road%2C%20Gazipur%20(Abdul%20Hakim%20Super%20Market)!5e0!3m2!1sen!2sbd!4v1640156803476!5m2!1sen!2sbd" width="440" height="340" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>  
             </div> 
             <div class="row between-xs middle-xs copyright">
-                <p>Copyright © 2021 All Rights Reserved</p>
-                <p>Designed & Developed by 
+                <p>Copyright © 2021 All Rights Reserved BIST</p>
+                <p>Developed by 
                     <a class="mdc-button" href="http://azizul.intels.co/" target="_blank"> 
                         <span class="mdc-button__ripple"></span>
                         <span class="mdc-button__label">Azizul Islam</span> 
