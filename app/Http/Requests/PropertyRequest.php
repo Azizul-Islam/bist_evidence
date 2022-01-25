@@ -41,13 +41,14 @@ class PropertyRequest extends FormRequest
             'bathroom' => 'nullable|numeric',
             'garage' => 'nullable|numeric',
             'size' => 'required',
-            'year_built' => 'nullable',
+            'year_built' => 'required',
             'video_link' => 'nullable',
             'is_featured' => 'nullable',
             'consumer' => 'nullable',
             'status' => 'nullable',
-            'photo' => 'nullable|mimes:jpeg,jpg,png',
+            'photos' => 'nullable',
             'contract' => 'required',
+            'featured_image' => 'required'
         ];
     }
 }

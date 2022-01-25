@@ -35,7 +35,8 @@ class Property extends Model
         'status',
         'consumer',
         'contract',
-        'property_status'
+        'property_status',
+        'featured_image'
     ];
 
     public function area()

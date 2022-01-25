@@ -183,8 +183,16 @@
                                        
                                     </select>
                                 </div> 
-                                @endif    
+                                @endif 
                                 <div class="col-xs-12 mt-2">  
+                                    <label for="">Featured Image *</label>
+                                    <input class="form-control" type="file" name="featured_image" >
+                                    <div class="mt-2">
+                                        <img src="{{ asset('backend/properties/banner/'.$property->featured_image) }}" width="150" height="60" alt="">
+                                    </div>
+                                </div>     
+                                <div class="col-xs-12 mt-2">  
+                                    <label for="">Gllery Images</label>
                                     <input class="form-control" type="file" multiple name="photos[]" >
                                     <div class="mt-2">
                                         @foreach ($property->images as $item)
@@ -435,7 +443,7 @@
                                     </div>  
                                 </div> 
                                 
-                                <div class="col-xs-12 p-0 dynamic-steps">
+                                {{-- <div class="col-xs-12 p-0 dynamic-steps">
                                     <div class="row middle-xs my-3 px-2">
                                         <p class="mb-0"><span class="uppercase fw-500">Plans</span></p>                            
                                         <button class="mdc-icon-button material-icons primary-color add-step" type="button" data-template-name="plans">add_circle</button>  
@@ -445,9 +453,9 @@
                                    <div class="steps">
                                     <div class="step-section">
                                         <div class="row middle-xs">
-                                            {{-- <div class="col-xs-1 text-center fw-500">
+                                            <div class="col-xs-1 text-center fw-500">
                                                 <span class="num">{{ $i+1 }}</span>
-                                            </div> --}}
+                                            </div>
                                             <div class="col-xs-10">
                                                 <div class="row"> 
                                                     <div class="col-xs-12 col-sm-5 p-2">  
@@ -695,9 +703,9 @@
                                     <div class="steps">
                                         <div class="step-section">
                                             <div class="row middle-xs">
-                                                {{-- <div class="col-xs-1 text-center fw-500">
+                                                <div class="col-xs-1 text-center fw-500">
                                                     <span class="num">{{ $i+1 }}</span>
-                                                </div> --}}
+                                                </div>
                                                 <div class="col-xs-10">
                                                     <div class="row"> 
                                                         <div class="col-xs-12 col-sm-5 p-2">  
@@ -814,7 +822,7 @@
                                             </div>
                                         </div>  
                                     </div>
-                                </script>  
+                                </script>   --}}
                                 <div class="col-xs-12 py-3 row middle-xs">
                                     <div class="mdc-switch">
                                         <div class="mdc-switch__track"></div>

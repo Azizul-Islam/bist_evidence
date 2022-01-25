@@ -156,13 +156,6 @@
                                         <option value="sold">Sold</option>
                                     </select>
                                 </div> 
-                                {{-- <div class="col-xs-12 col-sm-6 p-2">  
-                                    <select name="completion_status" class="form-control" id="">
-                                        <option value="">Select Completion Status</option>
-                                        <option value="ready">Ready</option>
-                                        <option value="under constraction">Under Constraction</option>
-                                    </select>
-                                </div>  --}}
                                 <div class="col-xs-12 col-sm-6 p-2">
                                     <select name="category_id" required class="form-control" id="category_id">
                                         <option value="">Select Category *</option>
@@ -178,8 +171,12 @@
                                 </div> 
                                     
                                 <div class="col-xs-12 mt-2">  
+                                    <label for="">Featured Image *</label>
+                                    <input class="form-control" type="file" name="featured_image" >
+                                </div>  
+                                <div class="col-xs-12 mt-2">  
+                                    <label for="">Gllery Images</label>
                                     <input class="form-control" type="file" multiple name="photos[]" >
-                                    
                                 </div>  
                                 <div class="col-xs-12 col-sm-6 p-2">  
                                     <label class="">Purpose *</label><br>
@@ -411,7 +408,7 @@
                                     </div>  
                                 </div> 
                                 
-                                <div class="col-xs-12 p-0 dynamic-steps">
+                                {{-- <div class="col-xs-12 p-0 dynamic-steps">
                                     <div class="row middle-xs my-3 px-2">
                                         <p class="mb-0"><span class="uppercase fw-500">Plans</span></p>                            
                                         <button class="mdc-icon-button material-icons primary-color add-step" type="button" data-template-name="plans">add_circle</button>  
@@ -574,7 +571,7 @@
                                             </div>
                                         </div> 
                                     </div>  
-                                </script>  
+                                </script>   --}}
                                 {{-- <div class="col-xs-12 p-0 dynamic-steps">
                                     <div class="row middle-xs my-3 px-2">
                                         <p class="mb-0"><span class="uppercase fw-500">Additional features</span></p>                            
