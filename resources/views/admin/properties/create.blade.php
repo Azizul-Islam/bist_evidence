@@ -220,9 +220,7 @@
                                         </div>
                                     </div>  
                                 </div>  
-                                <div class="col-xs-12 p-2">
-                                    <div id="contact-map"></div>
-                                </div> 
+                                
                                 <div class="col-xs-12 col-sm-6 p-2">
                                     <select name="area_id" required class="form-control" id="area_id">
                                         <option value="">Select Area *</option>
@@ -577,7 +575,7 @@
                                         </div> 
                                     </div>  
                                 </script>  
-                                <div class="col-xs-12 p-0 dynamic-steps">
+                                {{-- <div class="col-xs-12 p-0 dynamic-steps">
                                     <div class="row middle-xs my-3 px-2">
                                         <p class="mb-0"><span class="uppercase fw-500">Additional features</span></p>                            
                                         <button class="mdc-icon-button material-icons primary-color add-step" type="button" data-template-name="features">add_circle</button>  
@@ -662,7 +660,7 @@
                                             </div>
                                         </div>  
                                     </div>
-                                </script>  
+                                </script>   --}}
                                 <div class="col-xs-12 py-3 row middle-xs">
                                     <div class="mdc-switch">
                                         <div class="mdc-switch__track"></div>
