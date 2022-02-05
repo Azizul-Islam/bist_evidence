@@ -14,6 +14,8 @@ use App\Models\PropertyFloorPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Prophecy\Prophet;
+use Image;
+
 
 class PropertyController extends Controller
 {
@@ -65,13 +67,21 @@ class PropertyController extends Controller
         }
         $data['property_status'] = 'approve';
 
-        $property = Property::create($data);
+        
 
-        // request has photo
+        if($request->has('featured_image')){
+            $file = $request->file('featured_image');
+            $name_gen = rand().".".$file->getClientOriginalExtension();
+            Image::make($file)->resize(1366,768)->save(public_path('backend/properties/banner/'.$name_gen));
+            $data['featured_image'] = $name_gen;
+        }
+
+        $property = Property::create($data);
+        // request has photos
         if ($request->has('photos') && !blank($request->photos)) {
             foreach ($request->photos as $photo) {
                 $name_gen = rand() . "." . $photo->getClientOriginalExtension();
-                $photo->move(public_path('backend/properties'), $name_gen);
+                Image::make($photo)->resize(390,293)->save(public_path('backend/properties/'.$name_gen));
                 $property->images()->create([
                     'path' => $name_gen,
                     'alt' => $property->title
@@ -79,8 +89,8 @@ class PropertyController extends Controller
             }
         }
 
-        $amenities = $request->amenity_id;
         //property amenity part herer
+        $amenities = $request->amenity_id;
         if (!empty(array_filter($amenities))) {
             foreach ($amenities as $i => $item) {
                 $amenity = new PropertyAmenity();
@@ -90,38 +100,38 @@ class PropertyController extends Controller
             }
         }
 
-        $floors = $request->floor_name;
         //property floor plan here
-        if (!empty(array_filter($floors))) {
-            foreach ($floors as $i => $item) {
-                $floor = new PropertyFloorPlan();
-                $floor->property_id = $property->id;
-                $floor->floor_name = $request->floor_name[$i];
-                $floor->floor_description = $request->floor_description[$i];
-                $floor->floor_size = $request->floor_size[$i];
-                $floor->floor_room = $request->floor_room[$i];
-                $floor->floor_bath = $request->floor_bath[$i];
-                if (!empty($request->floor_photo)) {
-                    $file = $request->floor_photo[$i];
-                    $name_gen = rand() . "." . $file->getClientOriginalExtension();
-                    $file->move(public_path('backend/properties/floor'), $name_gen);
-                    $floor->floor_photo = $name_gen;
-                }
-                $floor->save();
-            }
-        }
+        // $floors = $request->floor_name;
+        // if (!empty(array_filter($floors))) {
+        //     foreach ($floors as $i => $item) {
+        //         $floor = new PropertyFloorPlan();
+        //         $floor->property_id = $property->id;
+        //         $floor->floor_name = $request->floor_name[$i];
+        //         $floor->floor_description = $request->floor_description[$i];
+        //         $floor->floor_size = $request->floor_size[$i];
+        //         $floor->floor_room = $request->floor_room[$i];
+        //         $floor->floor_bath = $request->floor_bath[$i];
+        //         if (!empty($request->floor_photo)) {
+        //             $file = $request->floor_photo[$i];
+        //             $name_gen = rand() . "." . $file->getClientOriginalExtension();
+        //             $file->move(public_path('backend/properties/floor'), $name_gen);
+        //             $floor->floor_photo = $name_gen;
+        //         }
+        //         $floor->save();
+        //     }
+        // }
 
-        $features = $request->feature_name;
         //property feature part here
-        if (!empty(array_filter($features))) {
-            foreach ($features as $i => $item) {
-                $feature = new PropertyFeature();
-                $feature->property_id = $property->id;
-                $feature->feature_name = $request->feature_name[$i];
-                $feature->feature_value = $request->feature_value[$i];
-                $feature->save();
-            }
-        }
+        // $features = $request->feature_name;
+        // if (!empty(array_filter($features))) {
+        //     foreach ($features as $i => $item) {
+        //         $feature = new PropertyFeature();
+        //         $feature->property_id = $property->id;
+        //         $feature->feature_name = $request->feature_name[$i];
+        //         $feature->feature_value = $request->feature_value[$i];
+        //         $feature->save();
+        //     }
+        // }
         return redirect()->route('admin.properties.index')->with('success', 'Property created success');
     }
 
@@ -169,6 +179,16 @@ class PropertyController extends Controller
         } else {
             $data['is_featured'] = 0;
         }
+        if($request->has('featured_image')){
+            $path = public_path('/backend/properties/banner/'.$property->featured_image);
+            if(file_exists($path) && $property->featured_image != null){
+                unlink($path);
+            }
+            $file = $request->file('featured_image');
+            $name_gen = rand().".".$file->getClientOriginalExtension();
+            Image::make($file)->resize(1366,768)->save(public_path('backend/properties/banner/'.$name_gen));
+            $data['featured_image'] = $name_gen;
+        }
         $property->update($data);
         // request has photo
         if ($request->has('photos') && !blank($request->photos)) {
@@ -180,7 +200,7 @@ class PropertyController extends Controller
             }
             foreach ($request->photos as $photo) {
                 $name_gen = rand() . "." . $photo->getClientOriginalExtension();
-                $photo->move(public_path('backend/properties'), $name_gen);
+                Image::make($photo)->resize(390,293)->save(public_path('backend/properties/'.$name_gen));
                 $property->images()->create([
                     'path' => $name_gen,
                     'alt' => $property->title
@@ -191,51 +211,51 @@ class PropertyController extends Controller
             $property->amenities()->sync($request->amenity_id);
         }
 
-        $floors = $request->floor_name;
         //property floor plan here
-        if ($request->has('floor_name') && !blank($request->floor_name)) {
-            foreach ($floors as $i => $item) {
-                if(!empty($request->floor_id[$i])){
-                    $floor = PropertyFloorPlan::findOrFail($request->floor_id[$i]);
-                }
-                else{
-                    $floor = new PropertyFloorPlan();
-                }
-                $floor->property_id = $property->id;
-                $floor->floor_name = $request->floor_name[$i];
-                $floor->floor_description = $request->floor_description[$i];
-                $floor->floor_size = $request->floor_size[$i];
-                $floor->floor_room = $request->floor_room[$i];
-                $floor->floor_bath = $request->floor_bath[$i];
+        // $floors = $request->floor_name;
+        // if ($request->has('floor_name') && !blank($request->floor_name)) {
+        //     foreach ($floors as $i => $item) {
+        //         if(!empty($request->floor_id[$i])){
+        //             $floor = PropertyFloorPlan::findOrFail($request->floor_id[$i]);
+        //         }
+        //         else{
+        //             $floor = new PropertyFloorPlan();
+        //         }
+        //         $floor->property_id = $property->id;
+        //         $floor->floor_name = $request->floor_name[$i];
+        //         $floor->floor_description = $request->floor_description[$i];
+        //         $floor->floor_size = $request->floor_size[$i];
+        //         $floor->floor_room = $request->floor_room[$i];
+        //         $floor->floor_bath = $request->floor_bath[$i];
 
-                // if (!empty($request->floor_photo)) {
-                //     $file = $request->file('floor_photo');
-                //     $name_gen = rand() . "." . $file->getClientOriginalExtension();
-                //     $file->move(public_path('backend/properties/floor'), $name_gen);
-                //     $floor->floor_photo = $name_gen;
-                // }
+        //         if (!empty($request->floor_photo)) {
+        //             $file = $request->file('floor_photo');
+        //             $name_gen = rand() . "." . $file->getClientOriginalExtension();
+        //             $file->move(public_path('backend/properties/floor'), $name_gen);
+        //             $floor->floor_photo = $name_gen;
+        //         }
 
-                $floor->save();
-            }
-        }
+        //         $floor->save();
+        //     }
+        // }
 
-        $features = $request->feature_name;
         // property feature part here
-        if ($request->has('feature_name') && !blank($request->feature_name)) {
-            foreach ($features as $i => $item) {
-                // dd($request->feature_id[$i]);
-                if(!empty($request->feature_id[$i])) {
-                    $feature = PropertyFeature::findOrFail($request->feature_id[$i]);
-                }
-                else{
-                    $feature = new PropertyFeature();
-                } 
-                $feature->property_id = $property->id;
-                $feature->feature_name = $request->feature_name[$i];
-                $feature->feature_value = $request->feature_value[$i];
-                $feature->save();
-            }
-        }
+        // $features = $request->feature_name;
+        // if ($request->has('feature_name') && !blank($request->feature_name)) {
+        //     foreach ($features as $i => $item) {
+        //         // dd($request->feature_id[$i]);
+        //         if(!empty($request->feature_id[$i])) {
+        //             $feature = PropertyFeature::findOrFail($request->feature_id[$i]);
+        //         }
+        //         else{
+        //             $feature = new PropertyFeature();
+        //         } 
+        //         $feature->property_id = $property->id;
+        //         $feature->feature_name = $request->feature_name[$i];
+        //         $feature->feature_value = $request->feature_value[$i];
+        //         $feature->save();
+        //     }
+        // }
 
         return redirect()->route('admin.properties.index')->with('info', 'Property has been updated');
     }

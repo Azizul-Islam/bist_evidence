@@ -93,7 +93,7 @@
                 <div class="actions row between-xs middle-xs">
                     <p class="row date mb-0">
                         <i class="material-icons text-muted">date_range</i>
-                        <span class="mx-2">{{ date('d M , Y',strtotime($property->year_built)) }}</span>
+                        <span class="mx-2">{{ date('Y',strtotime($property->year_built)) }}</span>
                     </p> 
                     <a href="{{ route('property.details',$property->slug) }}" class="mdc-button mdc-button--outlined">
                         <span class="mdc-button__ripple"></span>

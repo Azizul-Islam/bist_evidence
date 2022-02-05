@@ -211,7 +211,7 @@
                             
                         </div> 
                     </div>
-                    <div class="mdc-card p-3 mt-3"> 
+                    {{-- <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Additional features</h2>  
                         <div class="row details">
                             @foreach ($property->features as $item)
@@ -222,13 +222,13 @@
                             @endforeach
                             
                         </div> 
-                    </div>
+                    </div> --}}
                    
-                    <div class="mdc-card p-3 mt-3"> 
+                    {{-- <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Location</h2> 
                         <div id="contact-map"></div>
-                    </div>
-                    <div class="mdc-card p-3 mt-3"> 
+                    </div> --}}
+                    {{-- <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Plans</h2> 
                         <div class="expansion-panel-wrapper"> 
                             @foreach ($property->floorPlans as $item)
@@ -248,13 +248,15 @@
                             </div> 
                             @endforeach
                         </div>
-                    </div>
+                    </div> --}}
+                    @if(isset($property->video_link))
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Videos</h2> 
                         <div class="videoWrapper">
                             {!! $property->video_link !!}
                         </div> 
                     </div>
+                    @endif
                     {{-- <div class="mdc-card p-3 mt-3 row between-xs middle-xs"> 
                         <span>ID:<span class="fw-500 mx-2">1</span></span>
                         <span>Published:<span class="fw-500 mx-2">12 August, 2012</span></span>
