@@ -448,6 +448,7 @@
         </div>   
     </div>
     @endif
+    @if(App\Models\Agent::where('status','active')->latest()->count() > 0)
     {{-- agents section start --}}
     <div class="section agents">
         <div class="px-3">
@@ -479,7 +480,7 @@
             </div>
         </div>   
     </div>  
-   
+   @endif
     {{-- agents section end --}}
     
     {{-- clients section start --}}

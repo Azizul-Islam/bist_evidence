@@ -122,14 +122,8 @@
                                 </div>  
                                 <div class="col-xs-12 p-2">  
                                     <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea">
-                                        <textarea class="mdc-text-field__input" rows="5" name="description" type="text">{{ old('description') }}</textarea>
-                                        <div class="mdc-notched-outline mdc-notched-outline--upgraded">
-                                            <div class="mdc-notched-outline__leading"></div>
-                                            <div class="mdc-notched-outline__notch">
-                                                <label class="mdc-floating-label">Description</label>
-                                            </div>
-                                            <div class="mdc-notched-outline__trailing"></div>
-                                        </div>
+                                        <textarea class="mdc-text-field__input" rows="5" name="description" id="editor" placeholder="Enter Description" type="text">{{ old('description') }}</textarea>
+                                        
                                     </div> 
                                 </div>
                                 

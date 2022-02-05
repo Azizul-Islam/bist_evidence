@@ -96,7 +96,7 @@
             <li>
                 <a class="{{ \Request::is('admin/agent-property') ? 'active' : '' }}" href="{{ route('admin.agent-property') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-house"></i>
+                        <i class="bi bi-person-square"></i>
                     </span>
                     <span>Agent Property</span>
                 </a>
@@ -112,7 +112,7 @@
             <li>
                 <a href="#">
                     <span class="nav-link-icon">
-                        <i class="bi bi-house"></i>
+                        <i class="bi bi-bricks"></i>
                     </span>
                     <span>Projects</span>
                 </a>
@@ -139,7 +139,7 @@
             <li>
                 <a href="#">
                     <span class="nav-link-icon">
-                        <i class="bi bi-house"></i>
+                        <i class="bi bi-people"></i>
                     </span>
                     <span>Users</span>
                 </a>
@@ -184,7 +184,7 @@
             <li>
                 <a class="{{ \Request::is('admin/faqs') || \Request::is('admin/faqs/create') ? 'active' : '' }}" href="{{ route('admin.faqs.index') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-person-badge"></i>
+                        <i class="bi bi-patch-question"></i>
                     </span>
                     <span>Faqs</span>
                 </a>
@@ -192,7 +192,7 @@
             <li>
                 <a class="{{ \Request::is('admin/pages') || \Request::is('admin/pages/create') ? 'active' : '' }}" href="{{ route('admin.pages.index') }}">
                     <span class="nav-link-icon">
-                        <i class="bi bi-wallet2"></i>
+                        <i class="bi bi-card-image"></i>
                     </span>
                     <span>Pages</span>
                 </a>
