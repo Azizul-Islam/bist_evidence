@@ -79,7 +79,9 @@
                         <div class="col-md-6">
                             <div class="mb-3">
                                 <input type="checkbox" name="is_service" value="1" id="service">
-                                <label for="service" class="form-label">Service</label>
+                                <label for="service" class="form-label">Service</label>&nbsp;&nbsp;&nbsp;
+                                <input type="checkbox" name="is_about" value="1" id="about">
+                                <label for="about" class="form-label">About</label>
                             </div>
                         </div>
                     </div>

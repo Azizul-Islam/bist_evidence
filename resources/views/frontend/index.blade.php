@@ -290,8 +290,8 @@
                                     </div>
                                 </div>
                                 <div class="d-none d-md-flex d-lg-flex d-xl-flex">
-                                    <div class="description mt-3"> 
-                                        <p>{{ $hotOfferProperty->description }}</p>
+                                    <div class="description mt-3 ml-3"> 
+                                        <p>{!! $hotOfferProperty->description !!}</p>
                                     </div>
                                 </div>
                                 <div class="features mt-3">                    

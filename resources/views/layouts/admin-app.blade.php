@@ -124,8 +124,8 @@
         responsive: true
     });
 </script>
-@include('admin.includes.message')
 @yield('scripts')
+@include('admin.includes.message')
 </body>
 
 <!-- Mirrored from vetra.laborasyon.com/demos/default/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 02 Jul 2021 03:57:43 GMT -->

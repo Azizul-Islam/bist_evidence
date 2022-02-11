@@ -65,6 +65,12 @@ class PageController extends Controller
         else {
             $data['is_service'] = 0;
         }
+        if($request->has('is_about')) {
+            $data['is_about'] = $request->is_about;
+        }
+        else {
+            $data['is_about'] = 0;
+        }
         $success = Page::create($data);
         if($success){
             return redirect()->route('admin.pages.index')->with('success','Page create successfully');
@@ -126,6 +132,12 @@ class PageController extends Controller
         }
         else {
             $data['is_service'] = 0;
+        }
+        if($request->has('is_about')) {
+            $data['is_about'] = $request->is_about;
+        }
+        else {
+            $data['is_about'] = 0;
         }
         $success = $page->update($data);
         if($success){

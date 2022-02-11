@@ -116,8 +116,3 @@
     </div>
 </div>
 @endsection
-@section('scripts')
-        @include('admin.includes.message')
-    
-    
-@endsection

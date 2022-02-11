@@ -119,10 +119,10 @@
                 <ul>
                    
                     <li>
-                        <a class="{{ \Request::is('admin/projects') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Property List</a>
+                        <a class="{{ \Request::is('admin/projects') ? 'active' : '' }}" href="{{ route('admin.projects.index') }}">Project List</a>
                     </li>
                     <li>
-                        <a class="{{ \Request::is('admin/projects/create') ? 'active' : '' }}" href="{{ route('admin.projects.create') }}">Add Property</a>
+                        <a class="{{ \Request::is('admin/projects/create') ? 'active' : '' }}" href="{{ route('admin.projects.create') }}">Add Project</a>
                     </li>
                     
                 </ul>
@@ -149,7 +149,7 @@
                         <a class="{{ \Request::is('admin/agent') ? 'active' : '' }}" href="{{ route('admin.agent.index') }}">Agent</a>
                     </li>
                     <li>
-                        <a class="{{ \Request::is('admin/users') ? 'active' : '' }}" href="">Admin User</a>
+                        <a class="{{ \Request::is('admin/users') ? 'active' : '' }}" href="{{ route('admin.users.index') }}">Admin User</a>
                     </li>
                     
                 </ul>

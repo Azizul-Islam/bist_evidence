@@ -55,17 +55,25 @@
         <hr class="mdc-list-divider m-0">
         <div class="mdc-drawer__content"> 
             <div class="vertical-menu">   
-                @php
-                    $page = App\Models\Page::where(['status'=>'active','slug'=>'about-us'])->first();
-                    @endphp
-                    @if(isset($page))
-                    <div>
-                        <a href="{{ route('page',$page->slug) }}" class="mdc-button">
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label">About us</span> 
-                        </a> 
-                    </div>   
-                    @endif
+                <div class="mdc-menu-surface--anchor"> 
+                    <a href="javascript:void(0);" class="mdc-button menu-item-has-children mdc-ripple-upgraded" style="--mdc-ripple-fg-size:55px; --mdc-ripple-fg-scale:1.9995; --mdc-ripple-fg-translate-start:12.2656px, -3.5px; --mdc-ripple-fg-translate-end:18.7344px, -8.5px;"> 
+                        <span class="mdc-button__ripple"></span> 
+                        <span class="mdc-button__label">About Us</span> 
+                    </a>  
+                    <div class="mdc-menu mdc-menu-surface">
+                        <div class="mdc-list"> 
+                            @foreach (App\Models\Page::where(['status'=>'active','is_about'=>1])->latest()->get() as $item)
+                            <div> 
+                                <a href="{{ route('page',$item->slug) }}" class="mdc-button mdc-ripple-upgraded"> 
+                                    <span class="mdc-button__ripple"></span>
+                                    <span class="mdc-button__label">{{ $item->title }}</span> 
+                                </a>  
+                            </div>
+                            @endforeach
+                           
+                        </div>
+                    </div>  
+                </div>
                    
                     <div>
                         <a href="#" data-value="buy" id="buy" class="mdc-button">
@@ -281,17 +289,25 @@
                     <img src="{{ asset('frontend/assets/Logo.png') }}" style="height: 37px;width:212px" alt="logo">
                 </a>  
                 <div class="horizontal-menu d-none d-md-flex d-lg-flex d-xl-flex">   
-                    @php
-                    $page = App\Models\Page::where(['status'=>'active','slug'=>'about-us'])->first();
-                    @endphp
-                    @if(isset($page))
-                    <div>
-                        <a href="{{ route('page',$page->slug) }}" class="mdc-button">
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label">About us</span> 
-                        </a> 
-                    </div>   
-                    @endif
+                    <div class="mdc-menu-surface--anchor"> 
+                        <a href="index.html" class="mdc-button menu-item-has-children mdc-ripple-upgraded" style="--mdc-ripple-fg-size:55px; --mdc-ripple-fg-scale:1.9995; --mdc-ripple-fg-translate-start:12.2656px, -3.5px; --mdc-ripple-fg-translate-end:18.7344px, -8.5px;"> 
+                            <span class="mdc-button__ripple"></span> 
+                            <span class="mdc-button__label">About Us</span> 
+                        </a>  
+                        <div class="mdc-menu mdc-menu-surface">
+                            <div class="mdc-list"> 
+                                @foreach (App\Models\Page::where(['status'=>'active','is_about'=>1])->latest()->get() as $item)
+                                <div> 
+                                    <a href="{{ route('page',$item->slug) }}" class="mdc-button mdc-ripple-upgraded"> 
+                                        <span class="mdc-button__ripple"></span>
+                                        <span class="mdc-button__label">{{ $item->title }}</span> 
+                                    </a>  
+                                </div>
+                                @endforeach
+                               
+                            </div>
+                        </div>  
+                    </div>
                    
                     <div>
                         <a href="#" data-value="buy" id="buy" class="mdc-button">

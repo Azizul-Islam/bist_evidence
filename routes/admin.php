@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\TestimonialController;
+use App\Http\Controllers\Admin\UserController;
 use Faker\DefaultGenerator;
 use Illuminate\Support\Facades\Route;
 
@@ -91,5 +92,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         //blog
         Route::resource('blogs',BlogController::class);
+        Route::resource('users',UserController::class);
     });
 });

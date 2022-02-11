@@ -93,14 +93,14 @@
                     </div>
                     <div class="mdc-card p-3 mt-3">  
                         <div class="main-carousel mb-3"> 
-                            <div class="control-icons">
+                            {{-- <div class="control-icons">
                                 <button class="mdc-button add-to-favorite" title="Add To Favorite">
                                     <i class="material-icons">favorite_border</i>
                                 </button>
                                 <button class="mdc-button" title="Add To Compare">
                                     <i class="material-icons">compare_arrows</i>
                                 </button>  
-                            </div>  
+                            </div>   --}}
                             <div class="swiper-container">
                                 <div class="swiper-wrapper"> 
                                     @foreach ($property->images as $image)
@@ -137,9 +137,9 @@
 
 
                     </div>
-                    <div class="mdc-card p-3 mt-3"> 
+                    <div class="mdc-card p-3 mt-3" > 
                         <h2 class="uppercase text-center fw-500 mb-2">Description</h2>  
-                        <p>{{ $property->description }}</p>
+                        <p>{!! $property->description !!}</p>
                     </div>
                     <div class="mdc-card p-3 mt-3"> 
                         <h2 class="uppercase text-center fw-500 mb-2">Details</h2>  

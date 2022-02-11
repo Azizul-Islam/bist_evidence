@@ -20,6 +20,7 @@ class CreatePagesTable extends Migration
             $table->text('description');
             $table->string('photo')->nullable();
             $table->boolean('is_service')->default(false);
+            $table->boolean('is_about')->default(false);
             $table->enum('status',['active','inactive'])->default('active');
             $table->timestamps();
         });
