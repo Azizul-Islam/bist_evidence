@@ -27,7 +27,7 @@
                                     <h2 class="author-name"><a href="{{ route('blog',$item->slug) }}">{{ $item->title }}</a></h2> 
                                 </p>
                                 <p class="text-muted fw-500 mb-2"><small>{{ date('d M, Y',strtotime($item->created_at)) }}</small></p>
-                                <p class="text">{{ Str::limit($item->description,250,'...') }}</p>
+                                <p class="text">{!! Str::limit("$item->description",250,'...') !!}</p>
                                 <a href="{{ route('blog',$item->slug) }}" style="float: right" class="mdc-button mdc-button--outlined mdc-ripple-upgraded mb-2" style="--mdc-ripple-fg-size:55px; --mdc-ripple-fg-scale:1.98122; --mdc-ripple-fg-translate-start:40.6875px, -8.40625px; --mdc-ripple-fg-translate-end:18.5938px, -9.5px;">
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">Details</span> 

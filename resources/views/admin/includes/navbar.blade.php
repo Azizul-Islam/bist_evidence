@@ -24,14 +24,10 @@
     </form>
     <div class="header-bar ms-auto">
         <ul class="navbar-nav justify-content-end">
-            <li class="nav-item">
-                <a href="#" class="nav-link nav-link-notify" data-count="2" data-sidebar-target="#notifications">
-                    <i class="bi bi-bell icon-lg"></i>
-                </a>
-            </li>
+           
             <li class="nav-item dropdown">
                 <a href="#" class="nav-link nav-link-notify" data-count="3" data-bs-toggle="dropdown">
-                    <i class="bi bi-cart2 icon-lg"></i>
+                    <i class="bi bi-bell icon-lg"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
                     <h6 class="m-0 px-4 py-3 border-bottom">Shopping Cart</h6>

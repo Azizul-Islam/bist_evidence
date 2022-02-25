@@ -65,7 +65,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table" id="dataTable">
+                    <table class="table" >
                         <thead>
                         <tr>
                             <th>S.L</th>

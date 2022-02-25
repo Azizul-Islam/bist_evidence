@@ -44,7 +44,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label">Description <small class="text-danger">*</small></label>
-                            <textarea type="text" class="form-control @error('description') is-invalid @enderror"  rows="10" name="description"
+                            <textarea type="text" id="editor" class="form-control @error('description') is-invalid @enderror"  rows="10" name="description"
                                 placeholder="Enter description">{{ old('description') }}</textarea>
                             @error('description')
                                 <span class="invalid-feedback">{{ $message }}</span>

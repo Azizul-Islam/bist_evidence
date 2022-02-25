@@ -45,7 +45,7 @@
                        <tr>
                         <td>{{ $i + 1 }}</td>
                        <td>{{ Str::limit($item->title,30,'...') }}</td>
-                       <td>{{ Str::limit($item->description,30,'...') }}</td>
+                       <td>{!! Str::limit("$item->description",30,'...') !!}</td>
                        <td>{{ date('d M ,Y',strtotime($item->created_at)) }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
@@ -83,28 +83,4 @@
 
     </div>
 </div>
-@endsection
-@section('scripts')
-    <script>
-        $('input[name=status]').change(function(){
-            var mode = $(this).prop('checked');
-            var id = $(this).val();
-            $.ajax({
-                url: "{{ route('admin.page.status') }}",
-                method: "POST",
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    mode: mode,
-                    id: id
-                },
-                success: function(data){
-                    if(data.status){
-                        toastr.success(data.msg);
-                    }else{
-                        toastr.error('Something went wrong!');
-                    }
-                }
-            });
-        });
-    </script>
 @endsection
