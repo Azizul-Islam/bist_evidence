@@ -192,8 +192,8 @@ class PropertyController extends Controller
         $property->update($data);
         // request has photo
         if ($request->has('photos') && !blank($request->photos)) {
-            if (!blank($property->photos)) {
-                foreach ($property->photos as $photo) {
+            if (!blank($property->images)) {
+                foreach ($property->images as $photo) {
                     unlink(public_path('backend/properties/' . $photo->path));
                     $photo->delete();
                 }

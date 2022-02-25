@@ -34,13 +34,15 @@
                                 <div class="thumbnail-section">  
                                       
                                     <div class="property-image"> 
-                                        <img src="{{ asset('backend/projects/'.$project->photo) }}" alt="project image">                                               
+                                        <a href="{{ route('project.details',$project->id) }}">
+                                            <img src="{{ asset('backend/projects/'.$project->photo) }}" alt="project image">                                               
+                                        </a>
                                     </div>  
                                 </div>
                                 <div class="property-content-wrapper"> 
                                     <div class="property-content">
                                         <div class="content">
-                                            <h2 class="title"><a href="#">{{ $project->title }}</a></h2>
+                                            <h2 class="title"><a href="{{ route('project.details',$project->id) }}">{{ $project->title }}</a></h2>
                                             <p class="row address flex-nowrap">
                                                 <i class="material-icons text-muted">location_on</i>
                                                 <span>{{ $project->address }}</span>
@@ -85,13 +87,15 @@
                                 <div class="thumbnail-section">  
                                       
                                     <div class="property-image"> 
-                                        <img src="{{ asset('backend/projects/'.$project->photo) }}" alt="project image">                                               
+                                        <a href="{{ route('project.details',$project->id) }}">
+                                            <img src="{{ asset('backend/projects/'.$project->photo) }}" alt="project image">                                               
+                                        </a>
                                     </div>  
                                 </div>
                                 <div class="property-content-wrapper"> 
                                     <div class="property-content">
                                         <div class="content">
-                                            <h2 class="title"><a href="#">{{ $project->title }}</a></h2>
+                                            <h2 class="title"><a href="{{ route('project.details',$project->id) }}">{{ $project->title }}</a></h2>
                                             <p class="row address flex-nowrap">
                                                 <i class="material-icons text-muted">location_on</i>
                                                 <span>{{ $project->address }}</span>
@@ -136,13 +140,15 @@
                                 <div class="thumbnail-section">  
                                       
                                     <div class="property-image"> 
-                                        <img src="{{ asset('backend/projects/'.$project->photo) }}" alt="project image">                                               
+                                        <a href="{{ route('project.details',$project->id) }}">
+                                            <img src="{{ asset('backend/projects/'.$project->images[0]->path) }}" alt="project image">                                               
+                                        </a>
                                     </div>  
                                 </div>
                                 <div class="property-content-wrapper"> 
                                     <div class="property-content">
                                         <div class="content">
-                                            <h2 class="title"><a href="#">{{ $project->title }}</a></h2>
+                                            <h2 class="title"><a href="{{ route('project.details',$project->id) }}">{{ $project->title }}</a></h2>
                                             <p class="row address flex-nowrap">
                                                 <i class="material-icons text-muted">location_on</i>
                                                 <span>{{ $project->address }}</span>

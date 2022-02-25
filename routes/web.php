@@ -40,6 +40,7 @@ Route::post('add-to-favorite',[FavoriteController::class,'addToFavorite'])->name
 Route::post('customer-response',[FrontendController::class,'customerResponse'])->name('customer-response.store');
 Route::post('review/store',[FrontendController::class,'reviewStore'])->name('review.store');
 Route::get('projects',[FrontendController::class,'projects'])->name('projects');
+Route::get('project/{id}/details',[FrontendController::class,'projectDetails'])->name('project.details');
 Route::get('blogs',[FrontendController::class,'blogs'])->name('blogs');
 Route::get('blog/{slug}',[FrontendController::class,'blogDetails'])->name('blog');
 Auth::routes();

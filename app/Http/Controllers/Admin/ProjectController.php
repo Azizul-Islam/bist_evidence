@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Image;
 
 class ProjectController extends Controller
 {
@@ -42,7 +43,7 @@ class ProjectController extends Controller
             'title' => 'required|string',
             'price_start' => 'required|numeric',
             'price_end' => 'nullable|numeric',
-            'photo' => 'required',
+            'photo' => 'nullable',
             'address' => 'required|string',
             'project_status' => 'required|string',
             'description' => 'nullable|string',
@@ -55,14 +56,19 @@ class ProjectController extends Controller
             $slug = rand() . "-" . $slug;
         }
         $data['slug'] = $slug;
-        if($request->has('photo')) {
-            $file = $request->file('photo');
-            $name_gen = rand().".".$file->getClientOriginalExtension();
-            $file->move(public_path('backend/projects'),$name_gen);
-            $data['photo'] = $name_gen;
+        $project = Project::create($data);
+        if($request->has('photos') && !blank($request->photos)) {
+            foreach($request->photos as $photo){
+                $name_gen = rand().".".$photo->getClientOriginalExtension();
+                Image::make($photo)->resize(500,280)->save(public_path('backend/projects/'.$name_gen));
+                $project->images()->create([
+                    'path' => $name_gen,
+                    'alt' => $request->title
+                ]);
+            }
         }
 
-        Project::create($data);
+        
         return redirect()->route('admin.projects.index')->with('success','Project added success');
     }
 
@@ -101,22 +107,29 @@ class ProjectController extends Controller
             'title' => 'required|string',
             'price_start' => 'required|numeric',
             'price_end' => 'nullable|numeric',
-            'photo' => 'nullable',
+            'photos' => 'nullable',
             'address' => 'required|string',
             'project_status' => 'required|string',
             'description' => 'nullable|string',
             'status' => 'nullable',
         ]);
         //make slug form title
-       $path = public_path('backend/projects/'.$project->photo);
-        if($request->has('photo')) {
-            if(file_exists($path)){
-                unlink($path);
+        if($request->has('photos') && !blank($request->photos)) {
+           
+            if(!blank($project->images)){
+                foreach($project->images as $photo){
+                    unlink(public_path('backend/projects/'.$photo->path));
+                    $photo->delete();
+                }
             }
-            $file = $request->file('photo');
-            $name_gen = rand().".".$file->getClientOriginalExtension();
-            $file->move(public_path('backend/projects'),$name_gen);
-            $data['photo'] = $name_gen;
+            foreach($request->photos as $photo){
+                $name_gen = rand().".".$photo->getClientOriginalExtension();
+                Image::make($photo)->resize(500,280)->save(public_path('backend/projects/'.$name_gen));
+                $project->images()->create([
+                    'path' => $name_gen,
+                    'alt' => $request->title
+                ]);
+            }
         }
 
         $project->update($data);
@@ -131,9 +144,11 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        $path = public_path('backend/projects/'.$project->photo);
-        if(file_exists($path)){
-            unlink($path);
+        if(!blank($project->images)){
+            foreach($project->images as $photo){
+                unlink(public_path('backend/projects/'.$photo->path));
+                $photo->delete();
+            }
         }
         $project->delete();
         return back()->with('info','Project deleted success');

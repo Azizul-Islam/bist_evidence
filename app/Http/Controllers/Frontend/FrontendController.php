@@ -241,4 +241,10 @@ class FrontendController extends Controller
         $blog = Blog::where('slug',$slug)->first();
         return view('frontend.pages.blog-details',compact('blog'));
     }
+
+    public function projectDetails($id)
+    {
+        $project = Project::findOrFail($id);
+        return view('frontend.pages.project_details',compact('project'));
+    }
 }

@@ -65,17 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="Photo" class="form-label">Photo <small class="text-danger">*</small></label>
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo"
-                                id="photo">
-                            @error('photo')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                            <div class="mt-2">
-                                <img src="{{ asset('backend/projects/'.$project->photo) }}" height="100" width="150" alt="">
-                            </div>
-                        </div>
+                       
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -120,7 +110,21 @@
                         
                        
                         <div class="row">
-                           
+                           <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="Photo" class="form-label">Photo <small class="text-danger">*</small></label>
+                                <input type="file" required class="form-control @error('photos') is-invalid @enderror" multiple name="photos[]"
+                                    id="photo">
+                                @error('photos')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                                <div class="mt-2">
+                                    @foreach ($project->images as $photo)
+                                    <img src="{{ asset('backend/projects/'.$photo->path) }}" height="100" width="150" alt="">
+                                    @endforeach
+                                </div>
+                            </div>
+                           </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="Status" class="form-label">Status </label>

@@ -24,7 +24,7 @@
                                     <span class="author-name">{{ $blog->title }}</span> 
                                 </p>
                                 <p class="text-muted fw-500 mb-2"><small>{{ date('d M, Y',strtotime($blog->created_at)) }}</small></p>
-                                <p class="text">{{ $blog->description }}</p>
+                                <p class="text">{!! $blog->description !!}</p>
                                
                             </div>
                         </div>

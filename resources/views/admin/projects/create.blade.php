@@ -64,14 +64,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-3">
-                            <label for="Photo" class="form-label">Photo <small class="text-danger">*</small></label>
-                            <input type="file" class="form-control @error('photo') is-invalid @enderror" name="photo"
-                                id="photo">
-                            @error('photo')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
+                      
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
@@ -113,10 +106,17 @@
                             @enderror
                         </div>
                        
-                        
-                       
                         <div class="row">
-                           
+                           <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="Photo" class="form-label">Photos <small class="text-danger">*</small></label>
+                                <input type="file" required multiple class="form-control @error('photo') is-invalid @enderror" name="photos[]"
+                                    id="photo">
+                                @error('photo')
+                                    <span class="invalid-feedback">{{ $message }}</span>
+                                @enderror
+                            </div>
+                           </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
                                     <label for="Status" class="form-label">Status </label>
