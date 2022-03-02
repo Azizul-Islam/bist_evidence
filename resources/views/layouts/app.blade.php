@@ -64,7 +64,7 @@
                         <div class="mdc-list"> 
                             @foreach (App\Models\Page::where(['status'=>'active','is_about'=>1])->latest()->get() as $item)
                             <div> 
-                                <a href="{{ route('page',$item->slug) }}" class="mdc-button mdc-ripple-upgraded"> 
+                                <a href="{{ route('page',$item->slug) }}" class="mdc-button mdc-ripple-upgraded {{\Request::is('about-us') ? 'active-link' : ''}}"> 
                                     <span class="mdc-button__ripple"></span>
                                     <span class="mdc-button__label">{{ $item->title }}</span> 
                                 </a>  
@@ -88,7 +88,7 @@
                         </a> 
                     </div>
                     <div>
-                        <a href="{{ route('properties') }}" class="mdc-button">
+                        <a href="{{ route('properties') }}" class="mdc-button {{\Request::is('properties') ? 'active-link' : ''}}">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">All Properties</span> 
                         </a> 
@@ -206,55 +206,7 @@
                     </a>
                 </div>  
                 <div class="row end-xs middle-xs">
-                    {{-- <div class="mdc-menu-surface--anchor"> 
-                        <button class="mdc-button mdc-ripple-surface mutable"> 
-                            <span class="mdc-button__ripple"></span>
-                            <span class="mdc-button__label"><span class="mutable">usd</span></span>
-                            <i class="material-icons mdc-button__icon m-0">arrow_drop_down</i>
-                        </button> 
-                        <div class="mdc-menu mdc-menu-surface">
-                            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                                <li class="mdc-list-item" role="menuitem">
-                                    <span class="mdc-list-item__text">usd</span>
-                                </li>
-                                <li class="mdc-list-item" role="menuitem">
-                                    <span class="mdc-list-item__text">eur</span>
-                                </li> 
-                            </ul>
-                        </div> 
-                    </div> --}}
-                    {{-- <div class="mdc-menu-surface--anchor"> 
-                        <button class="mdc-button mdc-ripple-surface mutable">
-                            <span class="mdc-button__ripple"></span> 
-                            <img src="assets/images/flags/gb.svg" alt="" width="18">
-                            <span class="mdc-button__label flag-name d-none d-lg-flex d-xl-flex"><span class="mutable">English</span></span>
-                            <i class="material-icons mdc-button__icon m-0">arrow_drop_down</i>
-                        </button> 
-                        <div class="mdc-menu mdc-menu-surface">
-                            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                                <li class="mdc-list-item" role="menuitem">
-                                    <img src="assets/images/flags/gb.svg" alt="" width="18" class="mdc-elevation--z1"> 
-                                    <span class="mdc-list-item__text flag-name">English</span>
-                                </li>
-                                <li class="mdc-list-item" role="menuitem">
-                                    <img src="assets/images/flags/de.svg" alt="" width="18" class="mdc-elevation--z1"> 
-                                    <span class="mdc-list-item__text flag-name">German</span>
-                                </li> 
-                                <li class="mdc-list-item" role="menuitem">
-                                    <img src="assets/images/flags/fr.svg" alt="" width="18" class="mdc-elevation--z1"> 
-                                    <span class="mdc-list-item__text flag-name">French</span>
-                                </li> 
-                                <li class="mdc-list-item" role="menuitem">
-                                    <img src="assets/images/flags/ru.svg" alt="" width="18" class="mdc-elevation--z1"> 
-                                    <span class="mdc-list-item__text flag-name">Russian</span>
-                                </li> 
-                                <li class="mdc-list-item" role="menuitem">
-                                    <img src="assets/images/flags/tr.svg" alt="" width="18" class="mdc-elevation--z1"> 
-                                    <span class="mdc-list-item__text flag-name">Turkish</span>
-                                </li> 
-                            </ul>
-                        </div> 
-                    </div>   --}}
+           
                    @if (auth()->guard('agent')->check())
                    <div class="mdc-menu-surface--anchor"> 
                     <button class="mdc-button mdc-ripple-surface"> 
@@ -322,13 +274,13 @@
                         </a> 
                     </div>
                     <div>
-                        <a href="{{ route('properties') }}" class="mdc-button">
+                        <a href="{{ route('properties') }}" class="mdc-button {{\Request::is('properties') ? 'active-link' : ''}}">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">All Properties</span> 
                         </a> 
                     </div>  
                     <div>
-                        <a href="{{ route('projects') }}" class="mdc-button">
+                        <a href="{{ route('projects') }}" class="mdc-button ">
                             <span class="mdc-button__ripple"></span>
                             <span class="mdc-button__label">Projects</span> 
                         </a> 

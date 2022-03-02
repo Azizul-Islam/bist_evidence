@@ -92,15 +92,7 @@
                         </button>
                     </div>
                     <div class="mdc-card p-3 mt-3">  
-                        <div class="main-carousel mb-3"> 
-                            {{-- <div class="control-icons">
-                                <button class="mdc-button add-to-favorite" title="Add To Favorite">
-                                    <i class="material-icons">favorite_border</i>
-                                </button>
-                                <button class="mdc-button" title="Add To Compare">
-                                    <i class="material-icons">compare_arrows</i>
-                                </button>  
-                            </div>   --}}
+                        {{-- <div class="main-carousel mb-3"> 
                             <div class="swiper-container">
                                 <div class="swiper-wrapper"> 
                                     @foreach ($property->images as $image)
@@ -119,9 +111,31 @@
                                     <span class="mdc-fab__icon material-icons">keyboard_arrow_right</span> 
                                 </button>   
                             </div>
-                        </div> 
-
-                        <div class="small-carousel">   
+                        </div>  --}}
+                         <div class="mdc-card property-item grid-item column-3 mb-3">
+                            <div class="thumbnail-section">
+                               
+                                <div class="property-image"> 
+                                    <div class="swiper-container">
+                                        <div class="swiper-wrapper">
+                                            @foreach ($property->images as $photo)    
+                                            <div class="swiper-slide">
+                                                <img src="{{ asset('frontend/assets/images/others/transparent-bg.png') }}" alt="slide image" data-src="{{ asset('backend/properties/'.$photo->path) }}" class="slide-item swiper-lazy">
+                                                <div class="swiper-lazy-preloader"></div> 
+                                            </div> 
+                                            @endforeach
+    
+                                        </div>  
+                                        <div class="swiper-pagination white"></div>  
+                                        <button class="mdc-icon-button swiper-button-prev swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_left</i></button>
+                                        <button class="mdc-icon-button swiper-button-next swipe-arrow"><i class="material-icons mat-icon-lg">keyboard_arrow_right</i></button>
+                                    </div>  
+                                </div> 
+                               
+                            </div>
+                           
+                        </div>
+                        {{-- <div class="small-carousel">   
                             <div id="small-carousel" class="swiper-container"> 
                                 <div class="swiper-wrapper"> 
                                     @foreach ($property->images as $image)
@@ -133,7 +147,7 @@
                                     
                                 </div>  
                             </div>
-                        </div>
+                        </div> --}}
 
 
                     </div>

@@ -35,7 +35,7 @@
                                       
                                     <div class="property-image"> 
                                         <a href="{{ route('project.details',$project->id) }}">
-                                            <img src="{{ asset('backend/projects/'.$project->photo) }}" alt="project image">                                               
+                                            <img src="{{ asset('backend/projects/'.$project->images[0]->path) }}" alt="project image">                                               
                                         </a>
                                     </div>  
                                 </div>
@@ -88,7 +88,7 @@
                                       
                                     <div class="property-image"> 
                                         <a href="{{ route('project.details',$project->id) }}">
-                                            <img src="{{ asset('backend/projects/'.$project->photo) }}" alt="project image">                                               
+                                            <img src="{{ asset('backend/projects/'.$project->images[0]->path) }}" alt="project image">                                               
                                         </a>
                                     </div>  
                                 </div>
